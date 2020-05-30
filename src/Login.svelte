@@ -2,18 +2,35 @@
 import { auth } from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 import { Navigate } from 'svelte-router-spa'
+import { onMount } from 'svelte';
 
-import { isSignedIn } from './stores.js';
+import { userStore } from './stores.js';
 
 let authContainer;
 let ui;
 let userName;
 
-let isSignedIn_value;
-const unsubscribe = isSignedIn.subscribe(value => {
-    isSignedIn_value = value;
-});
+let isSignedIn = false;
+let displayName = '';
 
+onMount(() => {
+
+    ui = new firebaseui.auth.AuthUI(auth());
+    createSignInForm();
+
+    const unsubscribe = userStore.subscribe(value => {
+
+        if (value.isSignedIn) {
+            authContainer.classList.add('hidden');
+        } else {
+            authContainer.classList.remove('hidden');
+            console.log('FAIL HERE?')
+        }
+
+        isSignedIn = value.isSignedIn;
+        displayName = value.displayName;
+    });
+});
 
 
 function createSignInForm() {
@@ -38,19 +55,6 @@ function createSignInForm() {
     ui.start('#firebaseui-auth-container', uiConfig);
 }
 
-auth().onAuthStateChanged(function (user) {
-
-    if (user) {
-        authContainer.innerHTML = '';
-        userName = user.displayName;
-        //authenticatedRequest('GET', '/app-js');
-    } else {
-        ui = new firebaseui.auth.AuthUI(auth());
-        createSignInForm();
-    }
-});
-
-
 
 function signOut() {
     auth().signOut();
@@ -62,23 +66,27 @@ function signOut() {
         margin-bottom: 2rem;
         text-align: center;
     }
+
+    .hidden {
+        display: none;
+    }
 </style>
 
 
 
-{#if isSignedIn_value}
+{#if isSignedIn}
 
     <div class="mdl-card mdl-shadow--2dp firebaseui-container">
         <div class="firebaseui-card-header">
             <h1 class="firebaseui-title">You are signed in.</h1>
             <p class="firebaseui-text">
-                Your username: {userName}
+                Your username: {displayName}
             </p>
         </div>
 
         <div class="firebaseui-card-actions">
             <div class="firebaseui-form-actions">
-                <Navigate to="sheet" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Character Sheet</Navigate>
+                <Navigate to="/" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Home</Navigate>
                 <button on:click={signOut} class="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Sign out</button>
             </div>
         </div>
@@ -89,6 +97,6 @@ function signOut() {
     </p>
 {/if}
 
-<div id="firebaseui-auth-container" bind:this={authContainer}></div>
+<div class="hidden" id="firebaseui-auth-container" bind:this={authContainer}></div>
 
 

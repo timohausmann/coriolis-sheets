@@ -1,12 +1,12 @@
 <script>
 import { Navigate } from 'svelte-router-spa'
 
-import { isSignedIn } from './stores.js';
+import { userStore } from './stores.js';
 
-let isSignedIn_value;
+/*let isSignedIn_value;
 const unsubscribe = isSignedIn.subscribe(value => {
     isSignedIn_value = value;
-});
+});*/
 </script>
 
 <style>
@@ -26,7 +26,7 @@ const unsubscribe = isSignedIn.subscribe(value => {
 
     <div class="firebaseui-card-actions">
         <div class="firebaseui-form-actions">
-            {#if isSignedIn_value}
+            {#if $userStore.isSignedIn}
                 <Navigate to="sheet" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Character Sheet</Navigate>
             {:else}
                 <Navigate to="login" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Login</Navigate>

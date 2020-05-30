@@ -2,7 +2,7 @@ import { initializeApp, auth } from "firebase/app";
 
 import App from './App.svelte';
 import firebaseConfig from "./fbConfig";
-import { isSignedIn } from './stores.js';
+import { userStore } from './stores.js';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
@@ -10,10 +10,16 @@ initializeApp(firebaseConfig);
 auth().onAuthStateChanged(function (user) {
     if (user) {
         console.log('We have a user!', user);
-        isSignedIn.set(true);
+        userStore.set({
+			isSignedIn: true,
+			displayName: user.displayName
+		});
     } else {
         console.log('We are not authed I guess!', user);
-        isSignedIn.set(false);
+        userStore.set({
+			isSignedIn: false,
+			displayName: ''
+		});
     }
 });
 
