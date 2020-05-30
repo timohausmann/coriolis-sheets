@@ -1,5 +1,5 @@
 <script>
-    import { firestore } from "firebase/app";
+    import { auth, firestore } from "firebase/app";
     import 'firebase/firestore';
     import Sheet from './coriolis/_sheet.svelte';
 
@@ -8,17 +8,21 @@
     const db = firestore();
     
     function save(e) {
-
+        
         e.preventDefault();
 
-        const formData = new FormData(form);
-        console.log(...formData);
+        const uid = auth().currentUser.uid;
 
-        db.collection("characters").doc("LA").set({
-            name: "Los Angeles",
-            state: "CA",
-            country: "USA"
-        })
+        const formData = new FormData(form);
+        var sheetData = {};
+        formData.forEach((value, key) => {
+            if(value) sheetData[key] = value
+        });
+        console.log(sheetData);
+
+        return false;        
+
+        db.collection("characters").doc(uid).set(sheetData)
         .then(function() {
             console.log("Document successfully written!");
         })

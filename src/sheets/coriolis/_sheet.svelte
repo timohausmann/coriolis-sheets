@@ -1,6 +1,7 @@
 <script>
 	import Field from './Field.svelte';
 	import TextField from './TextField.svelte';
+	import Points from './Points.svelte';
 	import Slider from './Slider.svelte';
 	import Equipment from './Equipment.svelte';
 	import Weapon from './Weapon.svelte';
@@ -39,12 +40,14 @@
         <section>
             <h2>Trauma</h2>
             <Field label="Trefferpunkte" name="hp" />
-            <Slider min="0" max="12" />
+            <Points max="12" />
+
             <TextField label="Kritische Wunden" name="crit_1" />
             <TextField label="Kr.W." name="crit_2" />
             <TextField label="Kr.W." name="crit_3" />
+
             <Field label="Willenskraft" name="will" />
-            <Slider min="0" max="12" />
+            <Points max="12" />
         </section>
     </div>
     <div class="flex-2 flex-gutter">
@@ -86,11 +89,11 @@
         <div class="row">
             <section class="flex-1 flex-gutter">
                 <h2>Strahlung</h2>
-                <Slider min="0" max="10" />
+                <Points max="10" />
             </section>
             <section class="flex-1 flex-gutter">
                 <h2>Erfahrung</h2>
-                <Slider min="0" max="10" />
+                <Points max="10" />
             </section>
         </div>
 
