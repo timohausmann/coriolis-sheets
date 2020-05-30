@@ -1,5 +1,6 @@
 <script>
 	export let label;
+	export let name = '';
 </script>
 
 <style>
@@ -25,5 +26,5 @@
 
 <div class="field">
     <label>{label}</label>
-    <input type="text" />
+    <input type="text" name={name} />
 </div>

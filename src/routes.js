@@ -1,7 +1,7 @@
 import Login from './Login.svelte'
 import Layout from './Layout.svelte'
 import Splash from './Splash.svelte'
-import Charactersheet from './sheets/coriolis/sheet.svelte'
+import Sheet from './sheets/Sheet.svelte'
 
 
 function userIsAdmin() {
@@ -21,7 +21,7 @@ const routes = [
     },
     { 
         name: 'sheet', 
-        component: Charactersheet, 
+        component: Sheet, 
         layout: Layout 
     },
 

@@ -1,5 +1,6 @@
 <script>
 	export let label;
+	export let name = '';
 	export let className = '';
 </script>
 
@@ -26,5 +27,5 @@
 
 <div class="field {className}">
     <label>{label}</label>
-    <input type="text" />
+    <input type="text" name={name} />
 </div>

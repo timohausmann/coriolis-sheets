@@ -30,20 +30,20 @@
     <div class="flex-1 flex-gutter">
         <section>
             <h2>Attribute</h2>
-            <Field label="Stärke" />
-            <Field label="Geschicklichkeit" />
-            <Field label="Verstand" />
-            <Field label="Empathie" />
+            <Field label="Stärke" name="attr_str" />
+            <Field label="Geschicklichkeit" name="attr_dex" />
+            <Field label="Verstand" name="attr_int" />
+            <Field label="Empathie" name="attr_emp" />
         </section>
 
         <section>
             <h2>Trauma</h2>
-            <Field label="Trefferpunkte" />
+            <Field label="Trefferpunkte" name="hp" />
             <Slider min="0" max="12" />
-            <TextField label="Kritische Wunden" />
-            <TextField label="Kr.W." />
-            <TextField label="Kr.W." />
-            <Field label="Willenskraft" />
+            <TextField label="Kritische Wunden" name="crit_1" />
+            <TextField label="Kr.W." name="crit_2" />
+            <TextField label="Kr.W." name="crit_3" />
+            <Field label="Willenskraft" name="will" />
             <Slider min="0" max="12" />
         </section>
     </div>
@@ -52,29 +52,29 @@
             <h2>Charakter</h2>
             <div class="row">
                 <div class="flex-2">
-                    <TextField label="Name" />
-                    <TextField label="Konzept" />
-                    <TextField label="Gruppenkonzept" />        
+                    <TextField label="Name" name="char_name" />
+                    <TextField label="Konzept" name="char_concept" />
+                    <TextField label="Gruppenkonzept" name="group_concept" />
                 </div>
                 <div class="flex-1">
-                    <TextField label="Hintergrund" />
-                    <TextField label="Ikone" />
-                    <Field label="Reputation" />
+                    <TextField label="Hintergrund" name="char_bg" />
+                    <TextField label="Ikone" name="char_icon" />
+                    <Field label="Reputation" name="char_rep" />
                 </div>
             </div>
-            <TextField label="Persönliches Problem" />
+            <TextField label="Persönliches Problem" name="challenge" />
         </section>
         <section>
             <h2>Aussehen</h2>
-            <TextField label="Gesicht" />
-            <TextField label="Kleidung" />
+            <TextField label="Gesicht" name="look_face" />
+            <TextField label="Kleidung" name="look_clothing" />
         </section>
         <section>
             <h2>Beziehungen</h2>
-            <TextField label="SC 1" />
-            <TextField label="SC 2" />
-            <TextField label="SC 3" />
-            <TextField label="SC 4" />
+            <TextField label="SC 1" name="rel_sc1" />
+            <TextField label="SC 2" name="rel_sc2" />
+            <TextField label="SC 3" name="rel_sc3" />
+            <TextField label="SC 4" name="rel_sc4" />
         </section>
     </div>
 </div>
@@ -98,24 +98,24 @@
             <h2>Fertigkeiten</h2>
             <div class="row">
                 <div class="flex-1">
-                    <Field label="Beobachtung (Verstand)" />
-                    <Field label="Beweglichkeit (Geschicklichkeit)" />
-                    <Field label="Fernkampf (Geschicklichkeit)" />
-                    <Field label="Infiltration (Geschicklichkeit)" />
-                    <Field label="Kraftakt (Stärke)" />
-                    <Field label="Manipulation (Empathie)" />
-                    <Field label="Nahkampf (Stärke)" />
-                    <Field label="Überleben (Verstand)" />
+                    <Field label="Beobachtung (Verstand)" name="ab_observation" />
+                    <Field label="Beweglichkeit (Geschicklichkeit)" name="ab_agility" />
+                    <Field label="Fernkampf (Geschicklichkeit)" name="ab_ranged" />
+                    <Field label="Infiltration (Geschicklichkeit)" name="ab_infiltration" />
+                    <Field label="Kraftakt (Stärke)" name="ab_strength" />
+                    <Field label="Manipulation (Empathie)" name="ab_manipulation" />
+                    <Field label="Nahkampf (Stärke)" name="ab_melee" />
+                    <Field label="Überleben (Verstand)" name="ab_survival" />
                 </div>
                 <div class="flex-1">
-                    <Field label="Datendschinn (Verstand)" />
-                    <Field label="Kommandieren (Empathie)" />
-                    <Field label="Kultur (Empathie)" />
-                    <Field label="Medikurgie (Verstand)" />
-                    <Field label="Mystik (Empathie)" />
-                    <Field label="Pilot (Geschicklichkeit)" />
-                    <Field label="Technologie (Verstand)" />
-                    <Field label="Wissenschaft (Verstand)" />
+                    <Field label="Datendschinn (Verstand)" name="ab_datadschinn" />
+                    <Field label="Kommandieren (Empathie)" name="ab_command" />
+                    <Field label="Kultur (Empathie)" name="ab_culture" />
+                    <Field label="Medikurgie (Verstand)" name="ab_medi" />
+                    <Field label="Mystik (Empathie)" name="ab_mystic" />
+                    <Field label="Pilot (Geschicklichkeit)" name="ab_pilot" />
+                    <Field label="Technologie (Verstand)" name="ab_tech" />
+                    <Field label="Wissenschaft (Verstand)" name="ab_science" />
                 </div>
             </div>
         </section>
@@ -166,11 +166,5 @@
             </div>
         </section>
     </div>
-
-        
-
-
+    
 </div>
-
-
-
