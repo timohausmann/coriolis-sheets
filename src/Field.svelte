@@ -1,0 +1,29 @@
+<script>
+	export let label;
+</script>
+
+<style>
+	.field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        color: #111;
+        padding: 0.25rem;
+        margin: 0 0.25rem;
+    }
+    .field:last-child {
+        border-bottom: none;
+    }
+    input {
+        margin: 0;
+        width: 2rem;
+        border-radius: 0.25rem;
+        border: none;
+    }
+</style>
+
+<div class="field">
+    <label>{label}</label>
+    <input type="text" />
+</div>
