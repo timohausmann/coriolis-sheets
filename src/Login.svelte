@@ -2,9 +2,10 @@
 import firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
 
+
+let authContainer;
+
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-
 
 function createSignInForm() {
 
@@ -30,8 +31,15 @@ function createSignInForm() {
 
 firebase.auth().onAuthStateChanged(function (user) {
 
+    authContainer.innerHTML = '';
+
     if (user) {
         console.log('We have a user!', user);
+
+        const btn = document.createElement('button');
+        btn.innerText = "Sign Out";
+        btn.addEventListener('click', signOut);
+        authContainer.appendChild(btn);
 
         //authenticatedRequest('GET', '/app-js');
     } else {
@@ -41,25 +49,22 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
-//document.getElementById('signOut').addEventListener('click', signOut);
 
-//function signOut() {
-//    firebase.auth().signOut();
-//}
+
+function signOut() {
+    firebase.auth().signOut();
+}
 </script>
 <style>
-    .content {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        max-width: 480px;
-        max-height: 320px;
-        width: 100%;
-        transform: translateX(-50%) translateY(-50%);
-
+    p {
+        color: #eee;
+        margin-bottom: 2rem;
         text-align: center;
     }
 </style>
-<div class="content" id="firebase-auth">
-    <div id="firebaseui-auth-container"></div>
-</div>
+
+<p class="firebaseui-text">
+    Create a new account or<br /> sign in with your existing account here.
+</p>
+
+<div id="firebaseui-auth-container" bind:this={authContainer}></div>
