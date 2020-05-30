@@ -1,5 +1,5 @@
 <script>
-	import Charactersheet from './Charactersheet.svelte';
+	import Charactersheet from './sheets/coriolis/Charactersheet.svelte';
 </script>
 
 <style>
