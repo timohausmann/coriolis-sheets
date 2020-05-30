@@ -1,6 +1,6 @@
 <script>
 	export let label;
-	export let className;
+	export let className = '';
 </script>
 
 <style>
@@ -14,6 +14,7 @@
         top: 0.25rem;
         left: 0.25rem;
         font-size: 0.625rem;
+        pointer-events: none;
     }
     input {
         display: block;
