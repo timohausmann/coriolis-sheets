@@ -1,12 +1,12 @@
-import * as firebase from "firebase/app";
+import { initializeApp } from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
-import firebaseConfig from "./fbConfig";
+//import "firebase/firestore";
 
 import App from './App.svelte';
+import firebaseConfig from "./fbConfig";
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const app = new App({
 	target: document.body,

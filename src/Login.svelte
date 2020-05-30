@@ -1,11 +1,11 @@
 <script>
-import firebase from 'firebase';
+import { auth } from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 
 
 let authContainer;
 
-const ui = new firebaseui.auth.AuthUI(firebase.auth());
+const ui = new firebaseui.auth.AuthUI(auth());
 
 function createSignInForm() {
 
@@ -20,8 +20,8 @@ function createSignInForm() {
         },
         signInSuccessUrl: '/',
         signInOptions: [
-            firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            //firebase.auth.GoogleAuthProvider.PROVIDER_ID
+            auth.EmailAuthProvider.PROVIDER_ID,
+            //auth.GoogleAuthProvider.PROVIDER_ID
         ],
         'credentialHelper': firebaseui.auth.CredentialHelper.NONE
     };
@@ -29,7 +29,7 @@ function createSignInForm() {
     ui.start('#firebaseui-auth-container', uiConfig);
 }
 
-firebase.auth().onAuthStateChanged(function (user) {
+auth().onAuthStateChanged(function (user) {
 
     authContainer.innerHTML = '';
 
@@ -52,7 +52,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 
 function signOut() {
-    firebase.auth().signOut();
+    auth().signOut();
 }
 </script>
 <style>
