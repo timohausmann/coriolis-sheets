@@ -1,5 +1,6 @@
 <script>
-	import Field from './Field.svelte';
+    import Field from './Field.svelte';
+    import FieldPoints from './FieldPoints.svelte';
 	import TextField from './TextField.svelte';
 	import Points from './Points.svelte';
 	import Slider from './Slider.svelte';
@@ -39,15 +40,13 @@
 
         <section>
             <h2>Trauma</h2>
-            <Field label="Trefferpunkte" name="hp" />
-            <Points max="12" />
+            <FieldPoints label="Trefferpunkte" name="hp" max="12" />
 
             <TextField label="Kritische Wunden" name="crit_1" />
             <TextField label="Kr.W." name="crit_2" />
             <TextField label="Kr.W." name="crit_3" />
 
-            <Field label="Willenskraft" name="will" />
-            <Points max="12" />
+            <FieldPoints label="Willenskraft" name="will" max="12" />
         </section>
     </div>
     <div class="flex-2 flex-gutter">

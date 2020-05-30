@@ -1,5 +1,6 @@
 <script>
-	export let label;
+    export let label;
+    export let max = 99;
 	export let name = '';
 </script>
 
@@ -18,7 +19,7 @@
     }
     input {
         margin: 0;
-        width: 2rem;
+        width: 3.5rem;
         border-radius: 0.25rem;
         border: none;
     }
@@ -26,5 +27,5 @@
 
 <div class="field">
     <label>{label}</label>
-    <input type="text" name={name} />
+    <input type="number" name={name} max={max} />
 </div>
