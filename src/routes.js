@@ -1,6 +1,9 @@
 import Login from './Login.svelte'
 import Layout from './Layout.svelte'
 import Splash from './Splash.svelte'
+import Page from './Page.svelte'
+import Parties from './Parties.svelte'
+import Characters from './Characters.svelte'
 import Sheet from './sheets/Sheet.svelte'
 
 
@@ -22,6 +25,21 @@ const routes = [
     { 
         name: 'sheet', 
         component: Sheet, 
+        layout: Layout 
+    },
+    { 
+        name: 'characters', 
+        component: Characters, 
+        layout: Layout 
+    },
+    { 
+        name: 'parties', 
+        component: Parties, 
+        layout: Layout 
+    },
+    { 
+        name: '404.html', 
+        component: Page, 
         layout: Layout 
     },
 

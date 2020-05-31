@@ -23,14 +23,4 @@ const unsubscribe = isSignedIn.subscribe(value => {
             This service allows you to manage and share Coriolis Character Sheets.
         </p>
     </div>
-
-    <div class="firebaseui-card-actions">
-        <div class="firebaseui-form-actions">
-            {#if $userStore.isSignedIn}
-                <Navigate to="sheet" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Character Sheet</Navigate>
-            {:else}
-                <Navigate to="login" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Login</Navigate>
-            {/if}
-        </div>
-    </div>
 </div>

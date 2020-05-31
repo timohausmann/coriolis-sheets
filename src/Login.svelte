@@ -24,7 +24,6 @@ onMount(() => {
             authContainer.classList.add('hidden');
         } else {
             authContainer.classList.remove('hidden');
-            console.log('FAIL HERE?')
         }
 
         isSignedIn = value.isSignedIn;

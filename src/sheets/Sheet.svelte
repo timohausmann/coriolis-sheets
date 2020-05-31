@@ -14,13 +14,15 @@
         const uid = auth().currentUser.uid;
 
         const formData = new FormData(form);
-        var sheetData = {};
+        var sheetData = {
+            user: uid
+        };
         formData.forEach((value, key) => {
             if(value) sheetData[key] = value
         });
         console.log(sheetData);
 
-        return false;        
+        return false;
 
         db.collection("characters").doc(uid).set(sheetData)
         .then(function() {
@@ -32,8 +34,16 @@
     }
 </script>
 
+<style>
+.sheet {
+    max-width: 960px;
+    margin: 0 auto;
+}
+</style>
+
 <form action="/sheet/" method="post" bind:this={form}>
     <button type="submit" on:click={save}>Save</button>
-
-    <Sheet />
+    <div class="sheet">
+        <Sheet />
+    </div>
 </form>

@@ -1,18 +1,20 @@
 <script>
-  import { Route } from 'svelte-router-spa'
-  export let currentRoute
-  const params = {}
+import { Route } from 'svelte-router-spa'
+import Sidebar from './Sidebar.svelte'
+
+export let currentRoute
+const params = {}
 </script>
 
 <style>
-	main {
+	.site {
         display: flex;
-        flex-direction: column;
+        /*flex-direction: column;
         justify-content: stretch;
 		padding: 0 1em;
-        max-width: 960px;
-        height: 100%;
 		margin: 0 auto;
+        max-width: 960px;*/
+        height: 100%;
 	}
 	h1 {
 		width: 100%;
@@ -27,12 +29,30 @@
         flex-direction: column;
         justify-content: center;
         align-items: stretch;
+        padding: 1rem;
+        overflow-y: auto;
+    }
+    .content > :global(*) {
+        max-height: 100%;
+    }
+
+    .sidebar {
+        background: black;
+        padding: 0 1rem;
+    }
+    .nav {
+        display: flex;
+        flex-direction: column;;
+    }
+    .nav :global(a) {
+        display: block;
+        padding: 0.5rem;
     }
 </style>
 
-<main>
-    <h1>Coriolis</h1>
-    <div class="content">
+<div class="site">
+    <Sidebar />
+    <main class="content">
         <Route {currentRoute} {params} />
-    </div>
-</main>
+    </main>
+</div>
