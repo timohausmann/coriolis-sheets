@@ -3,6 +3,7 @@ import Layout from './Layout.svelte'
 import Splash from './Splash.svelte'
 import Page from './Page.svelte'
 import Parties from './Parties.svelte'
+import Party from './Party.svelte'
 import Characters from './Characters.svelte'
 import Sheet from './sheets/Sheet.svelte'
 
@@ -56,27 +57,16 @@ const routes = [
         onlyIf: { guard: userIsSignedIn, redirect: '/login' },
     },
     { 
+        name: 'parties/:id', 
+        component: Party, 
+        layout: Layout,
+        onlyIf: { guard: userIsSignedIn, redirect: '/login' },
+    },
+    { 
         name: '404.html', 
         component: Page, 
         layout: Layout 
     },
-
-  /*{
-    name: 'admin',
-    component: AdminLayout,
-    onlyIf: { guard: userIsAdmin, redirect: '/login' },
-    nestedRoutes: [
-      { name: 'index', component: AdminIndex },
-      {
-        name: 'employees',
-        component: '',
-        nestedRoutes: [
-          { name: 'index', component: EmployeesIndex },
-          { name: 'show/:id', component: EmployeesShow },
-        ],
-      },
-    ],
-  },*/
 ]
 
 export { routes }

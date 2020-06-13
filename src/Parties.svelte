@@ -1,5 +1,6 @@
 <script>
 
+import { Navigate } from 'svelte-router-spa'
 import { firestore } from "firebase/app";
 import 'firebase/firestore';
 
@@ -45,6 +46,8 @@ li :global(a) {
 <h1>Parties</h1>
 <ul>
     {#each parties as party}
-        <li><a href="#">{party.name}</a></li>
+        <li>
+          <Navigate to="/parties/{party.id}">{party.name}</Navigate>
+        </li>
     {/each}
 </ul>
