@@ -5,7 +5,8 @@
 	import Points from './Points.svelte';
 	import Slider from './Slider.svelte';
 	import Equipment from './Equipment.svelte';
-	import Weapon from './Weapon.svelte';
+    import Weapon from './Weapon.svelte';
+    
 </script>
 
 <style>
@@ -124,10 +125,10 @@
 
         <section>
             <h2>Waffen</h2>
-            <Weapon />
-            <Weapon />
-            <Weapon />
-            <Weapon />
+            <Weapon suffix="1" />
+            <Weapon suffix="2" />
+            <Weapon suffix="3" />
+            <Weapon suffix="4" />
         </section>
     </div>
 
@@ -135,35 +136,35 @@
     <div class="flex-1 flex-gutter">
         <section>
             <h2>Talente</h2>
-            <TextField label="Talent 1" />
-            <TextField label="Talent 2" />
-            <TextField label="Talent 3" />
+            <TextField label="Talent 1" name="talent_1" />
+            <TextField label="Talent 2" name="talent_2" />
+            <TextField label="Talent 3" name="talent_3" />
         </section>
         <section>
             <h2>Ausrüstung</h2>
-            <Equipment />
-            <Equipment />
-            <Equipment />
-            <Equipment />
-            <Equipment />
-            <Equipment />
-            <Equipment />
-            <Equipment />
-            <Equipment />
-            <Equipment />
+            <Equipment suffix="1" />
+            <Equipment suffix="2" />
+            <Equipment suffix="3" />
+            <Equipment suffix="4" />
+            <Equipment suffix="5" />
+            <Equipment suffix="6" />
+            <Equipment suffix="7" />
+            <Equipment suffix="8" />
+            <Equipment suffix="9" />
+            <Equipment suffix="10" />
         </section>
         
         <section>
             <h2>Panzerung</h2>
             <div class="row">
                 <div class="flex-2">
-                    <TextField label="Name" />
+                    <TextField label="Name" name="armor_name" />
                 </div>
                 <div class="flex-1">
-                    <TextField label="Wert" />
+                    <TextField label="Wert" name="armor_value" />
                 </div>
                 <div class="flex-1">
-                    <TextField label="Anm." />
+                    <TextField label="Anm." name="armor_comment" />
                 </div>
             </div>
         </section>

@@ -1,13 +1,15 @@
 <script>
 	import TextField from './TextField.svelte';
+    
+    export let suffix
 </script>
 
 <div class="row">
-    <TextField className="flex-3" label="Name" />
-    <TextField className="flex-1" label="Bonus" />
-    <TextField className="flex-1" label="Int" />
-    <TextField className="flex-1" label="Schaden" />
-    <TextField className="flex-1" label="Krit" />
-    <TextField className="flex-1" label="Reichw." />
-    <TextField className="flex-3" label="Anmerkung" />
+    <TextField className="flex-3" label="Name" name={'weap_name_'+ suffix} />
+    <TextField className="flex-1" label="Bonus" name={'weap_bonus_'+ suffix} />
+    <TextField className="flex-1" label="Ini" name={'weap_ini_'+ suffix} />
+    <TextField className="flex-1" label="Schaden" name={'weap_dmg_'+ suffix} />
+    <TextField className="flex-1" label="Krit" name={'weap_crit_'+ suffix} />
+    <TextField className="flex-1" label="Reichw." name={'weap_range_'+ suffix} />
+    <TextField className="flex-3" label="Anmerkung" name={'weap_comment_'+ suffix} />
 </div>

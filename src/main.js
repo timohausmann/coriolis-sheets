@@ -1,4 +1,5 @@
-import { initializeApp, auth } from "firebase/app";
+import { initializeApp, auth, analytics } from "firebase/app";
+import "firebase/analytics";
 
 import App from './App.svelte';
 import firebaseConfig from "./fbConfig";
@@ -6,6 +7,8 @@ import { userStore } from './stores.js';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+
+analytics();
 
 auth().onAuthStateChanged(function (user) {
     if (user) {

@@ -30,10 +30,21 @@ partiesRef.get()
   });
 
 </script>
+<style>
+ul {
+  list-style: none;
+  margin: 2rem;
+}
+li :global(a) {
+  display: inline-block;
+  border: 1px solid #666;
+  padding: 1rem;
+}
+</style>
 
 <h1>Parties</h1>
 <ul>
     {#each parties as party}
-        <li>{party.name}</li>
+        <li><a href="#">{party.name}</a></li>
     {/each}
 </ul>

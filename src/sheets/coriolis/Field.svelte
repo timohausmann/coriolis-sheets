@@ -1,7 +1,24 @@
 <script>
+    import { onDestroy } from 'svelte';
+    import { currCharStore } from '../../stores.js'
+
     export let label;
     export let max = 99;
 	export let name = '';
+    
+    let currField_value = ''
+
+    const unsubscribe = currCharStore.subscribe(value => {
+
+        if(!value) return;
+
+        currField_value = value[name] ? value[name] : ''
+    })
+
+    onDestroy(() => {
+        unsubscribe()
+    })
+
 </script>
 
 <style>
@@ -27,5 +44,5 @@
 
 <div class="field">
     <label>{label}</label>
-    <input type="number" name={name} max={max} />
+    <input type="number" name={name} max={max} value={currField_value} />
 </div>

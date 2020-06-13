@@ -1,12 +1,7 @@
 <script>
 import { Navigate } from 'svelte-router-spa'
-
 import { userStore } from './stores.js';
 
-/*let isSignedIn_value;
-const unsubscribe = isSignedIn.subscribe(value => {
-    isSignedIn_value = value;
-});*/
 </script>
 
 <style>
@@ -22,5 +17,15 @@ const unsubscribe = isSignedIn.subscribe(value => {
         <p class="firebaseui-text">
             This service allows you to manage and share Coriolis Character Sheets.
         </p>
+    </div>
+
+    <div class="firebaseui-card-actions">
+        <div class="firebaseui-form-actions">
+            {#if $userStore.isSignedIn}
+                <Navigate to="/characters" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">My Characters</Navigate>
+            {:else}
+                <Navigate to="/login" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Register / Sign In</Navigate>
+            {/if}
+        </div>
     </div>
 </div>

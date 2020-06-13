@@ -41,7 +41,7 @@ import { userStore } from './stores.js';
             <Navigate to="/account/">Account</Navigate-->
             <Navigate to="/login/">Logout</Navigate>
         {:else}
-            <Navigate to="/login/">Register / Login</Navigate>
+            <Navigate to="/login/">Register / Sign In</Navigate>
         {/if}
     </nav>
 </div>

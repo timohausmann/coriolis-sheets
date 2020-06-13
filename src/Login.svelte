@@ -2,23 +2,22 @@
 import { auth } from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 import { Navigate } from 'svelte-router-spa'
-import { onMount } from 'svelte';
-
+import { onMount, onDestroy } from 'svelte';
 import { userStore } from './stores.js';
 
 let authContainer;
-let ui;
 let userName;
 
 let isSignedIn = false;
 let displayName = '';
 
+let unsubscribe;
+
 onMount(() => {
 
-    ui = new firebaseui.auth.AuthUI(auth());
     createSignInForm();
 
-    const unsubscribe = userStore.subscribe(value => {
+    unsubscribe = userStore.subscribe(value => {
 
         if (value.isSignedIn) {
             authContainer.classList.add('hidden');
@@ -32,7 +31,14 @@ onMount(() => {
 });
 
 
+onDestroy(() => {
+    unsubscribe();
+});
+
+
 function createSignInForm() {
+
+    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth())
 
     const uiConfig = {
         callbacks: {
@@ -85,7 +91,7 @@ function signOut() {
 
         <div class="firebaseui-card-actions">
             <div class="firebaseui-form-actions">
-                <Navigate to="/" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Home</Navigate>
+                <Navigate to="/characters" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">My Characters</Navigate>
                 <button on:click={signOut} class="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Sign out</button>
             </div>
         </div>

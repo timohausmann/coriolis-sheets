@@ -5,7 +5,8 @@ const firebaseConfig = {
     projectId: "coriolis-86cdc",
     storageBucket: "coriolis-86cdc.appspot.com",
     messagingSenderId: "147822393983",
-    appId: "1:147822393983:web:c13a2855fcc773efc5dd4a"
+    appId: "1:147822393983:web:c13a2855fcc773efc5dd4a",
+    measurementId: "G-1W9WXYJTF9"
 };
 
 export default firebaseConfig
