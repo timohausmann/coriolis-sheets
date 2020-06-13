@@ -36,18 +36,14 @@ const params = {}
         max-height: 100%;
     }
 
-    .sidebar {
-        background: black;
-        padding: 0 1rem;
+    
+
+    @media only screen and (max-width: 720px) {
+        .site {
+            flex-direction: column;
+        }
     }
-    .nav {
-        display: flex;
-        flex-direction: column;;
-    }
-    .nav :global(a) {
-        display: block;
-        padding: 0.5rem;
-    }
+
 </style>
 
 <div class="site">

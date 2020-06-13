@@ -32,19 +32,11 @@ partiesRef.get()
 
 </script>
 <style>
-ul {
-  list-style: none;
-  margin: 2rem;
-}
-li :global(a) {
-  display: inline-block;
-  border: 1px solid #666;
-  padding: 1rem;
-}
+
 </style>
 
 <h1>Parties</h1>
-<ul>
+<ul class="itemlist">
     {#each parties as party}
         <li>
           <Navigate to="/parties/{party.id}">{party.name}</Navigate>

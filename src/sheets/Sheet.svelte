@@ -109,8 +109,10 @@
 </style>
 
 <form action="/sheet/" method="post" bind:this={form}>
-    <button type="submit" on:click={save}>💾 Save</button>
-    <button on:click={del}>🗑️ Delete Character</button>
+    <div class="actions">
+        <button type="submit" on:click={save}>💾 Save</button>
+        <button on:click={del}>🗑️ Delete Character</button>
+    </div>    
     <div class="sheet">
         <CoriolisCharSheet />
     </div>

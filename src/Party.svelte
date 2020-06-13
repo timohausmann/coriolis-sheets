@@ -31,22 +31,13 @@
   });
 </script>
 <style>
-ul {
-  list-style: none;
-  margin: 2rem;
-}
-li :global(a) {
-  display: inline-block;
-  border: 1px solid #666;
-  padding: 1rem;
-  margin-bottom: 1rem;
-}
+
 </style>
 
 <h1>Party Charaktere</h1>
 
 {#if chars.length}
-  <ul>
+  <ul class="itemlist">
   {#each chars as char}
     <li>
       <Navigate to="/characters/{char.id}">{char.char_name}</Navigate>

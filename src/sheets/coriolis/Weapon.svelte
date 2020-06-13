@@ -4,7 +4,7 @@
     export let suffix
 </script>
 
-<div class="row">
+<div class="row group">
     <TextField className="flex-3" label="Name" name={'weap_name_'+ suffix} />
     <TextField className="flex-1" label="Bonus" name={'weap_bonus_'+ suffix} />
     <TextField className="flex-1" label="Ini" name={'weap_ini_'+ suffix} />

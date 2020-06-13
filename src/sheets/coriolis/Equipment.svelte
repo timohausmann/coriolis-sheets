@@ -4,7 +4,7 @@
     export let suffix
 </script>
 
-<div class="row">
+<div class="row group">
     <div class="flex-2">
         <TextField label="Name" name={'eq_name_'+ suffix} />
     </div>

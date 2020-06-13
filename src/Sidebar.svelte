@@ -6,7 +6,7 @@ import { userStore } from './stores.js';
 <style>
 	h1 {
 		width: 100%;
-		height: 6rem;
+        height: 3rem;
 		color: transparent;
 		background: url(../coriolis-header.png) center no-repeat black;
 		background-size: contain;
@@ -14,8 +14,16 @@ import { userStore } from './stores.js';
 
     .sidebar {
         background: black;
-        padding: 0 1rem;
+        padding: 1rem;
     }
+
+    @media only screen and (min-width: 721px) {
+        h1 {
+		    height: 6rem;
+            margin: 0 0 1rem;
+        }
+    }
+
     .nav {
         display: flex;
         flex-direction: column;;
