@@ -13,7 +13,9 @@
     "rollup-plugin-livereload": "^1.0.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
+    "sass": "^1.26.8",
     "svelte": "^3.0.0",
+    "svelte-preprocess": "^3.9.7",
     "svelte-router-spa": "^5.6.0"
   },
   "dependencies": {

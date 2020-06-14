@@ -1,55 +1,149 @@
-<script>
-import { Navigate } from 'svelte-router-spa'
-import { userStore } from './stores.js';
-</script>
+<style lang="scss">
 
-<style>
+    @import './vars.scss'; 
+
 	h1 {
-		width: 100%;
         height: 3rem;
 		color: transparent;
 		background: url(../coriolis-header.png) center no-repeat black;
-		background-size: contain;
+        background-size: contain;
+                
+        @media #{$media-tablet-landscape} {
+            width: 100%;
+            margin: 0 0 1rem;
+        }
     }
 
     .sidebar {
         background: black;
-        padding: 1rem;
-    }
+        padding: 0 0.5rem;
 
-    @media only screen and (min-width: 721px) {
-        h1 {
-		    height: 6rem;
-            margin: 0 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        @media #{$media-tablet-landscape} {
+            flex-direction: column;
+            justify-content: flex-start;
         }
     }
 
     .nav {
         display: flex;
-        flex-direction: column;;
-    }
-    .nav :global(a) {
-        display: block;
-        padding: 0.5rem;
-    }
-</style>
+        flex-direction: column;
+        background: rgba(0,0,0,0.9);
+        width: 100%;
 
+        @media #{$media-tablet-landscape-lt} {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            
+            justify-content: center;
+            z-index: 10;
+
+            transform: translateX(100%);
+            transition: transform 0.4s;
+        }
+        
+
+        input:checked ~ & {
+            transform: translateX(0);
+        }
+
+        :global(a) {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: white;
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    input {
+        display: none;
+    }
+
+    label {
+        position: relative;
+        z-index: 11;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.25rem;
+        text-align: center;
+        transition: border-color 0.4s;
+
+        &::before,
+        &::after {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            content: '⋮';
+            color: white;
+            font-size: 1.5rem;
+            line-height: 1.75rem;
+            transition: transform 0.4s, opacity 0.4s;
+        }
+        &::after {
+            content: '×';
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        input:checked + & {
+            &::before {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            &::after {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @media #{$media-tablet-landscape} {
+            display: none;
+        }
+    }
+
+</style>
+<script>
+import { navigateTo } from 'svelte-router-spa'
+import { userStore } from './stores.js';
+
+let input;
+
+function handleNav(e) {
+    
+    e.preventDefault();
+    navigateTo(e.target.href);
+
+    //close nav layer
+    input.checked = false;
+}
+
+</script>
 
 <div class="sidebar">
     <h1>Coriolis Web</h1>
+
+    <input class="nav_input" type="checkbox" id="nav_toggle" bind:this={input} />
+    <label class="nav_button" for="nav_toggle"></label>
+
     <nav class="nav">
     
         {#if $userStore.isSignedIn}
-            <Navigate to="/characters/">Meine Charaktere</Navigate>
-            <Navigate to="/parties/">Parties</Navigate>
-            <!--Navigate to="/sessions/">Sessions</Navigate>
-            <Navigate to="/items/">Items</Navigate>
-            <Navigate to="/talents/">Talente</Navigate>
-            <Navigate to="/crits/">Kritische Wunden</Navigate>
-            <Navigate to="/account/">Account</Navigate-->
-            <Navigate to="/login/">Logout</Navigate>
+            <a on:click={handleNav} href="/characters/">Meine Charaktere</a>
+            <a on:click={handleNav} href="/parties/">Parties</a>
+            <a on:click={handleNav} href="/login/">Logout</a>
         {:else}
-            <Navigate to="/login/">Register / Sign In</Navigate>
+            <a on:click={handleNav} href="/login/">Register / Sign In</a>
         {/if}
     </nav>
 </div>

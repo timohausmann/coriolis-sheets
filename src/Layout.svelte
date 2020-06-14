@@ -6,16 +6,27 @@ export let currentRoute
 const params = {}
 </script>
 
-<style>
+<style lang="scss">
+
+    @import './vars.scss'; 
+
+    :global(body) {
+        background: url(../bg_400x800.jpg) center no-repeat #111;
+        background-size: cover;
+
+        @media #{$media-tablet-landscape} {
+            background-image: url(../bg_1024x768.jpg);
+        }
+    }
+
 	.site {
         display: flex;
-        /*flex-direction: column;
-        justify-content: stretch;
-		padding: 0 1em;
-		margin: 0 auto;
-        max-width: 960px;*/
         height: 100%;
-	}
+        @media #{$media-tablet-landscape-lt} {
+            flex-direction: column;
+        }
+    }
+    
 	h1 {
 		width: 100%;
 		height: 6rem;
@@ -23,6 +34,7 @@ const params = {}
 		background: url(../coriolis-header.png) center no-repeat black;
 		background-size: contain;
     }
+
     .content {
         flex: 1;
         display: flex;
@@ -34,14 +46,6 @@ const params = {}
     }
     .content > :global(*) {
         max-height: 100%;
-    }
-
-    
-
-    @media only screen and (max-width: 720px) {
-        .site {
-            flex-direction: column;
-        }
     }
 
 </style>

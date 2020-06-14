@@ -1,0 +1,21 @@
+
+/**
+from tailwind 2020
+mobile portrait: less than 640px
+mobile landscape: > 640px
+tablet portrait: > 768px
+tablet landscape: > 1024px
+laptop: > 1280px
+*/
+
+$break-mobile-landscape: 640;
+$break-tablet: 768;
+$break-tablet-landscape: 1024;
+$break-laptop: 1280;
+
+$media-mobile: "only screen and (max-width: #{$break-mobile-landscape - 1}px)";
+$media-mobile-landscape: "only screen and min-width: #{$break-mobile-landscape}px)";
+$media-tablet: "only screen and (min-width: #{$break-tablet}px)";
+$media-tablet-landscape: "only screen and (min-width: #{$break-tablet-landscape}px)";
+$media-tablet-landscape-lt: "only screen and (max-width: #{$break-tablet-landscape - 1}px)";
+$media-laptop: "only screen and (min-width: #{$break-laptop}px)";
