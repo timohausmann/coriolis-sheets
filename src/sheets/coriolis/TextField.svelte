@@ -1,6 +1,6 @@
 <script>
     import { onDestroy } from 'svelte';
-    import { currCharStore } from '../../stores.js'
+    import { currCharStore, unsavedChangesStore } from '../../stores.js'
 
 	export let label;
 	export let name = '';
@@ -13,6 +13,11 @@
         
         currField_value = value[name] ? value[name] : ''
     })
+
+    function onChange(e) {
+        //temp_value = parseInt(e.target.value);
+        unsavedChangesStore.set(true);
+    }
 
     onDestroy(() => {
         unsubscribe()
@@ -43,5 +48,6 @@
 
 <div class="field {className}">
     <label>{label}</label>
-    <input type="text" name={name} value={currField_value} />
+    <input type="text" name={name} value={currField_value} 
+        on:change={onChange} on:keydown={onChange} />
 </div>

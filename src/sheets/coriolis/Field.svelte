@@ -1,19 +1,28 @@
 <script>
     import { onDestroy } from 'svelte';
-    import { currCharStore } from '../../stores.js'
+    import { currCharStore, unsavedChangesStore } from '../../stores.js'
 
     export let label;
     export let max = 99;
 	export let name = '';
     
+    //current input value
+    //let temp_value = ''
+
+    //database value
     let currField_value = ''
 
     const unsubscribe = currCharStore.subscribe(value => {
 
         if(!value) return;
 
-        currField_value = value[name] ? value[name] : ''
+        currField_value = value[name] ? parseInt(value[name]) : ''
     })
+
+    function onChange(e) {
+        //temp_value = parseInt(e.target.value);
+        unsavedChangesStore.set(true);
+    }
 
     onDestroy(() => {
         unsubscribe()
@@ -44,5 +53,6 @@
 
 <div class="field">
     <label>{label}</label>
-    <input type="number" name={name} max={max} value={currField_value} />
+    <input type="number" name={name} min="0" max={max} value={currField_value}
+        on:change={onChange} on:keydown={onChange} />
 </div>

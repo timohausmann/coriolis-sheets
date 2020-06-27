@@ -43,6 +43,7 @@ const params = {}
         align-items: stretch;
         padding: 1rem;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     .content > :global(*) {
         max-height: 100%;

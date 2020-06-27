@@ -1,7 +1,12 @@
 <script>
+    import { onDestroy } from 'svelte';
+    import { currCharStore, unsavedChangesStore } from '../../stores.js'
+
     export let max;
+    export let name;
 
     let value = 0;
+    const fieldname = `${name}_points`;
     
     const points = new Array(parseInt(max)).fill(0);
     
@@ -10,6 +15,7 @@
         if(value > 0) value--
         
         updatePoints()
+        unsavedChangesStore.set(true);
     }
 
     function increase(e) {
@@ -17,6 +23,7 @@
         if(value < max) value++
 
         updatePoints()
+        unsavedChangesStore.set(true);
     }
 
     function updatePoints() {
@@ -24,6 +31,18 @@
             points[i] = i < value
         }
     }
+
+    
+
+    const unsubscribe = currCharStore.subscribe(val => {
+        if(!val) return;
+        value = val[fieldname] ? val[fieldname] : 0
+        updatePoints()
+    })
+
+    onDestroy(() => {
+        unsubscribe()
+    })
 </script>
 <style>
 	.field {
@@ -33,10 +52,6 @@
     }
     button {
         width: 2rem;
-    }
-    input {
-        width: 100%;
-        padding: 1rem;
     }
     .point {
         position: relative;
@@ -74,4 +89,5 @@
 	{/each}
     <div class="output">{value}</div>
     <button on:click={increase}>+</button>
+    <input type="hidden" name={fieldname} value={value} />
 </div>

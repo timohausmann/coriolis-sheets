@@ -8,4 +8,4 @@
 </script>
 
 <Field label={label} name={name} max={max} />
-<Points max={max} />
+<Points name={name} max={max} />

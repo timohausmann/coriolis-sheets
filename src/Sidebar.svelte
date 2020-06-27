@@ -51,17 +51,6 @@
         input:checked ~ & {
             transform: translateX(0);
         }
-
-        :global(a) {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            color: white;
-
-            &:last-child {
-                border-bottom: 0;
-            }
-        }
     }
 
     input {
@@ -112,20 +101,44 @@
         }
     }
 
+    .faux-a {
+        cursor: pointer;
+        padding: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-align: center;
+        color: white;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
 </style>
 <script>
 import { navigateTo } from 'svelte-router-spa'
-import { userStore } from './stores.js';
+import { userStore, unsavedChangesStore } from './stores.js';
 
 let input;
 
 function handleNav(e) {
     
-    e.preventDefault();
-    navigateTo(e.target.href);
+    //this doesnt work? WTF?
+    //e.preventDefault()
 
+    const href = e.target.dataset.href
+    
     //close nav layer
-    input.checked = false;
+    input.checked = false
+
+    if($unsavedChangesStore) {
+        const msg = 'Du hast scheinbar ungespeicherte Änderungen, sicher dass du die Seite verlassen möchtest?'
+        const choice = window.confirm(msg)
+        if(!choice) return false
+    }
+
+    console.log('IDK lets navigate whoooo')
+
+    navigateTo(href);
 }
 
 </script>
@@ -139,11 +152,11 @@ function handleNav(e) {
     <nav class="nav">
     
         {#if $userStore.isSignedIn}
-            <a on:click={handleNav} href="/characters/">Meine Charaktere</a>
-            <a on:click={handleNav} href="/parties/">Parties</a>
-            <a on:click={handleNav} href="/login/">Logout</a>
+            <div class="faux-a" on:click={handleNav} data-href="/characters/">Meine Charaktere</div>
+            <div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div>
+            <div class="faux-a" on:click={handleNav} data-href="/login/">Logout</div>
         {:else}
-            <a on:click={handleNav} href="/login/">Register / Sign In</a>
+            <div class="faux-a" on:click={handleNav} data-href="/login/">Register / Sign In</div>
         {/if}
     </nav>
 </div>

@@ -3,7 +3,6 @@
     import FieldPoints from './FieldPoints.svelte';
 	import TextField from './TextField.svelte';
 	import Points from './Points.svelte';
-	import Slider from './Slider.svelte';
 	import Equipment from './Equipment.svelte';
     import Weapon from './Weapon.svelte';
     
@@ -89,11 +88,11 @@
         <div class="row">
             <section class="flex-1 flex-gutter">
                 <h2>Strahlung</h2>
-                <Points max="10" />
+                <Points max="10" name="rad" />
             </section>
             <section class="flex-1 flex-gutter">
                 <h2>Erfahrung</h2>
-                <Points max="10" />
+                <Points max="10" name="xp" />
             </section>
         </div>
 
