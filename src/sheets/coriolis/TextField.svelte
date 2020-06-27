@@ -43,6 +43,7 @@
         margin: 0;
         width: 100%;
         border: none;
+        padding-top: 0.75rem;
     }
 </style>
 

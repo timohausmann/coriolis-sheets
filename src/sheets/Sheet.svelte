@@ -129,44 +129,47 @@
 }
 .sheet {
     max-width: 960px;
-    margin: 0 auto;
+    margin: 0 auto 4rem;
 }
 
 .notification {
+    position: fixed;
+    left: 50%;
+    bottom: 1rem;
+    transform: translateX(-50%);
+    z-index: 100;
+    
     border-radius: 1rem;
     border: 2px solid #37453a;
     color: #abcbb8;
     background: black;
-    padding: 0.25rem 1rem;
+    padding: 0.5rem 1rem;
     transition: opacity 0.5s, transform 0.5s;
     
     &.hidden {
-        transform: translateY(-25%);
+        transform: translateX(-50%) translateY(-25%);
         opacity: 0;
-        
-        @media #{$media-tablet-landscape-lt} {
-            transform: translateX(-50%) translateY(-25%);
-        }
     }
 
     @media #{$media-tablet-landscape-lt} {
-        position: fixed;
-        width: 90%;
         bottom: 0.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        padding-bottom: 0.5rem;
-        z-index: 100;
+    }
+
+    @media #{$media-mobile-landscape-lt} {
+        width: 80%;
+        text-align: center;
+    }
+
+    @media #{$media-tablet-landscape} {
+        margin-left: 95px; //sidebar offset
     }
 }
 </style>
 
 <form action="/sheet/" method="post" bind:this={form}>
+    <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
     <div class="actions">
         <button on:click={del}>🗑️ Charakter löschen</button>
-
-        <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
-
         <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 Speichern</button>
     </div>    
     <div class="sheet">
