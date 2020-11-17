@@ -11,11 +11,17 @@ const params = {}
     @import './vars.scss'; 
 
     :global(body) {
-        background: url(../bg_400x800.jpg) center no-repeat #111;
+        background: url(../bg_portrait.jpg) center no-repeat #111;
         background-size: cover;
 
+        @media #{$media-tablet} {
+            background-image: url(../bg_1024.jpg);
+        }
         @media #{$media-tablet-landscape} {
-            background-image: url(../bg_1024x768.jpg);
+            background-image: url(../bg_1280.jpg);
+        }
+        @media #{$media-laptop} {
+            background-image: url(../bg_1440.jpg);
         }
     }
 

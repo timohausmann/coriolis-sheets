@@ -15,13 +15,15 @@ auth().onAuthStateChanged(function (user) {
         console.log('We have a user!', user);
         userStore.set({
 			isSignedIn: true,
-			displayName: user.displayName
+			displayName: user.displayName,
+			id: user.uid
 		});
     } else {
         console.log('We are not authed I guess!', user);
         userStore.set({
 			isSignedIn: false,
-			displayName: ''
+			displayName: '',
+			id: ''
 		});
     }
 });

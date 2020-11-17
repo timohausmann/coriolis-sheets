@@ -5,13 +5,14 @@
     import { navigateTo } from 'svelte-router-spa'
 
     import CoriolisCharSheet from './coriolis/_sheet.svelte';
-    import { currCharStore, unsavedChangesStore } from '../stores.js'
+    import { userStore, currCharStore, unsavedChangesStore } from '../stores.js'
 
     export let params
     export let currentRoute
     
     let form;
     let charData = {};
+    let userId = '';
 
     const db = firestore();    
     const dbChars = db.collection("characters");
@@ -110,10 +111,14 @@
             window.removeEventListener('beforeunload', confirmLeave)
             leaveMsgBound = false
         }
-    })    
+    })
+    const unsubscribe2 = userStore.subscribe(value => {
+        userId = value.id
+    });
 
     onDestroy(() => {
         unsubscribe()
+        unsubscribe2()
         unsavedChangesStore.set(false);
     })
 
@@ -168,10 +173,12 @@
 
 <form action="/sheet/" method="post" bind:this={form}>
     <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
-    <div class="actions">
-        <button on:click={del}>🗑️ Charakter löschen</button>
-        <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 Speichern</button>
-    </div>    
+    {#if charData.user === userId}
+        <div class="actions">
+            <button on:click={del}>🗑️ Charakter löschen</button>
+            <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 Speichern</button>
+        </div>    
+    {/if}
     <div class="sheet">
         <CoriolisCharSheet />
     </div>
