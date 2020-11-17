@@ -1,8 +1,9 @@
 <script>
     import { auth, firestore } from "firebase/app";
     import 'firebase/firestore';
-    import { setContext, onDestroy } from 'svelte'
+    import { setContext, beforeUpdate, onDestroy } from 'svelte'
     import { navigateTo } from 'svelte-router-spa'
+
 
     import CoriolisCharSheet from './coriolis/_sheet.svelte';
     import { userStore, currCharStore, unsavedChangesStore } from '../stores.js'
@@ -34,8 +35,12 @@
         currCharStore.set(charData);
 
     }, err => {
-    console.log(`Encountered error: ${err}`);
+        console.log(`Encountered error: ${err}`);
     });
+
+    beforeUpdate(function() {
+        console.log('DEINE MUDDA');
+    })
 
     
     function save(e) {

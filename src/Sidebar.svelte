@@ -101,7 +101,7 @@
         }
     }
 
-    .faux-a {
+    :global(.faux-a) {
         cursor: pointer;
         padding: 1rem;
         border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -117,6 +117,7 @@
 <script>
 import { navigateTo } from 'svelte-router-spa'
 import { userStore, unsavedChangesStore } from './stores.js';
+import SidebarParties from './SidebarParties.svelte';
 
 let input;
 
@@ -154,6 +155,7 @@ function handleNav(e) {
         {#if $userStore.isSignedIn}
             <div class="faux-a" on:click={handleNav} data-href="/characters/">Meine Charaktere</div>
             <div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div>
+            <SidebarParties />
             <div class="faux-a" on:click={handleNav} data-href="/login/">Logout</div>
         {:else}
             <div class="faux-a" on:click={handleNav} data-href="/login/">Register / Sign In</div>
