@@ -4,8 +4,7 @@
 	import TextField from './TextField.svelte';
 	import Points from './Points.svelte';
 	import Equipment from './Equipment.svelte';
-    import Weapon from './Weapon.svelte';
-    
+    import Weapon from './Weapon.svelte';    
 </script>
 
 <style>
@@ -151,6 +150,10 @@
             <Equipment suffix="8" />
             <Equipment suffix="9" />
             <Equipment suffix="10" />
+        </section>
+        <section>
+            <h2>Birr</h2>
+            <TextField label="Birr" name="birr" />
         </section>
         
         <section>

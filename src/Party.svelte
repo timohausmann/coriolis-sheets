@@ -1,5 +1,5 @@
 <script>
-  import { Navigate } from 'svelte-router-spa'
+  import { Link } from "svelte-routing";
   import { firestore } from "firebase/app";
   import "firebase/firestore";
   import { onMount, onDestroy } from 'svelte';
@@ -40,7 +40,7 @@
   <ul class="itemlist">
   {#each chars as char}
     <li>
-      <Navigate to="/characters/{char.id}">{char.char_name}</Navigate>
+      <Link to="/characters/{char.id}">{char.char_name}</Link>
     </li>
   {/each}
   </ul>

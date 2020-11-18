@@ -1,8 +1,10 @@
 <script>
-  import { Navigate } from 'svelte-router-spa'
+  import { Link } from 'svelte-routing'
   import { auth, firestore } from "firebase/app";
   import "firebase/firestore";
   import { onMount, onDestroy } from 'svelte';
+
+  export let location
 
   //import { userStore } from './stores.js';
 
@@ -27,11 +29,12 @@
       return;
     }
 
+    let i=0;
     snapshot.forEach(doc => {
-      chars.push({
+      chars[i++] = {
         id: doc.id,
         ...doc.data()
-      });
+      };
     });
 
 
@@ -70,7 +73,7 @@
   <ul class="itemlist">
   {#each chars as char}
     <li>
-      <Navigate to="/characters/{char.id}">{char.char_name}</Navigate>
+      <Link to="/characters/{char.id}">{char.char_name}</Link>
     </li>
   {/each}
   </ul>

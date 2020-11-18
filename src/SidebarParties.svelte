@@ -1,16 +1,14 @@
 <script>
-    import { Navigate } from 'svelte-router-spa'
+    import { Link } from "svelte-routing";
     import { firestore } from "firebase/app";
     import 'firebase/firestore';
     
-    let parties = [];
-    let chars = [];
-    let test = [];
-    
     const db = firestore();
-    const partiesRef = db.collection('parties');
-    const charactersRef = db.collection("characters");
+
+    export let handleNav
     
+    /*let parties = [];
+    const partiesRef = db.collection('parties');
     partiesRef.get()
       .then(snapshot => {
         if(snapshot.empty) {
@@ -31,11 +29,15 @@
       })
       .catch(err => {
         console.log('Error getting documents', err);
-      });
+      });*/
 
     
     //@TODO collect chars per party
-    charactersRef.onSnapshot(snapshot => {
+    let chars = [];
+    const charactersRef = db.collection("characters");
+    charactersRef
+    .orderBy('char_name')
+    .onSnapshot(snapshot => {
 
         if(snapshot.empty) {
             console.log("No matching documents.");
@@ -48,7 +50,6 @@
                 id: doc.id,
                 char_name: doc.data().char_name
             };
-            console.log(doc.data().char_name)
         });
 
     }, err => {
@@ -59,22 +60,10 @@
 <style>
 
 </style>
-
 <ul>
-    {#each test as t}
-        <li>
-            {t}
-        </li>
-    {/each}
-</ul>
-<ul>
-    {#each parties as party}
-        <!--Navigate to="/parties/{party.id}">{party.name}</Navigate-->
-        <!--b>{party.name}</b-->
-    {/each}
     {#each chars as char}
-        <div class="faux-a">
-            <Navigate to="/characters/{char.id}">{char.char_name}</Navigate>
+        <div class="faux-a" on:click={handleNav} data-href="/characters/{char.id}">
+            {char.char_name}
         </div>
     {/each}
 </ul>

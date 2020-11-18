@@ -1,15 +1,18 @@
 <script>
-
-import { Navigate } from 'svelte-router-spa'
 import { firestore } from "firebase/app";
 import 'firebase/firestore';
+import { Link } from "svelte-routing";
+
+export let location
 
 let parties = [];
 
 const db = firestore();
 const partiesRef = db.collection('parties');
 
-partiesRef.get()
+partiesRef
+  .orderBy('name')
+  .get()
   .then(snapshot => {
     if(snapshot.empty) {
       console.log('No matching documents.');
@@ -39,7 +42,7 @@ partiesRef.get()
 <ul class="itemlist">
     {#each parties as party}
         <li>
-          <Navigate to="/parties/{party.id}">{party.name}</Navigate>
+          <Link to="/parties/{party.id}">{party.name}</Link>
         </li>
     {/each}
 </ul>

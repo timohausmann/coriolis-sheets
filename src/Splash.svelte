@@ -1,6 +1,8 @@
 <script>
-import { Navigate } from 'svelte-router-spa'
+import { Link } from "svelte-routing";
 import { userStore } from './stores.js';
+
+export let location
 
 </script>
 
@@ -22,9 +24,9 @@ import { userStore } from './stores.js';
     <div class="firebaseui-card-actions">
         <div class="firebaseui-form-actions">
             {#if $userStore.isSignedIn}
-                <Navigate to="/characters" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">My Characters</Navigate>
+                <Link to="/characters" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">My Characters</Link>
             {:else}
-                <Navigate to="/login" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Register / Sign In</Navigate>
+                <Link to="/login" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Register / Sign In</Link>
             {/if}
         </div>
     </div>

@@ -2,14 +2,13 @@
     import { auth, firestore } from "firebase/app";
     import 'firebase/firestore';
     import { setContext, beforeUpdate, onDestroy } from 'svelte'
-    import { navigateTo } from 'svelte-router-spa'
+    import { navigate } from "svelte-routing";
 
 
     import CoriolisCharSheet from './coriolis/_sheet.svelte';
     import { userStore, currCharStore, unsavedChangesStore } from '../stores.js'
 
-    export let params
-    export let currentRoute
+    export let id
     
     let form;
     let charData = {};
@@ -17,30 +16,38 @@
 
     const db = firestore();    
     const dbChars = db.collection("characters");
-    const queryDoc = dbChars.doc(currentRoute.namedParams.id)
+
+    $: if (id) { //watch id for changes
+        getData(); //invoke your method to reload data
+        unsavedChangesStore.set(false);
+    }
+
+    function getData() {
+
+        const queryDoc = dbChars.doc(id)
+        const observer = queryDoc.onSnapshot(snapshot => {
+            //console.log('Received doc snapshot', snapshot);
+
+            if(snapshot.empty) {
+                console.log("No matching documents.");
+                return;
+            }
+            
+            console.log('snapshot.data()', snapshot.data())
+
+            charData = snapshot.data()
+            
+            currCharStore.set(charData);
+
+        }, err => {
+            console.log(`Encountered error: ${err}`);
+        });
+    }
 
 
-    const observer = queryDoc.onSnapshot(snapshot => {
-        //console.log('Received doc snapshot', snapshot);
-
-        if(snapshot.empty) {
-            console.log("No matching documents.");
-            return;
-        }
-        
-        console.log('snapshot.data()', snapshot.data())
-
-        charData = snapshot.data()
-        
-        currCharStore.set(charData);
-
-    }, err => {
-        console.log(`Encountered error: ${err}`);
-    });
-
-    beforeUpdate(function() {
-        console.log('DEINE MUDDA');
-    })
+    /*beforeUpdate(function() {
+        console.log('beforeUpdate');
+    })*/
 
     
     function save(e) {
@@ -92,7 +99,7 @@
         if(window.confirm(`Bist du sicher dass du ${charData.char_name} löschen möchtest? Dies kann nicht rückgängig gemacht werden.`)) {
             queryDoc.delete();
 
-            navigateTo('characters')
+            navigate('/characters')
         }
     }
 
@@ -106,8 +113,6 @@
 
     let leaveMsgBound = false
     const unsubscribe = unsavedChangesStore.subscribe(value => {
-
-        console.log('Changed ...')
 
         if(value && !leaveMsgBound) {
             leaveMsgBound = true

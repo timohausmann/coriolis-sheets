@@ -115,16 +115,13 @@
 
 </style>
 <script>
-import { navigateTo } from 'svelte-router-spa'
+import { navigate } from "svelte-routing";
 import { userStore, unsavedChangesStore } from './stores.js';
 import SidebarParties from './SidebarParties.svelte';
 
 let input;
 
 function handleNav(e) {
-    
-    //this doesnt work? WTF?
-    //e.preventDefault()
 
     const href = e.target.dataset.href
     
@@ -137,9 +134,7 @@ function handleNav(e) {
         if(!choice) return false
     }
 
-    console.log('IDK lets navigate whoooo')
-
-    navigateTo(href);
+    navigate(href);
 }
 
 </script>
@@ -154,8 +149,8 @@ function handleNav(e) {
     
         {#if $userStore.isSignedIn}
             <div class="faux-a" on:click={handleNav} data-href="/characters/">Meine Charaktere</div>
-            <div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div>
-            <SidebarParties />
+            <!--div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div-->
+            <SidebarParties handleNav={handleNav} />
             <div class="faux-a" on:click={handleNav} data-href="/login/">Logout</div>
         {:else}
             <div class="faux-a" on:click={handleNav} data-href="/login/">Register / Sign In</div>
