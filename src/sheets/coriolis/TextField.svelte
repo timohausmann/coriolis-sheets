@@ -7,15 +7,18 @@
 	export let className = ''; 
     
     let currField_value = ''
+    let readonly = null;
+
     const unsubscribe = currCharStore.subscribe(value => {
 
         if(!value) return;
         
+        readonly = value.readonly ? true : null;
         currField_value = value[name] ? value[name] : ''
     })
 
     function onChange(e) {
-        //temp_value = parseInt(e.target.value);
+        if(readonly) return;
         unsavedChangesStore.set(true);
     }
 
@@ -50,5 +53,5 @@
 <div class="field {className}">
     <label>{label}</label>
     <input type="text" name={name} value={currField_value} 
-        on:change={onChange} on:keydown={onChange} />
+        readonly={readonly} on:change={onChange} on:keydown={onChange} />
 </div>

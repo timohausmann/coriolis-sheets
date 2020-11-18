@@ -33,9 +33,10 @@
                 return;
             }
             
-            console.log('snapshot.data()', snapshot.data())
+            //console.log('snapshot.data()', snapshot.data())
 
             charData = snapshot.data()
+            charData.readonly = charData.user !== userId;
             
             currCharStore.set(charData);
 

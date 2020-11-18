@@ -4,23 +4,20 @@
 
     export let label;
     export let max = 99;
-	export let name = '';
+    export let name = '';
     
-    //current input value
-    //let temp_value = ''
-
-    //database value
     let currField_value = ''
+    let readonly = null;
 
     const unsubscribe = currCharStore.subscribe(value => {
 
         if(!value) return;
-
+        readonly = value.readonly ? true : null;
         currField_value = value[name] ? parseInt(value[name]) : ''
     })
 
     function onChange(e) {
-        //temp_value = parseInt(e.target.value);
+        if(readonly) return;
         unsavedChangesStore.set(true);
     }
 
@@ -54,5 +51,5 @@
 <div class="field">
     <label>{label}</label>
     <input type="number" name={name} min="0" max={max} value={currField_value}
-        on:change={onChange} on:keydown={onChange} />
+        readonly={readonly} on:change={onChange} on:keydown={onChange} />
 </div>

@@ -5,14 +5,15 @@
     export let max;
     export let name;
 
-    let value = 0;
+    let currField_value = 0;
+    let readonly = null;
+
     const fieldname = `${name}_points`;
-    
     const points = new Array(parseInt(max)).fill(0);
     
     function decrease(e) {
         e.preventDefault()
-        if(value > 0) value--
+        if(currField_value > 0) currField_value--
         
         updatePoints()
         unsavedChangesStore.set(true);
@@ -20,7 +21,7 @@
 
     function increase(e) {
         e.preventDefault()
-        if(value < max) value++
+        if(currField_value < max) currField_value++
 
         updatePoints()
         unsavedChangesStore.set(true);
@@ -28,15 +29,15 @@
 
     function updatePoints() {
         for(let i=0; i<max; i++) {
-            points[i] = i < value
+            points[i] = i < currField_value
         }
     }
 
-    
 
-    const unsubscribe = currCharStore.subscribe(val => {
-        if(!val) return;
-        value = val[fieldname] ? val[fieldname] : 0
+    const unsubscribe = currCharStore.subscribe(value => {
+        if(!value) return;
+        readonly = value.readonly ? true : null;
+        currField_value = value[fieldname] ? value[fieldname] : 0
         updatePoints()
     })
 
@@ -82,12 +83,13 @@
 </style>
 
 <div class="field row">
-    <button on:click={decrease}>-</button>
+    
+    <button on:click={decrease} disabled={readonly}>-</button>
     
 	{#each points as point}
         <div class={point ? 'point point--filled' : 'point'}></div>
 	{/each}
-    <div class="output">{value}</div>
-    <button on:click={increase}>+</button>
-    <input type="hidden" name={fieldname} value={value} />
+    <div class="output">{currField_value}</div>
+    <button on:click={increase} disabled={readonly}>+</button>
+    <input type="hidden" name={fieldname} value={currField_value} />
 </div>
