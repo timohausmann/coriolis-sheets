@@ -2,9 +2,11 @@
     import Field from './Field.svelte';
     import FieldPoints from './FieldPoints.svelte';
 	import TextField from './TextField.svelte';
+	import TextArea from './TextArea.svelte';
 	import Points from './Points.svelte';
 	import Equipment from './Equipment.svelte';
-    import Weapon from './Weapon.svelte';    
+    import Weapon from './Weapon.svelte';
+    import Image from './Image.svelte';
 </script>
 
 <style>
@@ -28,6 +30,16 @@
 </style>
 
 <div class="row">
+    <section class="flex-1 flex-gutter">
+        <h2>Abbildung</h2>
+        <Image />
+    </section>
+    <section class="flex-2 flex-gutter">
+        <h2>Beschreibung</h2>
+        <TextArea label="Beschreibung" name="description" />
+    </section>
+</div>
+<div class="row">
     <div class="flex-1 flex-gutter">
         <section>
             <h2>Attribute</h2>
@@ -35,17 +47,6 @@
             <Field label="Geschicklichkeit" name="attr_dex" />
             <Field label="Verstand" name="attr_int" />
             <Field label="Empathie" name="attr_emp" />
-        </section>
-
-        <section>
-            <h2>Trauma</h2>
-            <FieldPoints label="Trefferpunkte" name="hp" max="12" />
-
-            <TextField label="Kritische Wunden" name="crit_1" />
-            <TextField label="Kr.W." name="crit_2" />
-            <TextField label="Kr.W." name="crit_3" />
-
-            <FieldPoints label="Willenskraft" name="will" max="12" />
         </section>
     </div>
     <div class="flex-2 flex-gutter">
@@ -73,6 +74,32 @@
                 </div>
             </div>
         </section>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="flex-1 flex-gutter">
+
+        <section>
+            <h2>Trauma</h2>
+            <FieldPoints label="Trefferpunkte" name="hp" max="12" />
+
+            <TextField label="Kritische Wunden" name="crit_1" />
+            <TextField label="Kr.W." name="crit_2" />
+            <TextField label="Kr.W." name="crit_3" />
+
+            <FieldPoints label="Willenskraft" name="will" max="12" />
+        </section>
+    </div>
+    <div class="flex-2 flex-gutter">
         <section>
             <h2>Aussehen</h2>
             <TextField label="Gesicht" name="look_face" />

@@ -157,7 +157,8 @@ button:focus {
 	width: 4rem;
 	height: 4rem;
 	margin-right: 1rem;
-	background: rgba(0,0,0,0.2);
+	background: rgba(0,0,0,0.2) center no-repeat;
+	background-size: cover;
 }
 
 
@@ -196,4 +197,9 @@ button:focus {
 	text-transform: uppercase;
 	/*margin: 0 -0.25rem;*/
 	margin: 0;
+}
+
+.p {
+	color: rgba(42, 54, 44, 0.9);
+	padding: 1rem;
 }

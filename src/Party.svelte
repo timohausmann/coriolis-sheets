@@ -3,6 +3,7 @@
   import { firestore } from "firebase/app";
   import "firebase/firestore";
   import { onMount, onDestroy } from 'svelte';
+  import Charlink from './Charlink.svelte';
 
   let chars = [];
 
@@ -20,9 +21,12 @@
     }
 
     snapshot.forEach(doc => {
+      
+      const data = doc.data();
       chars.push({
         id: doc.id,
-        ...doc.data()
+        name: data.char_name,
+        avatar: data.avatar
       });
     });
 
@@ -42,10 +46,7 @@
       <ul class="itemlist">
       {#each chars as char}
         <li>
-          <Link to="/characters/{char.id}">
-            <div class="avatar"></div>
-            {char.char_name}
-          </Link>
+          <Charlink id={char.id} name={char.name} avatar={char.avatar} />
         </li>
       {/each}
       </ul>

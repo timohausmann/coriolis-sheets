@@ -1,8 +1,9 @@
 <script>
-  import { Link } from 'svelte-routing'
   import { auth, firestore } from "firebase/app";
   import "firebase/firestore";
-  import { onMount, onDestroy } from 'svelte';
+
+  //import { onMount, onDestroy } from 'svelte';
+  import Charlink from './Charlink.svelte';
 
   export let location
 
@@ -17,7 +18,6 @@
   const dbChars = db.collection("characters");
 
   const query = dbChars.where("user", "==", uid)
-
     
   const observer = query.onSnapshot(snapshot => {
     console.log(`Received query snapshot of size ${snapshot.size}`);
@@ -31,10 +31,15 @@
 
     let i=0;
     snapshot.forEach(doc => {
-      chars[i++] = {
+
+      const data = doc.data();
+      const charData = {
         id: doc.id,
-        ...doc.data()
+        name: data.char_name,
+        avatar: data.avatar
       };
+
+      chars[i++] = charData;
     });
 
 
@@ -76,15 +81,12 @@
       <ul class="itemlist">
       {#each chars as char}
         <li>
-          <Link to="/characters/{char.id}">
-            <div class="avatar"></div>
-            {char.char_name}
-          </Link>
+          <Charlink id={char.id} name={char.name} avatar={char.avatar} />
         </li>
       {/each}
       </ul>
     {:else}
-      <p>Du hast noch keine Charaktere.</p>
+      <p class="p">Du hast noch keine Charaktere.</p>
     {/if}
   </div>
 </main>

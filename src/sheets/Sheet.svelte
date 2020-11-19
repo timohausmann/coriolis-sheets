@@ -1,8 +1,10 @@
 <script>
-    import { auth, firestore } from "firebase/app";
+    import { auth, storage, firestore } from "firebase/app";
     import 'firebase/firestore';
+    import 'firebase/storage';
     import { onDestroy } from 'svelte'
     import { navigate } from "svelte-routing";
+    //import { v4 as uuidv4 } from 'uuid';
 
     import CoriolisCharSheet from './coriolis/_char.svelte';
     //import CoriolisShipSheet from './coriolis/_ship.svelte';
@@ -36,6 +38,7 @@
             //console.log('snapshot.data()', snapshot.data())
 
             charData = snapshot.data()
+            charData.id = id;
             charData.readonly = charData.user !== userId;
             
             currCharStore.set(charData);
@@ -55,16 +58,35 @@
         
         e.preventDefault();
 
+        const queryDoc = dbChars.doc(id);
         const uid = auth().currentUser.uid;
 
         const formData = new FormData(form);
-        var sheetData = {
+        const sheetData = {
             user: uid
         };
+        let avatarBlobUrl = null;
+
         formData.forEach((value, key) => {
             if(!value) return;
 
-            //dont store ints as strings
+            //extract file blobs to files
+            /*if(key.indexOf('file_') === 0) {
+                let fileKey = key.replace('file_', '');
+                files[fileKey] = value;
+                sheetData[key] = id
+                return;
+            }*/
+            if(key === 'char_avatar') {
+                if(value.indexOf('blob:') === 0) {
+                    avatarBlobUrl = value;
+                } else if(value === 'delete') {
+                    //if we get a "delete" from char_avatar, null the field to delete it
+                    sheetData.avatar = null;
+                }
+            }
+
+            //parse ints
             if(parseInt(value) == value) {
                 sheetData[key] = parseInt(value)
             } else {
@@ -78,11 +100,40 @@
             return;
         }
 
+        /*if(Object.keys(files).length) {
+            const storageRef = storage().ref();
+            for(let key in files) {
+                (async function() {
+                    console.log('trying to upload', files[key]);
+                    const blob = await fetch(files[key]).then(r => r.blob());
+                    const fileRef = storageRef.child(`${key}/${id}.jpg`);
+                    fileRef.put(blob).then(function(snapshot) {
+                        console.log('Uploaded a blob!');
+                    });
+                })();
+            }
+        }*/
 
+        if(avatarBlobUrl) {
+            const storageRef = storage().ref();
+            (async function() {
+                console.log('trying to upload', avatarBlobUrl);
+                const blob = await fetch(avatarBlobUrl).then(r => r.blob());
+                const fileRef = storageRef.child(`avatar/${id}.jpg`);
+                fileRef.put(blob).then(function(snapshot) {
+                    //console.log('Uploaded a blob!');
+                    snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                        //console.log("File available at", downloadURL);
+                        queryDoc.update({'avatar': `avatar/${id}.jpg`})
+                    });
+                    
+                });
+            })();
+        }
+        
         console.log('attempting to save sheet data ...', sheetData);
 
-        const queryDoc = dbChars.doc(id)
-        queryDoc.set(sheetData)
+        queryDoc.update(sheetData)
             .then(function() {
                 console.log("Document successfully written!");
                 unsavedChangesStore.set(false);
