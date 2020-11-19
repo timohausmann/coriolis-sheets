@@ -71,11 +71,6 @@ button:focus {
 
 
 
-.content h1 {
-	margin-bottom: 2rem;
-}
-
-
 
 .row {
 	display: flex;
@@ -125,24 +120,80 @@ button:focus {
 
 .itemlist {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr;
 	grid-template-rows: auto;
 	grid-gap: 0.5rem;
 
 	list-style: none;
-	margin: 2rem;
+	margin: 1rem;
+}
+
+@media only screen and (min-width: 720px) {
+	.itemlist {
+		grid-template-columns: 1fr 1fr;
+		margin: 2rem;
+	}
+}
+@media only screen and (min-width: 1024px) {
+	.itemlist {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }
 
 .itemlist a {
-	display: block;
-	border: 1px solid #666;
-	padding: 1rem;
+	display: flex;
+	align-items: center;
+	padding: 0.5rem;
+	font-weight: bold;
+	color: white;
+	transition: background 0.2s;
+}
+.itemlist a:hover {
+	text-decoration: none;
+}
+
+.avatar {
+	display: inline-block;
+	width: 4rem;
+	height: 4rem;
+	margin-right: 1rem;
+	background: rgba(0,0,0,0.2);
 }
 
 
-@media only screen and (max-width: 720px) {
-	.itemlist {
-		grid-template-columns: 1fr 1fr;
-		margin: 0;
-	}
+
+.content {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	padding: 1rem;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+.content--center {
+	justify-content: center;
+}
+.content > * {
+	max-height: 100%;
+}
+
+
+
+
+.section {
+/*    padding: 0 0.25rem;*/
+	background: rgba(188, 224, 204, 0.9);
+	margin-bottom: 0.5rem;
+}
+
+.h2 {
+	padding: 0.5rem;
+	background: rgba(42, 54, 44, 0.9);
+	color: white;
+	font-size: 0.875rem;
+	font-weight: normal;
+	text-transform: uppercase;
+	/*margin: 0 -0.25rem;*/
+	margin: 0;
 }

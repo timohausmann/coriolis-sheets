@@ -38,11 +38,18 @@ partiesRef
 
 </style>
 
-<h1>Parties</h1>
-<ul class="itemlist">
-    {#each parties as party}
-        <li>
-          <Link to="/parties/{party.id}">{party.name}</Link>
-        </li>
-    {/each}
-</ul>
+<main class="content">
+  <div class="section">
+    <h1 class="h2">Parties</h1>
+    <ul class="itemlist">
+        {#each parties as party}
+            <li>
+              <Link to="/parties/{party.id}">
+                <div class="avatar"></div>
+                {party.name}
+              </Link>
+            </li>
+        {/each}
+    </ul>
+  </div>
+</main>

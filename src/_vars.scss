@@ -20,3 +20,6 @@ $media-tablet: "only screen and (min-width: #{$break-tablet}px)";
 $media-tablet-landscape: "only screen and (min-width: #{$break-tablet-landscape}px)";
 $media-tablet-landscape-lt: "only screen and (max-width: #{$break-tablet-landscape - 1}px)";
 $media-laptop: "only screen and (min-width: #{$break-laptop}px)";
+
+$color-green-light: rgba(188, 224, 204, 0.9);
+$color-green-dark: rgba(42, 54, 44, 0.9);

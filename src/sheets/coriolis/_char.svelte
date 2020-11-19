@@ -55,15 +55,23 @@
                 <div class="flex-2">
                     <TextField label="Name" name="char_name" />
                     <TextField label="Konzept" name="char_concept" />
-                    <TextField label="Gruppenkonzept" name="group_concept" />
+                    <div class="row">
+                        <div class="flex-1">
+                            <TextField label="Gruppenkonzept" name="group_concept" />
+                        </div>
+                        <div class="flex-1">
+                            <TextField label="Gruppentalent" name="group_talent" />
+                        </div>
+                    </div>
+                    <TextField label="Persönliches Problem" name="challenge" />
                 </div>
                 <div class="flex-1">
                     <TextField label="Hintergrund" name="char_bg" />
+                    <TextField label="Heimatsystem" name="homesystem" />
                     <TextField label="Ikone" name="char_icon" />
                     <Field label="Reputation" name="char_rep" />
                 </div>
             </div>
-            <TextField label="Persönliches Problem" name="challenge" />
         </section>
         <section>
             <h2>Aussehen</h2>
@@ -128,6 +136,28 @@
             <Weapon suffix="3" />
             <Weapon suffix="4" />
         </section>
+
+        
+        <div class="row">
+            <section class="flex-2 flex-gutter">
+                <h2>Panzerung</h2>
+                <div class="row">
+                    <div class="flex-2">
+                        <TextField label="Name" name="armor_name" />
+                    </div>
+                    <div class="flex-1">
+                        <TextField label="Wert" name="armor_value" />
+                    </div>
+                    <div class="flex-1">
+                        <TextField label="Anm." name="armor_comment" />
+                    </div>
+                </div>
+            </section>
+            <section class="flex-1 flex-gutter">
+                <h2>Birr</h2>
+                <TextField label="Birr" name="birr" />
+            </section>
+        </div>
     </div>
 
 
@@ -137,6 +167,8 @@
             <TextField label="Talent 1" name="talent_1" />
             <TextField label="Talent 2" name="talent_2" />
             <TextField label="Talent 3" name="talent_3" />
+            <TextField label="Talent 4" name="talent_4" />
+            <TextField label="Talent 5" name="talent_5" />
         </section>
         <section>
             <h2>Ausrüstung</h2>
@@ -150,25 +182,7 @@
             <Equipment suffix="8" />
             <Equipment suffix="9" />
             <Equipment suffix="10" />
-        </section>
-        <section>
-            <h2>Birr</h2>
-            <TextField label="Birr" name="birr" />
-        </section>
-        
-        <section>
-            <h2>Panzerung</h2>
-            <div class="row">
-                <div class="flex-2">
-                    <TextField label="Name" name="armor_name" />
-                </div>
-                <div class="flex-1">
-                    <TextField label="Wert" name="armor_value" />
-                </div>
-                <div class="flex-1">
-                    <TextField label="Anm." name="armor_comment" />
-                </div>
-            </div>
+            <Equipment suffix="11" />
         </section>
     </div>
     

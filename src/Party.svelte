@@ -34,16 +34,24 @@
 
 </style>
 
-<h1>Party Charaktere</h1>
+<main class="content">
+  <div class="section">
+    <h1 class="h2">Party Charaktere</h1>
 
-{#if chars.length}
-  <ul class="itemlist">
-  {#each chars as char}
-    <li>
-      <Link to="/characters/{char.id}">{char.char_name}</Link>
-    </li>
-  {/each}
-  </ul>
-{:else}
-  <p>Keine Charaktere vorhanden.</p>
-{/if}
+    {#if chars.length}
+      <ul class="itemlist">
+      {#each chars as char}
+        <li>
+          <Link to="/characters/{char.id}">
+            <div class="avatar"></div>
+            {char.char_name}
+          </Link>
+        </li>
+      {/each}
+      </ul>
+    {:else}
+      <p>Keine Charaktere vorhanden.</p>
+    {/if}
+  </div>
+
+</main>

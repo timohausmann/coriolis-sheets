@@ -149,7 +149,7 @@ function handleNav(e) {
     
         {#if $userStore.isSignedIn}
             <div class="faux-a" on:click={handleNav} data-href="/characters/">Meine Charaktere</div>
-            <!--div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div-->
+            <div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div>
             <SidebarParties handleNav={handleNav} />
             <div class="faux-a" on:click={handleNav} data-href="/login/">Logout</div>
         {:else}

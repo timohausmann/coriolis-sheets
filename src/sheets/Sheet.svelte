@@ -1,11 +1,11 @@
 <script>
     import { auth, firestore } from "firebase/app";
     import 'firebase/firestore';
-    import { setContext, beforeUpdate, onDestroy } from 'svelte'
+    import { onDestroy } from 'svelte'
     import { navigate } from "svelte-routing";
 
-
-    import CoriolisCharSheet from './coriolis/_sheet.svelte';
+    import CoriolisCharSheet from './coriolis/_char.svelte';
+    //import CoriolisShipSheet from './coriolis/_ship.svelte';
     import { userStore, currCharStore, unsavedChangesStore } from '../stores.js'
 
     export let id
@@ -81,16 +81,17 @@
 
         console.log('attempting to save sheet data ...', sheetData);
 
+        const queryDoc = dbChars.doc(id)
         queryDoc.set(sheetData)
-        .then(function() {
-            console.log("Document successfully written!");
-            unsavedChangesStore.set(false);
-        //    alert("Update successful!")
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-            alert("Error writing document :(")
-        });
+            .then(function() {
+                console.log("Document successfully written!");
+                unsavedChangesStore.set(false);
+            //    alert("Update successful!")
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+                alert("Error writing document :(")
+            });
     }
     
     function del(e) {
@@ -182,15 +183,17 @@
 }
 </style>
 
-<form action="/sheet/" method="post" bind:this={form}>
-    <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
-    {#if charData.user === userId}
-        <div class="actions">
-            <button on:click={del}>🗑️ Charakter löschen</button>
-            <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 Speichern</button>
-        </div>    
-    {/if}
-    <div class="sheet">
-        <CoriolisCharSheet />
-    </div>
-</form>
+<main class="content content--center">
+    <form action="/sheet/" method="post" bind:this={form}>
+        <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
+        {#if charData.user === userId}
+            <div class="actions">
+                <button on:click={del}>🗑️ Charakter löschen</button>
+                <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 Speichern</button>
+            </div>    
+        {/if}
+        <div class="sheet">
+            <CoriolisCharSheet />
+        </div>
+    </form>
+</main>
