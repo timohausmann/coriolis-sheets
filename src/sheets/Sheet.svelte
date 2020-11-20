@@ -149,7 +149,7 @@
         
         e.preventDefault();
 
-        if(window.confirm(`Bist du sicher dass du ${charData.char_name} löschen möchtest? Dies kann nicht rückgängig gemacht werden.`)) {
+        if(window.confirm(`Bist du sicher dass du ${charData.char_name} löschen möchtest? Dies kann nicht rückgängig gemacht werden!`)) {
             queryDoc.delete();
 
             navigate('/characters')
@@ -195,6 +195,16 @@
     display: flex;
     justify-content: space-between;
 }
+
+.delete {
+    cursor: pointer;
+    padding: 0.4em;
+    border-radius: 0.25rem;
+    transition: background 0.2s;
+    &:hover {
+        background: rgba(255,0,0,0.2);
+    }
+}
 .sheet {
     max-width: 960px;
     margin: 0 auto 4rem;
@@ -239,7 +249,7 @@
         <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
         {#if charData.user === userId}
             <div class="actions">
-                <button on:click={del}>🗑️ Charakter löschen</button>
+                <div class="delete" on:click={del}>🗑️ Charakter löschen</div>
                 <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 Speichern</button>
             </div>    
         {/if}

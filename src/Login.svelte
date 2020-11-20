@@ -1,5 +1,6 @@
 <script>
 import { auth } from 'firebase/app';
+import * as firebaseui from 'firebaseui';
 import { Link } from "svelte-routing";
 import { onMount, onDestroy } from 'svelte';
 import { userStore } from './stores.js';
@@ -12,6 +13,8 @@ let displayName = '';
 let unsubscribe;
 
 onMount(() => {
+
+    createSignInForm();
 
     unsubscribe = userStore.subscribe(value => {
 
@@ -33,7 +36,35 @@ onDestroy(() => {
 
 
 function signOut() {
-    auth().signOut();
+    auth()
+        .signOut()
+        .then(() => {
+            location.reload();
+        });
+}
+
+function createSignInForm() {
+
+    const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth())
+
+    const uiConfig = {
+        callbacks: {
+            signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+                return true;
+            },
+            uiShown: function () {
+
+            }
+        },
+        signInSuccessUrl: '/',
+        signInOptions: [
+            auth.EmailAuthProvider.PROVIDER_ID,
+            //auth.GoogleAuthProvider.PROVIDER_ID
+        ],
+        'credentialHelper': firebaseui.auth.CredentialHelper.NONE
+    };
+
+    ui.start('#firebaseui-auth-container', uiConfig);
 }
 </script>
 <style>
