@@ -25,12 +25,11 @@
         @media #{$media-tablet-landscape} {
             flex-direction: column;
             justify-content: flex-start;
+            width: 14rem;
         }
     }
 
     .nav {
-        display: flex;
-        flex-direction: column;
         background: rgba(0,0,0,0.9);
         width: 100%;
 
@@ -39,9 +38,9 @@
             top: 0;
             left: 0;
             height: 100%;
-            
-            justify-content: center;
             z-index: 10;
+            overflow-y: auto;
+            padding: 2rem 0;
 
             transform: translateX(100%);
             transition: transform 0.4s;
@@ -146,7 +145,6 @@ function handleNav(e) {
     <label class="nav_button" for="nav_toggle"></label>
 
     <nav class="nav">
-    
         {#if $userStore.isSignedIn}
             <div class="faux-a" on:click={handleNav} data-href="/characters/">Meine Charaktere</div>
             <div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div>

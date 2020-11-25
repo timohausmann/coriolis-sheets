@@ -244,7 +244,7 @@
 }
 </style>
 
-<main class="content content--center">
+<main class="content">
     <form action="/sheet/" method="post" bind:this={form}>
         <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
         {#if charData.user === userId}

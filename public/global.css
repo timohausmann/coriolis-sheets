@@ -175,9 +175,9 @@ button:focus {
 .content--center {
 	justify-content: center;
 }
-.content > * {
+/*.content > * {
 	max-height: 100%;
-}
+}*/
 
 
 
