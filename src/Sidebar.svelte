@@ -16,7 +16,7 @@
 
     .sidebar {
         background: black;
-        padding: 0 0.5rem;
+        padding: 0 0.5rem 1rem;
 
         display: flex;
         align-items: center;
@@ -100,7 +100,11 @@
         }
     }
 
-    :global(.faux-a) {
+    .logo-link:hover {
+        text-decoration: none;
+    }
+
+    :global(.nav-item) {
         cursor: pointer;
         padding: 1rem;
         border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -114,9 +118,12 @@
 
 </style>
 <script>
-import { navigate } from "svelte-routing";
+import { navigate, link } from "svelte-routing";
+import { _ } from 'svelte-i18n'
+
 import { userStore, unsavedChangesStore } from './stores.js';
 import SidebarParties from './SidebarParties.svelte';
+import SidebarLang from './SidebarLang.svelte';
 
 let input;
 
@@ -128,8 +135,7 @@ function handleNav(e) {
     input.checked = false
 
     if($unsavedChangesStore) {
-        const msg = 'Du hast scheinbar ungespeicherte Änderungen, sicher dass du die Seite verlassen möchtest?'
-        const choice = window.confirm(msg)
+        const choice = window.confirm($_('confirm_unsaved_changes'))
         if(!choice) return false
     }
 
@@ -139,19 +145,22 @@ function handleNav(e) {
 </script>
 
 <div class="sidebar">
-    <h1>Coriolis Web</h1>
+    <a use:link href="/" class="logo-link"><h1>Coriolis Web</h1></a>
 
     <input class="nav_input" type="checkbox" id="nav_toggle" bind:this={input} />
     <label class="nav_button" for="nav_toggle"></label>
 
     <nav class="nav">
         {#if $userStore.isSignedIn}
-            <div class="faux-a" on:click={handleNav} data-href="/characters/">Meine Charaktere</div>
-            <div class="faux-a" on:click={handleNav} data-href="/parties/">Parties</div>
+            <div class="nav-item" on:click={handleNav} data-href="/characters/">{$_('nav_my_characters')}</div>
+            <div class="nav-item" on:click={handleNav} data-href="/parties/">{$_('nav_my_parties')}</div>
             <SidebarParties handleNav={handleNav} />
-            <div class="faux-a" on:click={handleNav} data-href="/login/">Logout</div>
+            <div class="nav-item" on:click={handleNav} data-href="/login/">{$_('nav_signout')}</div>
         {:else}
-            <div class="faux-a" on:click={handleNav} data-href="/login/">Register / Sign In</div>
+            <div class="nav-item" on:click={handleNav} data-href="/login/">{$_('nav_signin')}</div>
         {/if}
+        
+        <SidebarLang />
     </nav>
+
 </div>

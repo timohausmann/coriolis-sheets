@@ -1,5 +1,6 @@
 <script>
   import { Router, Route } from "svelte-routing";
+  import { isLoading } from 'svelte-i18n'
 
   import Routes from './Routes.svelte'
   import Sidebar from './Sidebar.svelte'
@@ -26,27 +27,23 @@
       }
   }
 
-.site {
-      display: flex;
-      height: 100%;
-      @media #{$media-tablet-landscape-lt} {
-          flex-direction: column;
-      }
-  }
-  
-h1 {
-  width: 100%;
-  height: 6rem;
-  color: transparent;
-  background: url(../coriolis-header.png) center no-repeat black;
-  background-size: contain;
-  }
+  .site {
+        display: flex;
+        height: 100%;
+        @media #{$media-tablet-landscape-lt} {
+            flex-direction: column;
+        }
+    }
 
 </style>
 
 <Router url="{url}">
   <div class="site">
+    {#if $isLoading}
+      Loading &hellip;
+    {:else}
       <Sidebar />
       <Routes />
+    {/if}
   </div>
 </Router>

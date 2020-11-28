@@ -3,6 +3,7 @@ import { auth } from 'firebase/app';
 import * as firebaseui from 'firebaseui';
 import { Link } from "svelte-routing";
 import { onMount, onDestroy } from 'svelte';
+import { _ } from 'svelte-i18n';
 import { userStore } from './stores.js';
 
 let authContainer;
@@ -86,22 +87,22 @@ function createSignInForm() {
 
         <div class="mdl-card mdl-shadow--2dp firebaseui-container">
             <div class="firebaseui-card-header">
-                <h1 class="firebaseui-title">You are signed in.</h1>
+                <h1 class="firebaseui-title">{$_('logged_in')}</h1>
                 <p class="firebaseui-text">
-                    Your username: {displayName}
+                    {$_('my_username')}: {displayName}
                 </p>
             </div>
 
             <div class="firebaseui-card-actions">
                 <div class="firebaseui-form-actions">
-                    <Link to="/characters" styles="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">My Characters</Link>
-                    <button on:click={signOut} class="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Sign out</button>
+                    <Link to="/characters">{$_('nav_my_characters')}</Link>
+                    <button on:click={signOut} class="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">{$_('nav_signout')}</button>
                 </div>
             </div>
         </div>
     {:else}
         <p class="grey firebaseui-text">
-            Create a new account or<br /> sign in with your existing account here.
+            {$_('signin_text')}
         </p>
     {/if}
 

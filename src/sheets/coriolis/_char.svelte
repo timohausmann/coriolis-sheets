@@ -1,4 +1,6 @@
 <script>
+    import { _ } from 'svelte-i18n';
+
     import Field from './Field.svelte';
     import FieldPoints from './FieldPoints.svelte';
 	import TextField from './TextField.svelte';
@@ -10,9 +12,7 @@
 </script>
 
 <style>
-
     section {
-    /*    padding: 0 0.25rem;*/
         background: rgba(188, 224, 204, 0.9);
         margin-bottom: 0.5rem;
     }
@@ -24,53 +24,52 @@
         font-size: 0.875rem;
         font-weight: normal;
         text-transform: uppercase;
-        /*margin: 0 -0.25rem;*/
         margin: 0;
     }
 </style>
 
 <div class="row">
     <section class="flex-1 flex-gutter">
-        <h2>Abbildung</h2>
+        <h2>{$_('sheet_image')}</h2>
         <Image />
     </section>
     <section class="flex-2 flex-gutter">
-        <h2>Beschreibung</h2>
-        <TextArea label="Beschreibung" name="description" />
+        <h2>{$_('sheet_description')}</h2>
+        <TextArea label="{$_('sheet_description')}" name="description" />
     </section>
 </div>
 <div class="row">
     <div class="flex-1 flex-gutter">
         <section>
-            <h2>Attribute</h2>
-            <Field label="Stärke" name="attr_str" />
-            <Field label="Geschicklichkeit" name="attr_dex" />
-            <Field label="Verstand" name="attr_int" />
-            <Field label="Empathie" name="attr_emp" />
+            <h2>{$_('sheet_attributes')}</h2>
+            <Field label={$_('attr_str')} name="attr_str" />
+            <Field label={$_('attr_dex')} name="attr_dex" />
+            <Field label={$_('attr_int')} name="attr_int" />
+            <Field label={$_('attr_emp')} name="attr_emp" />
         </section>
     </div>
     <div class="flex-2 flex-gutter">
         <section>
-            <h2>Charakter</h2>
+            <h2>{$_('sheet_character')}</h2>
             <div class="row">
                 <div class="flex-2">
-                    <TextField label="Name" name="char_name" />
-                    <TextField label="Konzept" name="char_concept" />
+                    <TextField label={$_('sheet_name')} name="char_name" />
+                    <TextField label={$_('sheet_concept')} name="char_concept" />
                     <div class="row">
                         <div class="flex-1">
-                            <TextField label="Gruppenkonzept" name="group_concept" />
+                            <TextField label={$_('sheet_group_concept')} name="group_concept" />
                         </div>
                         <div class="flex-1">
-                            <TextField label="Gruppentalent" name="group_talent" />
+                            <TextField label={$_('sheet_group_talent')} name="group_talent" />
                         </div>
                     </div>
-                    <TextField label="Persönliches Problem" name="challenge" />
+                    <TextField label={$_('sheet_problem')} name="challenge" />
                 </div>
                 <div class="flex-1">
-                    <TextField label="Hintergrund" name="char_bg" />
-                    <TextField label="Heimatsystem" name="homesystem" />
-                    <TextField label="Ikone" name="char_icon" />
-                    <Field label="Reputation" name="char_rep" />
+                    <TextField label={$_('sheet_background')} name="char_bg" />
+                    <TextField label={$_('sheet_homesystem')} name="homesystem" />
+                    <TextField label={$_('sheet_icon')} name="char_icon" />
+                    <Field label={$_('sheet_reputation')} name="char_rep" />
                 </div>
             </div>
         </section>
@@ -89,28 +88,28 @@
     <div class="flex-1 flex-gutter">
 
         <section>
-            <h2>Trauma</h2>
-            <FieldPoints label="Trefferpunkte" name="hp" max="12" />
+            <h2>{$_('sheet_trauma')}</h2>
+            <FieldPoints label={$_('sheet_hp')} name="hp" max="12" />
 
-            <TextField label="Kritische Wunden" name="crit_1" />
-            <TextField label="Kr.W." name="crit_2" />
-            <TextField label="Kr.W." name="crit_3" />
+            <TextField label={$_('sheet_crits')} name="crit_1" />
+            <TextField label={$_('sheet_crits_short')} name="crit_2" />
+            <TextField label={$_('sheet_crits_short')} name="crit_3" />
 
-            <FieldPoints label="Willenskraft" name="will" max="12" />
+            <FieldPoints label={$_('sheet_spirit')} name="will" max="12" />
         </section>
     </div>
     <div class="flex-2 flex-gutter">
         <section>
-            <h2>Aussehen</h2>
-            <TextField label="Gesicht" name="look_face" />
-            <TextField label="Kleidung" name="look_clothing" />
+            <h2>{$_('sheet_looks')}</h2>
+            <TextField label={$_('sheet_face')} name="look_face" />
+            <TextField label={$_('sheet_apparel')} name="look_clothing" />
         </section>
         <section>
-            <h2>Beziehungen</h2>
-            <TextField label="SC 1" name="rel_sc1" />
-            <TextField label="SC 2" name="rel_sc2" />
-            <TextField label="SC 3" name="rel_sc3" />
-            <TextField label="SC 4" name="rel_sc4" />
+            <h2>{$_('sheet_relationships')}</h2>
+            <TextField label="{$_('sheet_player_char')} 1" name="rel_sc1" />
+            <TextField label="{$_('sheet_player_char')} 2" name="rel_sc2" />
+            <TextField label="{$_('sheet_player_char')} 3" name="rel_sc3" />
+            <TextField label="{$_('sheet_player_char')} 4" name="rel_sc4" />
         </section>
     </div>
 </div>
@@ -121,43 +120,43 @@
 
         <div class="row">
             <section class="flex-1 flex-gutter">
-                <h2>Strahlung</h2>
+                <h2>{$_('sheet_radiation')}</h2>
                 <Points max="10" name="rad" />
             </section>
             <section class="flex-1 flex-gutter">
-                <h2>Erfahrung</h2>
+                <h2>{$_('sheet_experience')}</h2>
                 <Points max="10" name="xp" />
             </section>
         </div>
 
         <section class="section">
-            <h2>Fertigkeiten</h2>
+            <h2>{$_('sheet_skills')}</h2>
             <div class="row">
                 <div class="flex-1">
-                    <Field label="Beobachtung (Verstand)" name="ab_observation" />
-                    <Field label="Beweglichkeit (Geschicklichkeit)" name="ab_agility" />
-                    <Field label="Fernkampf (Geschicklichkeit)" name="ab_ranged" />
-                    <Field label="Infiltration (Geschicklichkeit)" name="ab_infiltration" />
-                    <Field label="Kraftakt (Stärke)" name="ab_strength" />
-                    <Field label="Manipulation (Empathie)" name="ab_manipulation" />
-                    <Field label="Nahkampf (Stärke)" name="ab_melee" />
-                    <Field label="Überleben (Verstand)" name="ab_survival" />
+                    <Field label="{$_('skill_observation')} ({$_('attr_int')})" name="ab_observation" />
+                    <Field label="{$_('skill_agility')} ({$_('attr_dex')})" name="ab_agility" />
+                    <Field label="{$_('skill_ranged')} ({$_('attr_dex')})" name="ab_ranged" />
+                    <Field label="{$_('skill_infiltration')} ({$_('attr_dex')})" name="ab_infiltration" />
+                    <Field label="{$_('skill_strength')} ({$_('attr_str')})" name="ab_strength" />
+                    <Field label="{$_('skill_manipulation')} ({$_('attr_emp')})" name="ab_manipulation" />
+                    <Field label="{$_('skill_melee')} ({$_('attr_str')})" name="ab_melee" />
+                    <Field label="{$_('skill_survival')} ({$_('attr_int')})" name="ab_survival" />
                 </div>
                 <div class="flex-1">
-                    <Field label="Datendschinn (Verstand)" name="ab_datadschinn" />
-                    <Field label="Kommandieren (Empathie)" name="ab_command" />
-                    <Field label="Kultur (Empathie)" name="ab_culture" />
-                    <Field label="Medikurgie (Verstand)" name="ab_medi" />
-                    <Field label="Mystik (Empathie)" name="ab_mystic" />
-                    <Field label="Pilot (Geschicklichkeit)" name="ab_pilot" />
-                    <Field label="Technologie (Verstand)" name="ab_tech" />
-                    <Field label="Wissenschaft (Verstand)" name="ab_science" />
+                    <Field label="{$_('skill_data')} ({$_('attr_int')})" name="ab_datadschinn" />
+                    <Field label="{$_('skill_command')} ({$_('attr_emp')})" name="ab_command" />
+                    <Field label="{$_('skill_culture')} ({$_('attr_emp')})" name="ab_culture" />
+                    <Field label="{$_('skill_medical')} ({$_('attr_int')})" name="ab_medi" />
+                    <Field label="{$_('skill_mystic')} ({$_('attr_emp')})" name="ab_mystic" />
+                    <Field label="{$_('skill_pilot')} ({$_('attr_dex')})" name="ab_pilot" />
+                    <Field label="{$_('skill_tech')} ({$_('attr_int')})" name="ab_tech" />
+                    <Field label="{$_('skill_science')} ({$_('attr_int')})" name="ab_science" />
                 </div>
             </div>
         </section>
 
         <section>
-            <h2>Waffen</h2>
+            <h2>{$_('sheet_weapons')}</h2>
             <Weapon suffix="1" />
             <Weapon suffix="2" />
             <Weapon suffix="3" />
@@ -167,22 +166,22 @@
         
         <div class="row">
             <section class="flex-2 flex-gutter">
-                <h2>Panzerung</h2>
+                <h2>{$_('sheet_armor')}</h2>
                 <div class="row">
                     <div class="flex-2">
-                        <TextField label="Name" name="armor_name" />
+                        <TextField label={$_('sheet_name')} name="armor_name" />
                     </div>
                     <div class="flex-1">
-                        <TextField label="Wert" name="armor_value" />
+                        <TextField label={$_('sheet_value')} name="armor_value" />
                     </div>
                     <div class="flex-1">
-                        <TextField label="Anm." name="armor_comment" />
+                        <TextField label={$_('sheet_note')} name="armor_comment" />
                     </div>
                 </div>
             </section>
             <section class="flex-1 flex-gutter">
-                <h2>Birr</h2>
-                <TextField label="Birr" name="birr" />
+                <h2>{$_('sheet_birr')}</h2>
+                <TextField label={$_('sheet_birr')} name="birr" />
             </section>
         </div>
     </div>
@@ -190,15 +189,15 @@
 
     <div class="flex-1 flex-gutter">
         <section>
-            <h2>Talente</h2>
-            <TextField label="Talent 1" name="talent_1" />
-            <TextField label="Talent 2" name="talent_2" />
-            <TextField label="Talent 3" name="talent_3" />
-            <TextField label="Talent 4" name="talent_4" />
-            <TextField label="Talent 5" name="talent_5" />
+            <h2>{$_('sheet_talents')}</h2>
+            <TextField label="{$_('sheet_talent')} 1" name="talent_1" />
+            <TextField label="{$_('sheet_talent')} 2" name="talent_2" />
+            <TextField label="{$_('sheet_talent')} 3" name="talent_3" />
+            <TextField label="{$_('sheet_talent')} 4" name="talent_4" />
+            <TextField label="{$_('sheet_talent')} 5" name="talent_5" />
         </section>
         <section>
-            <h2>Ausrüstung</h2>
+            <h2>{$_('sheet_equipment')}</h2>
             <Equipment suffix="1" />
             <Equipment suffix="2" />
             <Equipment suffix="3" />

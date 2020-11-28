@@ -5,3 +5,5 @@
 
 /.firebase/
 firebase-debug.log
+
+.vscode

@@ -1,6 +1,7 @@
 <script>
   import { auth, firestore } from "firebase/app";
   import "firebase/firestore";
+  import { _ } from 'svelte-i18n';
 
   //import { onMount, onDestroy } from 'svelte';
   import Charlink from './Charlink.svelte';
@@ -48,15 +49,16 @@
   });
 
   function newCharPrompt() {
-    const name = window.prompt('Bitte gib den Namen deines Charakters ein.')
-    const safeName = name.trim()
+    const name = window.prompt($_('input_char_name'))
+    if(!name) return;
 
+    const safeName = name.trim()
     if(!safeName.length) {
-      alert('Comon, dein Name darf nicht leer sein.')
+      alert($_('alert_empty_name'))
       return
     }
 
-    let addDoc = dbChars.add({
+    dbChars.add({
       char_name: name,
       user: uid
     }).then(ref => {
@@ -71,11 +73,11 @@
 <main class="content">
 
   <div class="actions">
-    <button on:click={newCharPrompt}>➕ Neuen Charakter erstellen</button>
+    <button on:click={newCharPrompt}>➕ {$_('char_create')}</button>
   </div>
 
   <div class="section">
-    <h1 class="h2">Meine Charaktere</h1>
+    <h1 class="h2">{$_('nav_my_characters')}</h1>
 
     {#if chars.length}
       <ul class="itemlist">
@@ -86,7 +88,7 @@
       {/each}
       </ul>
     {:else}
-      <p class="p">Du hast noch keine Charaktere.</p>
+      <p class="p">{$_('char_none')}</p>
     {/if}
   </div>
 </main>

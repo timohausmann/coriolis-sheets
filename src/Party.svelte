@@ -4,6 +4,10 @@
   import "firebase/firestore";
   import { onMount, onDestroy } from 'svelte';
   import Charlink from './Charlink.svelte';
+  import { _ } from 'svelte-i18n';
+
+  export let id;
+  export let location;
 
   let chars = [];
 
@@ -40,7 +44,7 @@
 
 <main class="content">
   <div class="section">
-    <h1 class="h2">Party Charaktere</h1>
+    <h1 class="h2">{$_('party_chars')}</h1>
 
     {#if chars.length}
       <ul class="itemlist">
@@ -51,7 +55,7 @@
       {/each}
       </ul>
     {:else}
-      <p>Keine Charaktere vorhanden.</p>
+      <p>{$_('party_no_chars')}</p>
     {/if}
   </div>
 

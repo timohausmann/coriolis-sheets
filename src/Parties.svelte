@@ -2,6 +2,7 @@
 import { firestore } from "firebase/app";
 import 'firebase/firestore';
 import { Link } from "svelte-routing";
+import { _ } from 'svelte-i18n';
 
 export let location
 
@@ -40,7 +41,7 @@ partiesRef
 
 <main class="content">
   <div class="section">
-    <h1 class="h2">Parties</h1>
+    <h1 class="h2">{$_('nav_my_parties')}</h1>
     <ul class="itemlist">
         {#each parties as party}
             <li>

@@ -1,5 +1,6 @@
 import { navigate } from "svelte-routing";
 import { unsavedChangesStore } from './stores.js';
+import { _ } from 'svelte-i18n';
 
 function handleNav(e) {
 
@@ -11,7 +12,7 @@ function handleNav(e) {
     console.log(unsavedChangesStore);
     //@TODO understand $ ...
     if($unsavedChangesStore) {
-        const msg = 'Du hast scheinbar ungespeicherte Änderungen, sicher dass du die Seite verlassen möchtest?'
+        const msg = $_('confirm_unsaved_changes')
         const choice = window.confirm(msg)
         if(!choice) return false
     }

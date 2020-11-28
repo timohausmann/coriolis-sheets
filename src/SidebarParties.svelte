@@ -61,7 +61,7 @@
 
 </style>
 {#each chars as char}
-    <div class="faux-a" on:click={handleNav} data-href="/characters/{char.id}">
+    <div class="nav-item" on:click={handleNav} data-href="/characters/{char.id}">
         {char.char_name}
     </div>
 {/each}

@@ -40,6 +40,9 @@
     .field:last-child {
         border-bottom: none;
     }
+    label {
+        line-height: 1;
+    }
     input {
         margin: 0;
         width: 3.5rem;
@@ -49,7 +52,7 @@
 </style>
 
 <div class="field">
-    <label>{label}</label>
-    <input type="number" name={name} min="0" max={max} value={currField_value}
+    <label for={name}>{label}</label>
+    <input id={name} type="number" name={name} min="0" max={max} value={currField_value}
         readonly={readonly} on:change={onChange} on:keydown={onChange} />
 </div>

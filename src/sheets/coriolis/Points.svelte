@@ -1,5 +1,7 @@
 <script>
     import { onDestroy } from 'svelte';
+    import { _ } from 'svelte-i18n';
+
     import { currCharStore, unsavedChangesStore } from '../../stores.js'
 
     export let max;
@@ -83,13 +85,11 @@
 </style>
 
 <div class="field row">
-    
-    <button on:click={decrease} disabled={readonly}>-</button>
-    
+    <button on:click={decrease} disabled={readonly} title={$_('sheet_decrease')}>-</button>
 	{#each points as point}
         <div class={point ? 'point point--filled' : 'point'}></div>
 	{/each}
     <div class="output">{currField_value}</div>
-    <button on:click={increase} disabled={readonly}>+</button>
+    <button on:click={increase} disabled={readonly} title={$_('sheet_increase')}>+</button>
     <input type="hidden" name={fieldname} value={currField_value} />
 </div>

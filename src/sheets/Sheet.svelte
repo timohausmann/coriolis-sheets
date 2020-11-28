@@ -4,7 +4,7 @@
     import 'firebase/storage';
     import { onDestroy } from 'svelte'
     import { navigate } from "svelte-routing";
-    //import { v4 as uuidv4 } from 'uuid';
+    import { _ } from 'svelte-i18n';
 
     import CoriolisCharSheet from './coriolis/_char.svelte';
     //import CoriolisShipSheet from './coriolis/_ship.svelte';
@@ -15,6 +15,7 @@
     let form;
     let charData = {};
     let userId = '';
+    let noData = true;
 
     const db = firestore();    
     const dbChars = db.collection("characters");
@@ -28,15 +29,15 @@
 
         const queryDoc = dbChars.doc(id)
         const observer = queryDoc.onSnapshot(snapshot => {
-            //console.log('Received doc snapshot', snapshot);
+            //console.log('Received doc snapshot', snapshot.exists, snapshot);
 
-            if(snapshot.empty) {
+            if(!snapshot.exists) {
+                noData = true;
                 console.log("No matching documents.");
                 return;
             }
-            
-            //console.log('snapshot.data()', snapshot.data())
 
+            noData = false;
             charData = snapshot.data()
             charData.id = id;
             charData.readonly = charData.user !== userId;
@@ -47,12 +48,6 @@
             console.log(`Encountered error: ${err}`);
         });
     }
-
-
-    /*beforeUpdate(function() {
-        console.log('beforeUpdate');
-    })*/
-
     
     function save(e) {
         
@@ -69,14 +64,7 @@
 
         formData.forEach((value, key) => {
             if(!value) return;
-
-            //extract file blobs to files
-            /*if(key.indexOf('file_') === 0) {
-                let fileKey = key.replace('file_', '');
-                files[fileKey] = value;
-                sheetData[key] = id
-                return;
-            }*/
+            
             if(key === 'char_avatar') {
                 if(value.indexOf('blob:') === 0) {
                     avatarBlobUrl = value;
@@ -96,23 +84,9 @@
         });
 
         if(!sheetData.char_name || !sheetData.char_name.trim().length) {
-            alert('Dein Charakter-Name darf nicht leer sein.')
+            alert($_('alert_empty_name'))
             return;
         }
-
-        /*if(Object.keys(files).length) {
-            const storageRef = storage().ref();
-            for(let key in files) {
-                (async function() {
-                    console.log('trying to upload', files[key]);
-                    const blob = await fetch(files[key]).then(r => r.blob());
-                    const fileRef = storageRef.child(`${key}/${id}.jpg`);
-                    fileRef.put(blob).then(function(snapshot) {
-                        console.log('Uploaded a blob!');
-                    });
-                })();
-            }
-        }*/
 
         if(avatarBlobUrl) {
             const storageRef = storage().ref();
@@ -137,7 +111,6 @@
             .then(function() {
                 console.log("Document successfully written!");
                 unsavedChangesStore.set(false);
-            //    alert("Update successful!")
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -149,9 +122,9 @@
         
         e.preventDefault();
 
-        if(window.confirm(`Bist du sicher dass du ${charData.char_name} löschen möchtest? Dies kann nicht rückgängig gemacht werden!`)) {
-            queryDoc.delete();
-
+        
+        if(window.confirm($_('char_delete_confirm', { values: { name: charData.char_name }}))) {
+            dbChars.doc(id).delete();
             navigate('/characters')
         }
     }
@@ -159,8 +132,7 @@
 
     function confirmLeave(e) {
         e.preventDefault()
-        const msg = 'Du hast scheinbar ungespeicherte Änderungen, sicher dass du die Seite verlassen möchtest?'
-        e.returnValue = msg
+        e.returnValue = $_('confirm_unsaved_changes')
         return prompt
     }
 
@@ -244,17 +216,28 @@
 }
 </style>
 
-<main class="content">
-    <form action="/sheet/" method="post" bind:this={form}>
-        <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 Du hast ungespeicherte Änderungen</div>
-        {#if charData.user === userId}
-            <div class="actions">
-                <div class="delete" on:click={del}>🗑️ Charakter löschen</div>
-                <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 Speichern</button>
-            </div>    
-        {/if}
-        <div class="sheet">
-            <CoriolisCharSheet />
-        </div>
-    </form>
+{#if noData}
+<main class="content content--center"><div class="mdl-card mdl-shadow--2dp firebaseui-container">
+    <div class="firebaseui-card-header">
+        <div class="firebaseui-title">{$_('sheet_not_found')}</div>
+        <p class="firebaseui-text">
+            {$_('sheet_not_found_text')}
+        </p>
+    </div>
 </main>
+{:else}
+    <main class="content">
+        <form action="/sheet/" method="post" bind:this={form}>
+            <div class={$unsavedChangesStore ? 'notification' : 'notification hidden'}>😲 {$_('unsaved_changes')}</div>
+            {#if charData.user === userId}
+                <div class="actions">
+                    <div class="delete" on:click={del}>🗑️ {$_('char_delete')}</div>
+                    <button type="submit" on:click={save} disabled={!$unsavedChangesStore}>💾 {$_('save')}</button>
+                </div>    
+            {/if}
+            <div class="sheet">
+                <CoriolisCharSheet />
+            </div>
+        </form>
+    </main>
+{/if}

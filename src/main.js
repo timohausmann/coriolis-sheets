@@ -5,6 +5,7 @@ import "firebase/auth";
 import App from './App.svelte';
 import firebaseConfig from "./fbConfig";
 import { userStore } from './stores.js';
+import './i18n.js';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);

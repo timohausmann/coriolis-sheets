@@ -54,7 +54,7 @@
 </style>
 
 <div class="field {className}">
-    <label>{label}</label>
-    <textarea name={name} on:change={onChange} on:keydown={onChange}
+    <label for={name}>{label}</label>
+    <textarea id={name} name={name} on:change={onChange} on:keydown={onChange}
         readonly={readonly}>{currField_value}</textarea>
 </div>

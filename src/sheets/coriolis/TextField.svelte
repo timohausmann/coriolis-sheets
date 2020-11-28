@@ -51,7 +51,7 @@
 </style>
 
 <div class="field {className}">
-    <label>{label}</label>
-    <input type="text" name={name} value={currField_value} 
+    <label for={name}>{label}</label>
+    <input id={name} type="text" name={name} value={currField_value} 
         readonly={readonly} on:change={onChange} on:keydown={onChange} />
 </div>
