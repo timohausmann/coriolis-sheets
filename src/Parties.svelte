@@ -34,12 +34,40 @@ partiesRef
     console.log('Error getting documents', err);
   });
 
+  function newPartyPrompt() {
+    window.alert('This feature is not available yet.');
+    return;
+    const name = window.prompt($_('party_input_name'))
+    if(!name) return;
+
+    const safeName = name.trim()
+    if(!safeName.length) {
+      alert($_('alert_empty_name'))
+      return
+    }
+
+    const newParty = {
+      name: name,
+      roles: {}
+    };
+    newParty[uid] = 'owner';
+
+    partiesRef.add(newParty).then(ref => {
+      console.log('Added document with ID: ', ref.id);
+    });
+  }
+
 </script>
 <style>
 
 </style>
 
 <main class="content">
+
+  <div class="actions">
+    <button on:click={newPartyPrompt}>➕ {$_('party_create')}</button>
+  </div>
+
   <div class="section">
     <h1 class="h2">{$_('nav_my_parties')}</h1>
     <ul class="itemlist">
