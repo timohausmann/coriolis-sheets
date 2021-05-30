@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+
+	<title>Coriolis Character Sheets</title>
+
+	<link rel='icon' type='image/svg' href='favicon.svg'>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,500&display=swap" rel="stylesheet">
+
+    <style>
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+        /*html {
+            scroll-snap-type: y proximity;
+        }
+        section {
+            scroll-snap-align: start;
+        }*/
+        body {
+            margin: 0;
+            font-family: 'DM Mono', monospace;
+            background: black;
+            color: white;
+        }
+
+        header {
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            background: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+        }
+
+        nav {
+            position: fixed;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 1rem;
+        }
+
+        nav a {
+            display: block;
+            width: 0.75rem;
+            height: 0.75rem;
+            border: 2px solid white;
+            border-radius: 50%;
+            opacity: 0.6;
+            transition: opacity 0.2s, background-color 0.2s;
+        }
+        nav a.active { 
+            opacity: 1;
+            background: white;
+        }
+
+        h1 {
+            font-size: 1.375rem;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        main {
+            min-height: 100vh;
+        }
+
+        section {
+            height: 100vh;
+            position: relative;
+        }
+        section > div {
+            padding: 0 1rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        section h2 {
+            font-size: 3rem;
+            font-weight: 500;
+            line-height: 1.2;
+            max-width: 60%;
+            margin-bottom: 2rem;
+            padding-top: 25vh;
+        }
+        section h2::after {
+            content: '_';
+            animation: flash 1s infinite;
+        }
+
+        section:first-of-type > div h2 {
+            padding-top: 60vh;
+        }
+
+        section h3 {
+            margin-top: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        section p {
+            margin-bottom: 1rem;
+        }
+
+        section p + .cta {
+            margin-top: 2rem;
+        }
+
+        section ul {
+            list-style: none;
+
+        }
+        section li {
+            margin-bottom: 0.5rem;
+        }
+        section li::before {
+            content: '> ';
+        }
+
+        .cta {
+            position: relative;
+            display: inline-block;
+            color: white;
+            text-transform: uppercase;
+            font-size: 1.25rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            padding: 1.25rem 3rem;
+            background: #003070;
+            text-decoration: none;
+            overflow: hidden;
+        }
+        .cta::before {
+            content: '> ';
+        }
+        .cta::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -25%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(to right, 
+                rgba(255,255,255,0.0), 
+                rgba(255,255,255,0.1));
+
+            transform: translateX(-250%) rotate(-20deg);
+            transition: transform 0.4s;
+            opacity: 0;
+        }
+        .cta:hover::after {
+            transform: translateX(100%) rotate(-20deg);
+            opacity: 1;
+        }
+        .cta--header {
+            font-size: 0.875rem;
+            padding: 0.75rem 2rem;
+        }
+
+        .footnote {
+            position: absolute;
+            right: 1rem;
+            bottom: 1rem;
+        }
+        .footnote a {
+            color: inherit;
+        }
+
+        footer {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem;
+        }
+        footer a {
+            margin-left: 2rem;
+            color: inherit;
+        }
+
+        @keyframes flash {
+            0%, 100% { opacity: 0; }
+            66% { opacity: 1; }
+        }
+        
+    </style>
+	
+</head>
+
+<body>
+
+    <header>
+        <h1>Coriolis Character Sheets</h1>
+        <a href="#" class="cta cta--header">Launch app</a>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#start" title="Start" class="active"></a></li>
+            <li><a href="#sheets" title="Sheets"></a></li>
+            <li><a href="#team-up" title="Team up"></a></li>
+            <li><a href="#contribute" title="Contribute"></a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <div>
+                <a name="start"></a>
+                <h2 class="js-intro">Store your characters<br />in the cloud</h2>
+                <a href="#" class="cta">Launch App</a>
+                <div class="footnote">
+                    Artwork by <a href="#">langwich</a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <a name="sheets"></a>
+                <h2>Create sheets for characters and ships</h2>
+                <ul>
+                    <li>Never loose your character sheet again</li>
+                    <li>No more coffee stains or eraser marks</li>
+                    <li>Upload an image of your character or ship</li>
+                    <li>Additional fields for lore and inventory</li>
+                    <li>Optimized for mobile and desktop</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <a name="team-up"></a>
+                <h2>Team up<br />with your party</h2>
+                <ul>
+                    <li>Create a party and invite your crew</li>
+                    <li>See the character sheets of your mates</li>
+                    <li>Board a ship together</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <a name="contribute"></a>
+                <h2>Free<br />as free can be</h2>
+                <p>Coriolis Character Sheets is free and open source forever.</p>
+                <h3>Feeling cute, might contribute later?</h3>
+                <p>
+                    Feel free to contribute to this project:<br />
+                    Code | Artwork | Translation | Donation
+                </p>
+                <a href="#" class="cta">Visit us as github</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <a href="#">About</a>
+        <a href="#">Privacy</a>
+        <a href="#">Github</a>
+        </ul>
+    </footer>
+
+    <script>
+        //jumpnav
+        (function() {
+            const nav = document.querySelector('nav');
+            nav.querySelectorAll('a').forEach(el => {
+                el.addEventListener('click', e => {
+                    e.preventDefault();
+                    const section = document.querySelector(`[name="${e.target.href.split('#').pop()}"]`);
+                    if(section) {
+                        section.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            document.addEventListener('scroll', () => {
+
+                const anchors = document.querySelectorAll('a[name]');
+                let currentAnchor = anchors[0];
+                for(let i=1; i<anchors.length; i++) {
+                    if(anchors[i].getBoundingClientRect().top < 100) currentAnchor = anchors[i];
+                }
+                
+                const currentLink = nav.querySelector('.active');
+                currentLink.classList.remove('active');
+
+                const futureLink = nav.querySelector(`a[href="#${currentAnchor.name}"]`);
+                futureLink.classList.add('active');
+            })
+        })();
+    </script>
+</body>
+</html>
