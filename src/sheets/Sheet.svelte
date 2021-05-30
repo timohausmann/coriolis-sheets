@@ -7,10 +7,24 @@
     import { _ } from 'svelte-i18n';
 
     import CoriolisCharSheet from './coriolis/_char.svelte';
-    //import CoriolisShipSheet from './coriolis/_ship.svelte';
+    import CoriolisShipSheet from './coriolis/_ship.svelte';
     import { userStore, currCharStore, unsavedChangesStore } from '../stores.js'
 
     export let id
+    export let template //character, ship
+
+    const sheetConfig = {
+        character: {
+            db: 'characters',
+            component: CoriolisCharSheet
+        },
+        ship: {
+            db: 'ships',
+            component: CoriolisShipSheet
+        }
+    };
+
+    const currentSheet = sheetConfig[template];
     
     let form;
     let charData = {};
@@ -18,7 +32,7 @@
     let noData = true;
 
     const db = firestore();    
-    const dbChars = db.collection("characters");
+    const dbSheet = db.collection(currentSheet.db);
 
     $: if (id) { //watch id for changes
         getData(); //invoke your method to reload data
@@ -27,7 +41,7 @@
 
     function getData() {
 
-        const queryDoc = dbChars.doc(id)
+        const queryDoc = dbSheet.doc(id)
         const observer = queryDoc.onSnapshot(snapshot => {
             //console.log('Received doc snapshot', snapshot.exists, snapshot);
 
@@ -53,7 +67,7 @@
         
         e.preventDefault();
 
-        const queryDoc = dbChars.doc(id);
+        const queryDoc = dbSheet.doc(id);
         const uid = auth().currentUser.uid;
 
         const formData = new FormData(form);
@@ -62,8 +76,8 @@
         };
         let avatarBlobUrl = null;
 
+
         formData.forEach((value, key) => {
-            if(!value) return;
             
             if(key === 'char_avatar') {
                 if(value.indexOf('blob:') === 0) {
@@ -124,7 +138,7 @@
 
         
         if(window.confirm($_('char_delete_confirm', { values: { name: charData.char_name }}))) {
-            dbChars.doc(id).delete();
+            dbSheet.doc(id).delete();
             navigate('/characters')
         }
     }
@@ -216,7 +230,7 @@
 }
 </style>
 
-{#if noData}
+{#if false}
 <main class="content content--center"><div class="mdl-card mdl-shadow--2dp firebaseui-container">
     <div class="firebaseui-card-header">
         <div class="firebaseui-title">{$_('sheet_not_found')}</div>
@@ -236,7 +250,7 @@
                 </div>    
             {/if}
             <div class="sheet">
-                <CoriolisCharSheet />
+                <svelte:component this={currentSheet.component}/>
             </div>
         </form>
     </main>

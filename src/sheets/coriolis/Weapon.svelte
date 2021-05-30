@@ -3,6 +3,7 @@
 	import TextField from './TextField.svelte';
     
     export let suffix
+    export let shipweapon = false
 </script>
 <style>
     .weapon {
@@ -14,7 +15,9 @@
 <div class="row group weapon">
     <TextField className="flex-3 mobile-full" label={$_('sheet_name')} name={'weap_name_'+ suffix} />
     <TextField className="flex-1" label={$_('sheet_bonus')} name={'weap_bonus_'+ suffix} />
-    <TextField className="flex-1" label={$_('sheet_ini')} name={'weap_ini_'+ suffix} />
+    {#if !shipweapon}
+        <TextField className="flex-1" label={$_('sheet_ini')} name={'weap_ini_'+ suffix} />
+    {/if}
     <TextField className="flex-1" label={$_('sheet_damage')} name={'weap_dmg_'+ suffix} />
     <TextField className="flex-1" label={$_('sheet_crit')} name={'weap_crit_'+ suffix} />
     <TextField className="flex-1" label={$_('sheet_range')} name={'weap_range_'+ suffix} />

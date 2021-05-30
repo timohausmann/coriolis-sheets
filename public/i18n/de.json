@@ -19,6 +19,8 @@
   "input_char_name": "Bitte gib den Namen deines Charakters ein.",
   "party_chars": "Party Charaktere",
   "party_no_chars": "Keine Charaktere vorhanden.",
+  "party_ships": "Party Schiffe",
+  "party_no_ships": "Keine Schiffe vorhanden.",
   "party_create": "Neue Party erstellen",
   "party_input_name": "Bitte gib einen Namen für die Party ein.",
   "sheet_not_found": "Charakter nicht gefunden",

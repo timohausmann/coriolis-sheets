@@ -59,4 +59,16 @@
     {/if}
   </div>
 
+  <div class="section">
+    <h1 class="h2">{$_('party_ships')}</h1>
+
+    <ul class="itemlist">
+      <li>
+        <Link to="/ships/3ee36NvBDs5L5nuD9457">
+          <div class="avatar"></div>
+          Kalifas Wish
+        </Link>
+      </li>
+  </div>
+
 </main>
