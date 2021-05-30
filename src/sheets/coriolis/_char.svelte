@@ -26,6 +26,16 @@
         text-transform: uppercase;
         margin: 0;
     }
+    .description {
+        display: flex;
+        flex-direction: column;
+    }
+    .description :global(h2) {
+
+    }
+    .description :global(.field) {
+        flex: 1;
+    }
 </style>
 
 <div class="row">
@@ -33,7 +43,7 @@
         <h2>{$_('sheet_image')}</h2>
         <Image />
     </section>
-    <section class="flex-2 flex-gutter">
+    <section class="flex-2 flex-gutter description">
         <h2>{$_('sheet_description')}</h2>
         <TextArea label="{$_('sheet_description')}" name="description" />
     </section>

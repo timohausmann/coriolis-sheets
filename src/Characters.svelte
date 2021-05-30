@@ -18,7 +18,7 @@
   const db = firestore();
   const dbChars = db.collection("characters");
 
-  const query = dbChars.where("user", "==", uid)
+  const query = dbChars.where("user", "==", uid).orderBy('char_name')
     
   const observer = query.onSnapshot(snapshot => {
     console.log(`Received query snapshot of size ${snapshot.size}`);
@@ -34,6 +34,7 @@
     snapshot.forEach(doc => {
 
       const data = doc.data();
+      console.log(data)
       const charData = {
         id: doc.id,
         name: data.char_name,
@@ -42,6 +43,8 @@
 
       chars[i++] = charData;
     });
+
+    console.log('CHARS', chars)
 
 
   }, err => {
@@ -79,16 +82,18 @@
   <div class="section">
     <h1 class="h2">{$_('nav_my_characters')}</h1>
 
-    {#if chars.length}
-      <ul class="itemlist">
-      {#each chars as char}
-        <li>
-          <Charlink id={char.id} name={char.name} avatar={char.avatar} />
-        </li>
-      {/each}
-      </ul>
-    {:else}
-      <p class="p">{$_('char_none')}</p>
-    {/if}
+    {#key chars}
+      {#if chars.length}
+        <ul class="itemlist">
+        {#each chars as char}
+          <li>
+            <Charlink id={char.id} name={char.name} avatar={char.avatar} />
+          </li>
+        {/each}
+        </ul>
+      {:else}
+        <p class="p">{$_('char_none')}</p>
+      {/if}
+    {/key}
   </div>
 </main>

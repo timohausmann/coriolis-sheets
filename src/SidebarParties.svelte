@@ -39,6 +39,8 @@
     .orderBy('char_name')
     .onSnapshot(snapshot => {
 
+        chars = []
+
         if(snapshot.empty) {
             console.log("No matching documents.");
             return;
