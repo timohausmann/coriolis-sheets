@@ -66,7 +66,7 @@
     }
 </script>
 
-<div class="section">
+<div class="section section--intro has-background-white">
     <div class="container">
         <div class="level">
             <h1 class="title">{$_("nav_my_parties")}</h1>
@@ -78,6 +78,12 @@
                 >
             </div>
         </div>
+    </div>
+</div>
+
+
+<div class="section">
+    <div class="container">
 
         <Tiles chars={parties} route="parties" empty={$_("party_none")} />
     </div>

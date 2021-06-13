@@ -66,7 +66,8 @@
 
 {#if $activePartyId}
     <div class="navbar-item has-dropdown is-hoverable">
-        <a href="#" class="navbar-link">{$_("nav_party_chars")}</a>
+        <div href="#" class="navbar-link" on:click={handleNav}
+                    data-href={`/parties/${$activePartyId}`}>{$_("nav_party_chars")}</div>
 
         <div class="navbar-dropdown">
             {#each chars as char}

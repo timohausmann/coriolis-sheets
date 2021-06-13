@@ -190,7 +190,7 @@
     }
 </script>
 
-<div class="section">
+<div class="section section--intro has-background-white">
     <div class="container">
         <div class="level">
             <h1 class="title">{partyName}</h1>
@@ -214,6 +214,12 @@
                 />
             {/if}
         </div>
+    </div>
+</div>
+
+
+<div class="section">
+    <div class="container">
 
         {#if !isMember && isInvite}
             <PartyJoin {queryDoc} />

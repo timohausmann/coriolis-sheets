@@ -177,43 +177,48 @@
     });
 </script>
 
-<div class="section">
-    <div class="container">
-        <form action="/sheet/" method="post" bind:this={form}>
-            <div
-                class={$unsavedChangesStore
-                    ? "notification"
-                    : "notification hidden"}
-            >
-                😲 {$_("unsaved_changes")} 
+<form action="/sheet/" method="post" bind:this={form}>
+    <div class="section section--intro has-background-white">
+        <div class="container">
+            <div class="level">
+                <h1 class="title">{charData.char_name}</h1>
+                {#if charData.user === userId}
+                    <div class="buttons">
+                        <button
+                            class="button is-primary"
+                            type="submit"
+                            on:click={save}
+                            disabled={!$unsavedChangesStore}
+                            ><span class="icon is-small"
+                                ><i class="fa fa-save" /></span
+                            > <span>{$_("save")}</span></button
+                        >
+                        <Dropdown
+                            options={[
+                                {
+                                    label: $_("char_delete"),
+                                    icon: "trash",
+                                    onClick: del,
+                                },
+                            ]}
+                        />
+                    </div>
+                {/if}
             </div>
-            {#if charData.user === userId}
-                <div class="buttons">
-                    <button
-                        class="button is-primary"
-                        type="submit"
-                        on:click={save}
-                        disabled={!$unsavedChangesStore}
-                        ><span class="icon is-small"
-                            ><i class="fa fa-save" /></span
-                        > <span>{$_("save")}</span></button
-                    >
-                    <Dropdown
-                        options={[
-                            {
-                                label: $_("char_delete"),
-                                icon: "trash",
-                                onClick: del,
-                            },
-                        ]}
-                    />
-                </div>
-            {/if}
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
             <div class="sheet">
                 <svelte:component this={currentSheet.component} />
             </div>
-        </form>
+        </div>
     </div>
+</form>
+
+<div class={$unsavedChangesStore ? "notification" : "notification hidden"}>
+    😲 {$_("unsaved_changes")}
 </div>
 
 {#if false}
