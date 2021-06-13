@@ -57,7 +57,7 @@ function createSignInForm() {
 
             }
         },
-        signInSuccessUrl: '/',
+        signInSuccessUrl: '/characters/',
         signInOptions: [
             auth.EmailAuthProvider.PROVIDER_ID,
             //auth.GoogleAuthProvider.PROVIDER_ID
@@ -69,10 +69,10 @@ function createSignInForm() {
 }
 </script>
 <style>
-    .grey {
-        color: #eee;
-        margin-bottom: 2rem;
-        text-align: center;
+    .section {
+        min-height: 100%;
+        display: flex;
+        align-items: center;
     }
 
     .hidden {
@@ -82,29 +82,22 @@ function createSignInForm() {
 
 
 
-<main class="content content--center">
+<div class="section">
+    <div class="container">
     {#if isSignedIn}
 
-        <div class="mdl-card mdl-shadow--2dp firebaseui-container">
-            <div class="firebaseui-card-header">
-                <h1 class="firebaseui-title">{$_('logged_in')}</h1>
-                <p class="firebaseui-text">
-                    {$_('my_username')}: {displayName}
-                </p>
-            </div>
-
-            <div class="firebaseui-card-actions">
-                <div class="firebaseui-form-actions">
-                    <Link to="/characters">{$_('nav_my_characters')}</Link>
-                    <button on:click={signOut} class="firebaseui-button mdl-button mdl-js-button mdl-button--raised mdl-button--colored">{$_('nav_signout')}</button>
-                </div>
-            </div>
-        </div>
-    {:else}
-        <p class="grey firebaseui-text">
-            {$_('signin_text')}
+        <h2 class="title">{$_('logged_in')}</h2>
+        <p class="block">
+            {$_('my_username')}: {displayName}
         </p>
+
+        <button on:click={signOut} class="button">{$_('nav_signout')}</button>
+    {:else}
+        <h2 class="title has-text-centered">
+            {$_('signin_text')}
+        </h2>
     {/if}
 
     <div class="hidden" id="firebaseui-auth-container" bind:this={authContainer}></div>
-</main>
+</div>
+</div>

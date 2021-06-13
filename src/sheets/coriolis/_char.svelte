@@ -139,7 +139,7 @@
             </section>
         </div>
 
-        <section class="section">
+        <section>
             <h2>{$_('sheet_skills')}</h2>
             <div class="row">
                 <div class="flex-1">

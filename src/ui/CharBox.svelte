@@ -1,8 +1,6 @@
 <script>
-    import { Link } from "svelte-routing";
     import { storage } from "firebase/app";
     import "firebase/storage";
-    //import { onMount, onDestroy } from 'svelte';
 
     export let char;
 
@@ -20,20 +18,29 @@
 </script>
 
 <div class="box">
+    {#if avatarUrl}
     <article class="media">
         <div class="media-left">
-            <figure class="image is-64x64">
-                {#if avatarUrl}
-                    <img src={avatarUrl} alt={`Image of ${char.name}`} />
-                {/if}
+            <figure class="image is-96x96">
+                <img src={avatarUrl} alt={`Image of ${char.name}`} />
             </figure>
         </div>
         <div class="media-content">
             <div class="content">
                 <p class="title">{char.name}</p>
+                {#if char.meta}
+                    <p class="subtitle">{char.meta}</p>
+                {/if}
+
             </div>
         </div>
     </article>
+    {:else}
+        <p class="title">{char.name}</p>
+        {#if char.meta}
+            <p class="subtitle">{char.meta}</p>
+        {/if}
+    {/if}
 </div>
 
 <style>

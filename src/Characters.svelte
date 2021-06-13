@@ -1,99 +1,95 @@
 <script>
-  import { auth, firestore } from "firebase/app";
-  import "firebase/firestore";
-  import { _ } from 'svelte-i18n';
-
-  //import { onMount, onDestroy } from 'svelte';
-  import Charlink from './Charlink.svelte';
-
-  export let location
-
-  //import { userStore } from './stores.js';
-
-  const currUser = auth().currentUser;
-  const uid = currUser ? currUser.uid : null;
-
-  let chars = [];
-
-  const db = firestore();
-  const dbChars = db.collection("characters");
-
-  const query = dbChars.where("user", "==", uid).orderBy('char_name')
+    import { auth, firestore } from "firebase/app";
+    import "firebase/firestore";
+    import { _ } from "svelte-i18n";
+	import { onDestroy } from 'svelte';
+    import { userStore } from "./stores.js";
+    import { userCharsStore } from "./storesFirebase.js";
     
-  const observer = query.onSnapshot(snapshot => {
-    console.log(`Received query snapshot of size ${snapshot.size}`);
 
-    chars = [];
+    import Tiles from "./ui/Tiles.svelte";
+    import Modal from "./ui/Modal.svelte";
 
-    if(snapshot.empty) {
-      console.log("No matching documents.");
-      return;
-    }
+    export let location;
 
-    let i=0;
-    snapshot.forEach(doc => {
+    const db = firestore();
+    const dbChars = db.collection("characters");
 
-      const data = doc.data();
-      console.log(data)
-      const charData = {
-        id: doc.id,
-        name: data.char_name,
-        avatar: data.avatar
-      };
+    let chars = [];
 
-      chars[i++] = charData;
+    const currUser = auth().currentUser;
+    const uid = currUser ? currUser.uid : null;
+
+    const unsubscribe = {};
+
+    unsubscribe.userCharsStore = userCharsStore.subscribe(value => {
+        chars = value.map(data => ({
+            id: data.id,
+            name: data.char_name,
+            avatar: data.avatar,
+            meta: data.char_concept,
+        }));
     });
 
-    console.log('CHARS', chars)
+    onDestroy(() => {
+        for(let key in unsubscribe) {
+            unsubscribe[key]();
+        }
+    });
 
+    let textPromptActive = false;
+    let newCharName = '';
 
-  }, err => {
-    console.log(`Encountered error: ${err}`);
-  });
-
-  function newCharPrompt() {
-    const name = window.prompt($_('input_char_name'))
-    if(!name) return;
-
-    const safeName = name.trim()
-    if(!safeName.length) {
-      alert($_('alert_empty_name'))
-      return
+    function openTextPrompt() {
+        textPromptActive = true;
     }
 
-    dbChars.add({
-      char_name: name,
-      user: uid
-    }).then(ref => {
-      console.log('Added document with ID: ', ref.id);
-    });
-  }
+    function closeTextPrompt() {
+        textPromptActive = false;
+    }
+    function confirmTextPrompt() {
+        
+        const safeName = newCharName.trim();
+        newCharName = '';
+
+        if (!safeName.length) {
+            alert($_("alert_empty_name"));
+            return;
+        }
+
+        dbChars
+            .add({
+                char_name: safeName,
+                user: uid,
+            })
+            .then((ref) => {
+                console.log("Added document with ID: ", ref.id);
+            });
+    }
+
 </script>
-<style>
 
-</style>
+<div class="section">
+    <div class="container">
+        <div class="level">
+            <h1 class="title">{$_("nav_my_characters")}</h1>
 
-<main class="content">
+            {#if $userStore.isSignedIn}
+                <div class="buttons">
+                    <button class="button is-primary" on:click={openTextPrompt}>
+                        <span class="icon is-small"><i class="fa fa-plus" /></span>
+                        <span>{$_("char_create")}</span></button
+                    >
+                </div>
+            {/if}
+        </div>
 
-  <div class="actions">
-    <button on:click={newCharPrompt}>➕ {$_('char_create')}</button>
-  </div>
+        <Tiles {chars} empty={$_("char_none")} />
+    </div>
+</div>
 
-  <div class="section">
-    <h1 class="h2">{$_('nav_my_characters')}</h1>
-
-    {#key chars}
-      {#if chars.length}
-        <ul class="itemlist">
-        {#each chars as char}
-          <li>
-            <Charlink id={char.id} name={char.name} avatar={char.avatar} />
-          </li>
-        {/each}
-        </ul>
-      {:else}
-        <p class="p">{$_('char_none')}</p>
-      {/if}
-    {/key}
-  </div>
-</main>
+{#if textPromptActive}
+    <Modal title={$_("char_create")} confirm={$_("create")} on:close={closeTextPrompt} on:confirm={confirmTextPrompt}>
+        <input class="input is-primary" type="text" placeholder={$_("char_name_placeholder")} bind:value={newCharName} autofocus />
+    </Modal>
+{/if}

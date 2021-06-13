@@ -209,3 +209,21 @@ button:focus {
 	color: rgba(42, 54, 44, 0.9);
 	padding: 1rem;
 }
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete {
+	color: inherit;
+	background: none;
+	border: none;
+    cursor: pointer;
+    padding: 0.4em;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+}
+.delete:hover {
+	background-color: rgba(255,0,0,0.2);
+}

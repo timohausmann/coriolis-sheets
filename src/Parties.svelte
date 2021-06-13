@@ -1,84 +1,93 @@
 <script>
-import { firestore } from "firebase/app";
-import 'firebase/firestore';
-import { Link } from "svelte-routing";
-import { _ } from 'svelte-i18n';
+    import { auth, firestore } from "firebase/app";
+    import "firebase/firestore";
+	import { onDestroy } from 'svelte';
+    import { Link } from "svelte-routing";
+    import { _ } from "svelte-i18n";
+    import Tiles from "./ui/Tiles.svelte";
+    import Modal from "./ui/Modal.svelte";
+    import { userPartiesStore } from "./storesFirebase.js";
 
-export let location
+    export let location;
 
-let parties = [];
+    let newPartyName = '';
+    let textPromptActive = false;
+    let parties = [];
 
-const db = firestore();
-const partiesRef = db.collection('parties');
+    const db = firestore();
+    const partiesRef = db.collection("parties");
 
-partiesRef
-  .orderBy('name')
-  .get()
-  .then(snapshot => {
-    if(snapshot.empty) {
-      console.log('No matching documents.');
-      return;
-    }  
+    const currUser = auth().currentUser;
+    const uid = currUser ? currUser.uid : null;
 
-    parties = [];
+    const unsubscribe = {};
 
-    snapshot.forEach(doc => {
-      //console.log(doc.id, '=>', doc.data());
-      parties.push({
-          id: doc.id,
-          ... doc.data()
-      })
+    unsubscribe.userPartiesStore = userPartiesStore.subscribe(value => {
+        parties = value.map(data => ({
+            id: data.id,
+            name: data.name
+        }));
     });
-  })
-  .catch(err => {
-    console.log('Error getting documents', err);
-  });
 
-  function newPartyPrompt() {
-    window.alert('This feature is not available yet.');
-    return;
-    const name = window.prompt($_('party_input_name'))
-    if(!name) return;
+    onDestroy(() => {
+        for(let key in unsubscribe) {
+            unsubscribe[key]();
+        }
+    });
 
-    const safeName = name.trim()
-    if(!safeName.length) {
-      alert($_('alert_empty_name'))
-      return
+    function confirmTextPrompt() {
+        
+        const safeName = newPartyName.trim();
+        newPartyName = '';
+        
+        if (!safeName.length) {
+            alert($_("alert_empty_name"));
+            return;
+        }
+
+        const newParty = {
+            name: safeName,
+            owner: uid,
+            members: [uid]
+        };
+
+        partiesRef.add(newParty).then((ref) => {
+            console.log("Added document with ID: ", ref.id);
+        });
+
     }
 
-    const newParty = {
-      name: name,
-      roles: {}
-    };
-    newParty[uid] = 'owner';
+    function openTextPrompt() {
+        textPromptActive = true;
+    }
 
-    partiesRef.add(newParty).then(ref => {
-      console.log('Added document with ID: ', ref.id);
-    });
-  }
-
+    function closeTextPrompt() {
+        textPromptActive = false;
+    }
 </script>
+
+<div class="section">
+    <div class="container">
+        <div class="level">
+            <h1 class="title">{$_("nav_my_parties")}</h1>
+
+            <div class="buttons">
+                <button class="button is-primary" on:click={openTextPrompt}>
+                    <span class="icon is-small"><i class="fa fa-plus" /></span>
+                    <span>{$_("party_create")}</span></button
+                >
+            </div>
+        </div>
+
+        <Tiles chars={parties} route="parties" empty={$_("party_none")} />
+    </div>
+</div>
+
+{#if textPromptActive}
+    <Modal title={$_("party_create")} confirm={$_("create")} on:close={closeTextPrompt} on:confirm={confirmTextPrompt}>
+        <input class="input is-primary" type="text" placeholder={$_("party_name_placeholder")} bind:value={newPartyName} autofocus />
+    </Modal>
+{/if}
+
 <style>
-
 </style>
-
-<main class="content">
-
-  <div class="actions">
-    <button on:click={newPartyPrompt}>➕ {$_('party_create')}</button>
-  </div>
-
-  <div class="section">
-    <h1 class="h2">{$_('nav_my_parties')}</h1>
-    <ul class="itemlist">
-        {#each parties as party}
-            <li>
-              <Link to="/parties/{party.id}">
-                <div class="avatar"></div>
-                {party.name}
-              </Link>
-            </li>
-        {/each}
-    </ul>
-  </div>
-</main>

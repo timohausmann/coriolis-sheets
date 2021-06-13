@@ -16,11 +16,22 @@
 <!--Route path="sheet" component="{Sheet}" /-->
 <Route path="characters" component="{Characters}" />
 <Route path="characters/:id" let:params>
-    <Sheet id={params.id} template="character" />
+    {#key params.id}
+        <Sheet id={params.id} template="character" />
+    {/key}
 </Route>
 <Route path="ships/:id" let:params>
-    <Sheet id={params.id} template="ship" />
+    {#key params.id}
+        <Sheet id={params.id} template="ship" />
+    {/key}
 </Route>
 <Route path="parties" component="{Parties}" />
-<Route path="parties/:id" component="{Party}" />
+<Route path="parties/:id" let:params>
+    {#key params.id}
+        <Party location={params.location} id={params.id} />
+    {/key}
+</Route>
+<Route path="parties/:id/invite" let:params>
+    <Party location={params.location} id={params.id} isInvite={true} />
+</Route>
 <Route path="/" component="{Splash}" />

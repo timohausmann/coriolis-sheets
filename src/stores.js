@@ -11,4 +11,10 @@ export const currCharStore = writable({
     readonly: true
 });
 
+export const activePartyId = writable('');
+
 export const unsavedChangesStore = writable(false);
+
+//@ŧodo env
+//export const hostUrl = 'https://coriolis-86cdc.web.app';
+export const hostUrl = 'http://localhost:5000';

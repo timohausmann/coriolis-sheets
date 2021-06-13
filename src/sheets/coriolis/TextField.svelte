@@ -29,7 +29,7 @@
 </script>
 
 <style>
-	.field {
+	.sheetField {
         position: relative;
         padding: 0.125rem;
         color: #111;
@@ -50,7 +50,7 @@
     }
 </style>
 
-<div class="field {className}">
+<div class="sheetField {className}">
     <label for={name}>{label}</label>
     <input id={name} type="text" name={name} value={currField_value} 
         readonly={readonly} on:change={onChange} on:keydown={onChange} />

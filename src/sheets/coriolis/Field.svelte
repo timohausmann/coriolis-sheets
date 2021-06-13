@@ -28,7 +28,7 @@
 </script>
 
 <style>
-	.field {
+	.sheetField {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -37,7 +37,7 @@
         padding: 0.25rem;
         margin: 0 0.25rem;
     }
-    .field:last-child {
+    .sheetField:last-child {
         border-bottom: none;
     }
     label {
@@ -51,7 +51,7 @@
     }
 </style>
 
-<div class="field">
+<div class="sheetField">
     <label for={name}>{label}</label>
     <input id={name} type="number" name={name} min="0" max={max} value={currField_value}
         readonly={readonly} on:change={onChange} on:keydown={onChange} />

@@ -5,7 +5,8 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public -s",
-    "start:dev": "sirv public --dev -s"
+    "start:dev": "sirv public --dev -s",
+    "indexes": "firebase firestore:indexes > ./firestore.indexes.json"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^12.0.0",
