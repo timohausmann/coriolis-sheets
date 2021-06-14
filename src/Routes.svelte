@@ -2,7 +2,6 @@
     import { Route } from "svelte-routing";
   
     import Login from './Login.svelte'
-    import Splash from './Splash.svelte' 
     import Parties from './Parties.svelte'
     import Party from './Party.svelte'
     import Characters from './Characters.svelte'
@@ -34,4 +33,4 @@
 <Route path="parties/:id/invite" let:params>
     <Party location={params.location} id={params.id} isInvite={true} />
 </Route>
-<Route path="/" component="{Splash}" />
+<Route path="/" component="{Login}" />

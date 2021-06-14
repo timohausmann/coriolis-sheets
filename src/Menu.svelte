@@ -119,15 +119,16 @@
                 {/if}
 
                 <div class="navbar-item">
-                    <div class="buttons">
-                        <div
-                            class="button is-light"
+                    
+                        <div title="Your Account"
+                            class="button is-rounded is-light"
                             on:click={handleNav}
                             data-href="/login/"
+                        ><span class="icon is-small"
+                            ><i class="fa fa-user" /></span
                         >
-                            {$_("nav_signout")}
                         </div>
-                    </div>
+                    
                 </div>
             {/if}
         </div>
