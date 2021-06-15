@@ -9,7 +9,7 @@
           "arrayConfig": "CONTAINS"
         },
         {
-          "fieldPath": "char_name",
+          "fieldPath": "name",
           "order": "ASCENDING"
         }
       ]
@@ -19,11 +19,11 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "user",
+          "fieldPath": "owner",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "char_name",
+          "fieldPath": "name",
           "order": "ASCENDING"
         }
       ]
@@ -51,7 +51,7 @@
           "arrayConfig": "CONTAINS"
         },
         {
-          "fieldPath": "char_name",
+          "fieldPath": "name",
           "order": "ASCENDING"
         }
       ]

@@ -63,7 +63,7 @@
             <h2>{$_('sheet_character')}</h2>
             <div class="row">
                 <div class="flex-2">
-                    <TextField label={$_('sheet_name')} name="char_name" />
+                    <TextField label={$_('sheet_name')} name="name" />
                     <TextField label={$_('sheet_concept')} name="char_concept" />
                     <div class="row">
                         <div class="flex-1">

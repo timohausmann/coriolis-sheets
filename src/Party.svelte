@@ -57,10 +57,10 @@
         //@todo make this into a component or sth
         const charsQuery = dbChars
             .where("char_parties", "array-contains", id)
-            .orderBy("char_name");
+            .orderBy("name");
         const shipsQuery = dbShips
             .where("char_parties", "array-contains", id)
-            .orderBy("char_name");
+            .orderBy("name");
 
         unsubscribe.charsQuery = charsQuery.onSnapshot(
             (snapshot) => {
@@ -77,7 +77,7 @@
                     const data = doc.data();
                     chars.push({
                         id: doc.id,
-                        name: data.char_name,
+                        name: data.name,
                         avatar: data.avatar,
                         meta: data.char_concept,
                     });
@@ -103,7 +103,7 @@
                     const data = doc.data();
                     ships.push({
                         id: doc.id,
-                        name: data.char_name,
+                        name: data.name,
                         avatar: "",
                         meta: data.shipyard,
                     });
@@ -119,7 +119,7 @@
         userChars = value;
 
         userCharsInParty = value.filter((el) => {
-            if (!el.char_parties?.length) return false;
+            if (!el.char_parties || el.char_parties.length === 0) return false;
             return el.char_parties.indexOf(id) !== -1;
         });
         userCharsInParty = userCharsInParty.map((el) => el.id);
@@ -152,7 +152,7 @@
                 char_parties.splice(partyInDatabase, 1);
             }
 
-            console.log(char.char_name, char_parties);
+            console.log(char.name, char_parties);
 
             dbChars.doc(char.id).update({ char_parties });
         }
@@ -299,7 +299,7 @@
                                     bind:group={userCharsInParty}
                                     value={char.id}
                                 />
-                                {char.char_name}
+                                {char.name}
                             </label>
                         </div>
                     {/each}

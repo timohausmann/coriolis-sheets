@@ -49,7 +49,7 @@
     <div class={'box note' + (hidden ? ' hidden' : '')}>
 
         <div class="block">
-        <span class="is-size-6"
+        <span
             >{$_("privacy_note")}
             <a target="_blank" href={`/privacy-${locale}.html`}>{$_('learn_more')}</a></span
         ></div>
@@ -66,8 +66,8 @@
                 </label>
             
                 <div class="buttons">
-                    <button class="button is-light" on:click={accept}>{$_('accept_selection')}</button>
-                    <button class="button is-info" on:click={acceptAll}>{$_('accept_all')}</button>
+                    <button class="button is-small is-light" on:click={accept}>{$_('accept_selection')}</button>
+                    <button class="button is-small is-info" on:click={acceptAll}>{$_('accept_all')}</button>
                 </div>
             
         </div>
@@ -87,9 +87,11 @@
         left: 50%;
         transform: translateX(-50%);
         transition: 0.4s;
+        margin-bottom: 0 !important;
+        font-size: 0.75rem !important;
     }
     .box.note {
-        width: 66%;
+        width: 50%;
     }
     .box.hidden {
         opacity: 0;

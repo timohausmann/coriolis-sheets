@@ -14,8 +14,8 @@ export const userCharsStore = readable([], function start(set) {
     function storeCharacters(uid) {
         const query = firestore()
             .collection("characters")
-            .where("user", "==", uid)
-            .orderBy("char_name");
+            .where("owner", "==", uid)
+            .orderBy("name");
 
         let userChars = [];
 

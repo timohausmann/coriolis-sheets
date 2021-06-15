@@ -25,7 +25,7 @@
     unsubscribe.userCharsStore = userCharsStore.subscribe(value => {
         chars = value.map(data => ({
             id: data.id,
-            name: data.char_name,
+            name: data.name,
             avatar: data.avatar,
             meta: data.char_concept,
         }));
@@ -59,8 +59,8 @@
 
         dbChars
             .add({
-                char_name: safeName,
-                user: uid,
+                name: safeName,
+                owner: uid,
             })
             .then((ref) => {
                 console.log("Added document with ID: ", ref.id);
@@ -96,6 +96,6 @@
 
 {#if textPromptActive}
     <Modal title={$_("char_create")} confirm={$_("create")} on:close={closeTextPrompt} on:confirm={confirmTextPrompt}>
-        <input class="input is-primary" type="text" placeholder={$_("char_name_placeholder")} bind:value={newCharName} autofocus />
+        <input class="input is-primary" type="text" placeholder={$_("name_placeholder")} bind:value={newCharName} autofocus />
     </Modal>
 {/if}

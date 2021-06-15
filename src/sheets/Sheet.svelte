@@ -60,7 +60,7 @@
                 noData = false;
                 charData = snapshot.data();
                 charData.id = id;
-                charData.readonly = charData.user !== userId;
+                charData.readonly = charData.owner !== userId;
 
                 currCharStore.set(charData);
             },
@@ -78,7 +78,7 @@
 
         const formData = new FormData(form);
         const sheetData = {
-            user: uid,
+            owner: uid,
         };
         let avatarBlobUrl = null;
 
@@ -100,7 +100,7 @@
             }
         });
 
-        if (!sheetData.char_name || !sheetData.char_name.trim().length) {
+        if (!sheetData.name || !sheetData.name.trim().length) {
             alert($_("alert_empty_name"));
             return;
         }
@@ -141,7 +141,7 @@
         if (
             window.confirm(
                 $_("char_delete_confirm", {
-                    values: { name: charData.char_name },
+                    values: { name: charData.name },
                 })
             )
         ) {
@@ -181,8 +181,8 @@
     <div class="section section--intro has-background-white">
         <div class="container">
             <div class="level">
-                <h1 class="title">{charData.char_name}</h1>
-                {#if charData.user === userId}
+                <h1 class="title">{charData.name}</h1>
+                {#if charData.owner === userId}
                     <div class="buttons">
                         <button
                             class="button is-primary"

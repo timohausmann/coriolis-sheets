@@ -27,7 +27,7 @@
     <div class="column">
       <p>
           Coriolis is a science fiction role playing game by <a href="https://freeleaguepublishing.com/en/games/coriolis-2/">Fria Ligan</a>. 
-          This website is a fan project and not affiliated with Fria Ligan or Coriolis in any professional capacity.
+          This website is a fan project and not affiliated with Fria Ligan or Coriolis in any capacity.
         </p>
   </div>
 

@@ -26,7 +26,7 @@
 
 <div class={dropdownClass}>
     <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls={randomId}>
+        <button class="button" type="button" aria-haspopup="true" aria-controls={randomId}>
             {#if label}
                 <span>{label}</span>
                 <span class="icon is-small">

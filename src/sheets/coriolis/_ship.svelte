@@ -33,7 +33,7 @@
     <div class="flex-2 flex-gutter">
         <section>
             <h2>Schiff</h2>
-            <TextField label="Name" name="char_name" />
+            <TextField label="Name" name="name" />
             <div class="row">
                 <div class="flex-1">
                     <TextField label="Klasse & Typ" name="class_type" />

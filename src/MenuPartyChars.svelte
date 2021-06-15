@@ -18,7 +18,7 @@
 
         const charsQuery = dbChars
             .where("char_parties", "array-contains", value)
-            .orderBy("char_name");
+            .orderBy("name");
 
         charsQuery.onSnapshot((snapshot) => {
             chars = [];
@@ -27,7 +27,7 @@
             snapshot.forEach((doc) => {
                 chars[i++] = {
                     id: doc.id,
-                    char_name: doc.data().char_name,
+                    name: doc.data().name,
                 };
             });
         });
@@ -41,7 +41,7 @@
 
     /*
     charactersRef
-    .orderBy('char_name')
+    .orderBy('name')
     .onSnapshot(snapshot => {
 
         chars = []
@@ -55,7 +55,7 @@
         snapshot.forEach((doc) => {
             chars[i++] = {
                 id: doc.id,
-                char_name: doc.data().char_name
+                name: doc.data().name
             };
         });
 
@@ -76,7 +76,7 @@
                     on:click={handleNav}
                     data-href="/characters/{char.id}"
                 >
-                    {char.char_name}
+                    {char.name}
                 </div>
             {/each}
         </div>

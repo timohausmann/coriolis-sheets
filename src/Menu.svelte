@@ -1,7 +1,7 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { navigate, link } from "svelte-routing";
-    import { userStore, unsavedChangesStore, activePartyId } from "./stores.js";
+    import { navigate } from "svelte-routing";
+    import { userStore, unsavedChangesStore } from "./stores.js";
     import { userCharsStore, userPartiesStore } from "./storesFirebase.js";
     import MenuPartyChars from "./MenuPartyChars.svelte";
     import MenuActiveParty from "./MenuActiveParty.svelte";
@@ -29,13 +29,11 @@
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <a href="#" class="navbar-item">
-            <img
-                src="../coriolis-header.png"
+            <img class="navbar-item"
+                src="../coriolis-header.png" alt="Coriolis Character Sheets"
                 width="112"
                 height="28"
             />
-        </a>
 
         <a
             href="#"
@@ -54,46 +52,59 @@
     <div class={"navbar-menu" + (active ? " is-active" : "")}>
         <div class="navbar-start">
             {#if $userStore.isSignedIn}
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <div
-                        class="navbar-link"
-                        on:click={handleNav}
-                        data-href="/characters/"
-                    >
+
+                {#if $userPartiesStore.length}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <div
+                            class="navbar-link"
+                            on:click={handleNav}
+                            data-href="/characters/"
+                        >
+                            {$_("nav_my_characters")}
+                        </div>
+                        <div class="navbar-dropdown">
+                            {#each $userCharsStore as char}
+                                <div
+                                    class="navbar-item"
+                                    on:click={handleNav}
+                                    data-href="/characters/{char.id}"
+                                >
+                                    {char.name}
+                                </div>
+                            {/each}
+                        </div>
+                    </div>
+                {:else}
+                    <div class="navbar-item" on:click={handleNav} data-href="/characters/">
                         {$_("nav_my_characters")}
                     </div>
-                    <div class="navbar-dropdown">
-                        {#each $userCharsStore as char}
-                            <div
-                                class="navbar-item"
-                                on:click={handleNav}
-                                data-href="/characters/{char.id}"
-                            >
-                                {char.char_name}
-                            </div>
-                        {/each}
+                {/if}
+                {#if $userPartiesStore.length}
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <div
+                            class="navbar-link"
+                            on:click={handleNav}
+                            data-href="/parties/"
+                        >
+                            {$_("nav_my_parties")}
+                        </div>
+                        <div class="navbar-dropdown">
+                            {#each $userPartiesStore as party}
+                                <div
+                                    class="navbar-item"
+                                    on:click={handleNav}
+                                    data-href="/parties/{party.id}"
+                                >
+                                    {party.name}
+                                </div>
+                            {/each}
+                        </div>
                     </div>
-                </div>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <div
-                        class="navbar-link"
-                        on:click={handleNav}
-                        data-href="/parties/"
-                    >
+                {:else}
+                    <div class="navbar-item" on:click={handleNav} data-href="/parties/">
                         {$_("nav_my_parties")}
                     </div>
-                    <div class="navbar-dropdown">
-                        {#each $userPartiesStore as party}
-                            <div
-                                class="navbar-item"
-                                on:click={handleNav}
-                                data-href="/parties/{party.id}"
-                            >
-                                {party.name}
-                            </div>
-                        {/each}
-                    </div>
-                </div>
+                {/if}
 
                 <MenuPartyChars {handleNav} />
             {:else}{/if}
@@ -119,12 +130,12 @@
                 {/if}
 
                 <div class="navbar-item">
-                    
+                        <!-- click on icon isn't registred without p-e: none -->
                         <div title="Your Account"
                             class="button is-rounded is-light"
                             on:click={handleNav}
                             data-href="/login/"
-                        ><span class="icon is-small"
+                        ><span class="icon is-small" style="pointer-events: none;"
                             ><i class="fa fa-user" /></span
                         >
                         </div>
