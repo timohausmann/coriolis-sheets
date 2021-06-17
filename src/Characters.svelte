@@ -4,7 +4,7 @@
     import { _ } from "svelte-i18n";
 	import { onDestroy } from 'svelte';
     import { userStore } from "./stores.js";
-    import { userCharsStore } from "./storesFirebase.js";
+    import userCharsStore from "./stores/userCharsStore.js";
     
 
     import Tiles from "./ui/Tiles.svelte";

@@ -6,7 +6,7 @@
     import { _ } from "svelte-i18n";
     import Tiles from "./ui/Tiles.svelte";
     import Modal from "./ui/Modal.svelte";
-    import { userPartiesStore } from "./storesFirebase.js";
+    import userPartiesStore from "./stores/userPartiesStore.js";
 
     export let location;
 
@@ -15,6 +15,7 @@
     let parties = [];
 
     const db = firestore();
+    const usersRef = db.collection("users");
     const partiesRef = db.collection("parties");
 
     const currUser = auth().currentUser;
@@ -47,12 +48,19 @@
 
         const newParty = {
             name: safeName,
-            owner: uid,
-            members: [uid]
+            owner: uid
         };
 
         partiesRef.add(newParty).then((ref) => {
             console.log("Added document with ID: ", ref.id);
+
+            //add new party id to user
+            const userPartyIds = parties.map(p => p.id);
+            userPartyIds.push(ref.id);
+
+            usersRef.doc(uid).update({
+                parties: userPartyIds
+            });
         });
 
     }

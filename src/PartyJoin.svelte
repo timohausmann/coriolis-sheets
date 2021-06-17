@@ -1,39 +1,47 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { auth } from "firebase/app";
+    import { auth, firestore } from "firebase/app";
+    import { onDestroy } from "svelte";
     import { navigate } from "svelte-routing";
     import { hostUrl } from "./stores";
+    import userPartiesStore from "./stores/userPartiesStore.js";
 
-    export let queryDoc;
+    export let id;
+    export let partyName;
+
+    const db = firestore();
+    const usersRef = db.collection("users");
 
     const currUser = auth().currentUser;
     const uid = currUser ? currUser.uid : null;
 
-    let name = '';
-    let members = [];
+    const unsubscribe = {};
 
-    const unsubscribe = queryDoc.onSnapshot((snapshot) => {
-        if (!snapshot.exists) {
-            console.log("No matching documents.");
-            return;
-        }
-
-        const data = snapshot.data();
-        name = data.name;
-        members = data.members;
+    let userPartiesIds = [];
+    unsubscribe.userPartiesStore = userPartiesStore.subscribe((value) => {
+        userPartiesIds = value.map(p => p.id);
     });
 
-    function acceptInvite() {
-        if(!uid) return;
-
-        if(members.indexOf(uid) === -1) {
-            members.push(uid);
-            queryDoc
-                .update({members})
-                .then(() => {
-                    navigate(`${hostUrl}/parties/${queryDoc.id}/`);
-                })
+    onDestroy(() => {
+        for (let key in unsubscribe) {
+            unsubscribe[key]();
         }
+    });
+
+    let name = '';
+
+    function acceptInvite() {
+
+        const i = userPartiesIds.indexOf(id);
+        if(i !== -1) return;
+
+        userPartiesIds.push(id);
+
+        usersRef.doc(uid)
+            .update({parties: userPartiesIds})
+            .then(() => {
+                navigate(`${hostUrl}/parties/${id}/`);
+            });
     }
 </script>
 
@@ -41,7 +49,7 @@
     <div class="level">
         <p class="has-text-white">
             <strong class="has-text-white">{$_("invitation")}</strong><br />
-            {$_("party_invitation", { values: { partyName: name } })}
+            {$_("party_invitation", { values: { partyName } })}
         </p>
 
         <button class="button is-white" on:click={acceptInvite}>

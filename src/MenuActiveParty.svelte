@@ -1,6 +1,6 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { userPartiesStore } from "./storesFirebase.js";
+    import userPartiesStore from "./stores/userPartiesStore.js";
     import { activePartyId } from "./stores.js";
     import Dropdown from "./ui/Dropdown.svelte";
     import "firebase/firestore";

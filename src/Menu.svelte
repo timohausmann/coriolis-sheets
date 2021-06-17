@@ -1,8 +1,9 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { navigate } from "svelte-routing";
+    import { Link, navigate } from "svelte-routing";
     import { userStore, unsavedChangesStore } from "./stores.js";
-    import { userCharsStore, userPartiesStore } from "./storesFirebase.js";
+    import userCharsStore from "./stores/userCharsStore.js";
+    import userPartiesStore from "./stores/userPartiesStore.js";
     import MenuPartyChars from "./MenuPartyChars.svelte";
     import MenuActiveParty from "./MenuActiveParty.svelte";
 
@@ -29,11 +30,9 @@
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-            <img class="navbar-item"
-                src="../coriolis-header.png" alt="Coriolis Character Sheets"
-                width="112"
-                height="28"
-            />
+        <Link getProps={() => ({class: "navbar-item"})} to="/">
+            <strong>Coriolis Character Sheets</strong>
+        </Link>
 
         <a
             href="#"

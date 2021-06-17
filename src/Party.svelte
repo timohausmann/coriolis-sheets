@@ -4,7 +4,8 @@
     import "firebase/firestore";
     import { navigate } from "svelte-routing";
     import { onDestroy } from "svelte";
-    import { userCharsStore } from "./storesFirebase.js";
+    import userCharsStore from "./stores/userCharsStore.js";
+    import userPartiesStore from "./stores/userPartiesStore.js";
     import Tiles from "./ui/Tiles.svelte";
     import Modal from "./ui/Modal.svelte";
     import Dropdown from "./ui/Dropdown.svelte";
@@ -31,6 +32,7 @@
     let charPromptActive = false;
 
     let userChars = [];
+    let userParties = [];
     let userCharsInParty = [];
     let chars = [];
     let ships = [];
@@ -52,8 +54,7 @@
         partyName = data.name;
 
         isOwner = data.owner === uid;
-        isMember = data.members.indexOf(uid) !== -1;
-
+        
         //@todo make this into a component or sth
         const charsQuery = dbChars
             .where("char_parties", "array-contains", id)
@@ -125,6 +126,13 @@
         userCharsInParty = userCharsInParty.map((el) => el.id);
     });
 
+    unsubscribe.userPartiesStore = userPartiesStore.subscribe((value) => {
+        userParties = value;
+
+        const userPartiesIds = userParties.map(p => p.id);
+        isMember = userPartiesIds.indexOf(id) !== -1;
+    });
+
     onDestroy(() => {
         for (let key in unsubscribe) {
             unsubscribe[key]();
@@ -168,6 +176,8 @@
     function confirmDangerPrompt() {
         queryDoc.delete();
         navigate("/parties");
+
+        //@todo remove this party from all users
     }
 
     function openTextPrompt() {
@@ -222,7 +232,7 @@
     <div class="container">
 
         {#if !isMember && isInvite}
-            <PartyJoin {queryDoc} />
+            <PartyJoin {id} {partyName} />
         {/if}
 
         <div class="level">
@@ -272,7 +282,7 @@
 
             <hr class="has-background-grey-lighter" />
 
-            <PartyLeave {queryDoc} />
+            <PartyLeave {id} />
         {/if}
     </div>
 </div>

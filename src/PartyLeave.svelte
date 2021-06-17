@@ -1,41 +1,46 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { auth } from "firebase/app";
+    import { auth, firestore } from "firebase/app";
+    import { onDestroy } from "svelte";
     import { navigate } from "svelte-routing";
     import { hostUrl } from "./stores";
+    import userPartiesStore from "./stores/userPartiesStore.js";
 
-    export let queryDoc;
+    export let id;
+
+    const db = firestore();
+    const usersRef = db.collection("users");
 
     const currUser = auth().currentUser;
     const uid = currUser ? currUser.uid : null;
 
-    
+    const unsubscribe = {};
 
-    let members = [];
+    let userPartiesIds = [];
+    unsubscribe.userPartiesStore = userPartiesStore.subscribe((value) => {
+        userPartiesIds = value.map(p => p.id);
+    });
 
-    const unsubscribe = queryDoc.onSnapshot((snapshot) => {
-        if (!snapshot.exists) {
-            console.log("No matching documents.");
-            return;
+    onDestroy(() => {
+        for (let key in unsubscribe) {
+            unsubscribe[key]();
         }
-
-        const data = snapshot.data();
-        members = data.members;
     });
 
     function leave() {
-        if(!uid) return;
 
-        const i = members.indexOf(uid);
+        const i = userPartiesIds.indexOf(id);
         if(i === -1) return;
 
-        members.splice(i, 1);
-        queryDoc
-            .update({members})
+        userPartiesIds.splice(i, 1);
+
+        usersRef.doc(uid)
+            .update({parties: userPartiesIds})
             .then(() => {
-                navigate(`${hostUrl}/parties/${queryDoc.id}/invite/`);
+                navigate(`${hostUrl}/parties/${id}/invite/`);
             });
 
+        //@todo remove all characters of this user from the party
     }
 </script>
 
