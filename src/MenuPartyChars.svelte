@@ -38,33 +38,9 @@
             unsubscribe[key]();
         }
     });
-
-    /*
-    charactersRef
-    .orderBy('name')
-    .onSnapshot(snapshot => {
-
-        chars = []
-
-        if(snapshot.empty) {
-            console.log("No matching documents.");
-            return;
-        }
-
-        let i = 0;
-        snapshot.forEach((doc) => {
-            chars[i++] = {
-                id: doc.id,
-                name: doc.data().name
-            };
-        });
-
-    }, err => {
-        console.log(`Encountered error: ${err}`);
-    });*/
 </script>
 
-{#if $activePartyId}
+{#if $activePartyId && chars.length}
     <div class="navbar-item has-dropdown is-hoverable">
         <div href="#" class="navbar-link" on:click={handleNav}
                     data-href={`/parties/${$activePartyId}`}>{$_("nav_party_chars")}</div>
