@@ -24,13 +24,18 @@ const userPartiesStore = readable([], function start(set) {
 
         return usersRef.doc(uid).onSnapshot(userSnapshot => {
 
-            const partyIds = userSnapshot.data().parties;
+            //possibly user has no doc / parties yet
+            const data = userSnapshot.data();
+            if (!data || !data.parties || data.parties.length === 0) {
+                set([]);
+                return;
+            }
 
             userParties = [];
             if (typeof unsubscribePartyIDs === 'function') unsubscribePartyIDs();
 
             unsubscribePartyIDs = partiesRef
-                .where(firestore.FieldPath.documentId(), 'in', partyIds)
+                .where(firestore.FieldPath.documentId(), 'in', data.parties)
                 //.orderBy("name") //throws an error
                 .onSnapshot(partiesSnapshot => {
 

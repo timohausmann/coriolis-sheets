@@ -2,7 +2,7 @@
   import { _ } from "svelte-i18n";
   import { getLocaleFromNavigator } from "svelte-i18n";
 
-  const locale = getLocaleFromNavigator();
+  let locale = getLocaleFromNavigator();
   if (["de", "en"].indexOf(locale) === -1) locale = "en";
 
   const currentYear = new Date().getFullYear();
@@ -20,7 +20,7 @@
         </div>
 
         <div class="block">
-            &copy; Coriolis Character Sheets 2020 – {currentYear}
+            &copy; Coriolis Sheets 2020&mdash;{currentYear}
         </div>
       
   </div>

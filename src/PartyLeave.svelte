@@ -38,7 +38,10 @@
             .update({parties: userPartiesIds})
             .then(() => {
                 navigate(`${hostUrl}/parties/${id}/invite/`);
-            });
+            })
+            .catch(err => {
+                console.log('Error while leaving party', err);
+            })
 
         //@todo remove all characters of this user from the party
     }

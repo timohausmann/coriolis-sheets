@@ -6,6 +6,7 @@
     import { onDestroy } from "svelte";
     import userCharsStore from "./stores/userCharsStore.js";
     import userPartiesStore from "./stores/userPartiesStore.js";
+    import { userStore } from "./stores.js";
     import Tiles from "./ui/Tiles.svelte";
     import Modal from "./ui/Modal.svelte";
     import Dropdown from "./ui/Dropdown.svelte";
@@ -160,8 +161,6 @@
                 char_parties.splice(partyInDatabase, 1);
             }
 
-            console.log(char.name, char_parties);
-
             dbChars.doc(char.id).update({ char_parties });
         }
     }
@@ -231,7 +230,8 @@
 <div class="section">
     <div class="container">
 
-        {#if !isMember && isInvite}
+        <!-- @todo if user is not logged in: short PartyJoin with a sign up note  -->
+        {#if $userStore.isSignedIn && !isMember && isInvite}
             <PartyJoin {id} {partyName} />
         {/if}
 

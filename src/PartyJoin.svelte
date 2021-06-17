@@ -37,11 +37,17 @@
 
         userPartiesIds.push(id);
 
+        //we cannot be sure that every user has a user doc right now, so use set
         usersRef.doc(uid)
-            .update({parties: userPartiesIds})
+            .set({
+                parties: userPartiesIds
+            }, { merge: true })
             .then(() => {
                 navigate(`${hostUrl}/parties/${id}/`);
-            });
+            })
+            .catch(err => {
+                console.log('Error while joining party', err);
+            })
     }
 </script>
 

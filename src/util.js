@@ -20,5 +20,5 @@ export function formatString(str, data) {
 };
 
 
-console.log(formatString('hallo {0} {1}', ['a', 'b']));
-console.log(formatString('hallo {a} {b}', {'a': 'x', 'b': 'y'}));
+//console.log(formatString('hallo {0} {1}', ['a', 'b']));
+//console.log(formatString('hallo {a} {b}', {'a': 'x', 'b': 'y'}));

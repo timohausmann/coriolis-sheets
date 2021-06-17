@@ -4,7 +4,7 @@
     import { getLocaleFromNavigator } from 'svelte-i18n';
     import "firebase/analytics";
 
-    const locale = getLocaleFromNavigator();
+    let locale = getLocaleFromNavigator();
     if(['de', 'en'].indexOf(locale) === -1) locale = 'en';
 
     const gaOptout = localStorage.getItem('gaOptout') !== null;
@@ -91,7 +91,8 @@
         font-size: 0.75rem !important;
     }
     .box.note {
-        width: 50%;
+        width: 95%;
+        max-width: 640px;
     }
     .box.hidden {
         opacity: 0;

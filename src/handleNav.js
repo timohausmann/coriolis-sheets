@@ -9,8 +9,6 @@ function handleNav(e) {
     //close nav layer
     document.querySelector('#nav_toggle').checked = false
 
-    console.log(unsavedChangesStore);
-    //@TODO understand $ ...
     if($unsavedChangesStore) {
         const msg = $_('confirm_unsaved_changes')
         const choice = window.confirm(msg)

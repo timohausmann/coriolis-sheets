@@ -31,7 +31,7 @@
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <Link getProps={() => ({class: "navbar-item"})} to="/">
-            <strong>Coriolis Character Sheets</strong>
+            <strong>Coriolis Sheets</strong>
         </Link>
 
         <a
@@ -52,7 +52,7 @@
         <div class="navbar-start">
             {#if $userStore.isSignedIn}
 
-                {#if $userPartiesStore.length}
+                {#if $userCharsStore.length}
                     <div class="navbar-item has-dropdown is-hoverable">
                         <div
                             class="navbar-link"
