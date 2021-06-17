@@ -84,4 +84,12 @@
 {/if}
 
 <style>
+    /* @todo make these <a> */
+    div.navbar-item {
+        cursor: pointer;
+    }
+    div.navbar-item:hover {
+        background-color: #fafafa;
+        color: #3273dc;
+    }
 </style>
