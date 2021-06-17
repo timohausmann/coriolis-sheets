@@ -3,3 +3,5 @@ node_modules
 
 *.serviceAccountKey.json
 *.json
+!package.json
+!package-lock.json
