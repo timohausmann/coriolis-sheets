@@ -1,12 +1,10 @@
 <script>
     import { _ } from "svelte-i18n";
-    import { hostUrl } from "./stores";
-
     export let id;
 
     let input;
 
-    const inviteUrl = `${hostUrl}/parties/${id}/invite/`;
+    const inviteUrl = `${location.origin}/parties/${id}/invite/`;
 
     function copy() {
         input.select();

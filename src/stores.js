@@ -14,8 +14,3 @@ export const currCharStore = writable({
 export const activePartyId = writable('');
 
 export const unsavedChangesStore = writable(false);
-
-//@todo env
-export const hostUrl = 'https://coriolis-sheets.web.app';
-//export const hostUrl = 'https://coriolis-86cdc.web.app';
-//export const hostUrl = 'http://localhost:5000';

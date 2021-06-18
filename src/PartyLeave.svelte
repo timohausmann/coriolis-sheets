@@ -3,7 +3,6 @@
     import { auth, firestore } from "firebase/app";
     import { onDestroy } from "svelte";
     import { navigate } from "svelte-routing";
-    import { hostUrl } from "./stores";
     import userPartiesStore from "./stores/userPartiesStore.js";
 
     export let id;
@@ -37,7 +36,7 @@
         usersRef.doc(uid)
             .update({parties: userPartiesIds})
             .then(() => {
-                navigate(`${hostUrl}/parties/${id}/invite/`);
+                navigate(`${location.origin}/parties/${id}/invite/`);
             })
             .catch(err => {
                 console.log('Error while leaving party', err);

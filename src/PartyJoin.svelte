@@ -3,7 +3,6 @@
     import { auth, firestore } from "firebase/app";
     import { onDestroy } from "svelte";
     import { navigate } from "svelte-routing";
-    import { hostUrl } from "./stores";
     import userPartiesStore from "./stores/userPartiesStore.js";
 
     export let id;
@@ -43,7 +42,7 @@
                 parties: userPartiesIds
             }, { merge: true })
             .then(() => {
-                navigate(`${hostUrl}/parties/${id}/`);
+                navigate(`${location.origin}/parties/${id}/`);
             })
             .catch(err => {
                 console.log('Error while joining party', err);
