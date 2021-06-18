@@ -17,6 +17,7 @@
         <div class="block is-size-6" style="display: flex;">
             <a class="tinynav" target="_blank" href={`/privacy-${locale}.html`}>{$_("nav_privacy")}</a> 
             <a class="tinynav" target="_blank" href={`/imprint.html`}>{$_("nav_imprint")}</a>
+            <a class="tinynav" target="_blank" href={`https://paypal.me/thausmann/5`}>{$_("nav_donate")}</a>
         </div>
 
         <div class="block">
