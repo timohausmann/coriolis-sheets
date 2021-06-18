@@ -117,10 +117,12 @@
             {#if !$userStore.isSignedIn}
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a href="#" class="button is-primary">
+                        <Link getProps={() => ({class: "button is-primary"})} to="/">
                             <strong>Sign up</strong>
-                        </a>
-                        <a href="#" class="button is-light"> Log in </a>
+                        </Link>
+                        <Link getProps={() => ({class: "button is-light"})} to="/">
+                            Log in
+                        </Link>
                     </div>
                 </div>
             {:else}

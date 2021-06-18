@@ -96,6 +96,6 @@
 
 {#if textPromptActive}
     <Modal title={$_("char_create")} confirm={$_("create")} on:close={closeTextPrompt} on:confirm={confirmTextPrompt}>
-        <input class="input is-primary" type="text" placeholder={$_("name_placeholder")} bind:value={newCharName} autofocus />
+        <input class="input is-primary" type="text" placeholder={$_("char_name_placeholder")} bind:value={newCharName} autofocus />
     </Modal>
 {/if}

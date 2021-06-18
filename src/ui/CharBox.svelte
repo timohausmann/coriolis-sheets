@@ -21,8 +21,7 @@
     {#if avatarUrl}
     <article class="media">
         <div class="media-left">
-            <figure class="image is-96x96">
-                <img src={avatarUrl} alt={`Image of ${char.name}`} />
+            <figure class="image is-96x96" style={`background-image: url(${avatarUrl})`}>
             </figure>
         </div>
         <div class="media-content">
@@ -44,4 +43,9 @@
 </div>
 
 <style>
+    .image {
+        background: center no-repeat;
+        background-size: cover;
+        border-radius: 0.25rem;
+    }
 </style>

@@ -70,16 +70,13 @@ function createSignInForm() {
 </script>
 <style>
     .section {
-        min-height: 100%;
-        display: flex;
-        align-items: center;
+        margin: auto;
     }
 
     .hidden {
         display: none;
     }
 </style>
-
 
 
 <div class="section">
