@@ -13,7 +13,7 @@ body {
 	padding: 1.5rem;
 }
 
-.section--intro h1 {
+.section--intro .level h1 {
 	margin-bottom: 0 !important;
 }
 

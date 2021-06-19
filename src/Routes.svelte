@@ -7,6 +7,7 @@
     import Characters from './Characters.svelte';
     import Sheet from './sheets/Sheet.svelte';
     import Landing from './Landing.svelte';
+    import Page from './Page.svelte';
 
     //scroll to top on change
     //https://github.com/EmilTholin/svelte-routing/issues/132
@@ -43,3 +44,8 @@
     <Party location={params.location} id={params.id} isInvite={true} />
 </Route>
 <Route path="/" component={Landing} />
+<Route let:params>
+    <Page title="404" subtitle={window.location}>
+        <p>The requested route could not be found.</p>
+    </Page>
+</Route>

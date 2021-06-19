@@ -13,6 +13,6 @@ register('en', () => {
 });
 
 init({
-    fallbackLocale: 'de',
+    fallbackLocale: 'en',
     initialLocale: getLocaleFromNavigator(),
 });
