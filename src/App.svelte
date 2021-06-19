@@ -4,7 +4,7 @@
     import { isLoading } from "svelte-i18n";
 
     import Routes from "./Routes.svelte";
-    import Menu from "./Menu.svelte";
+    import Menu from "./menu/Menu.svelte";
     import Analytics from './Analytics.svelte';
     import Footer from './Footer.svelte';
 

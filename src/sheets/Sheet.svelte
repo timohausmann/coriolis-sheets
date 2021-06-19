@@ -2,7 +2,7 @@
     import { auth, storage, firestore } from 'firebase/app';
     import 'firebase/firestore';
     import 'firebase/storage';
-    import { onMount, onDestroy } from 'svelte';
+    import { onDestroy } from 'svelte';
     import { Link, navigate } from 'svelte-routing';
     import { _ } from 'svelte-i18n';
 
@@ -42,10 +42,6 @@
 
     const db = firestore();
     const dbSheet = db.collection(currentSheet.db);
-
-    onMount(() => {
-        window.scrollTo(0, 0);
-    });
 
     //mark id as reactive
     //@todo this is doubled in Router (#key), find best way

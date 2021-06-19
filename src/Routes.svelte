@@ -8,8 +8,14 @@
     import Sheet from './sheets/Sheet.svelte';
     import Landing from './Landing.svelte';
 
-    //import CoriolisCharSheet from './sheets/coriolis/_char.svelte';
-    //import CoriolisShipSheet from './sheets/coriolis/_ship.svelte';
+    //scroll to top on change
+    //https://github.com/EmilTholin/svelte-routing/issues/132
+    history.pushState = new Proxy(history.pushState, {
+        apply(target, thisArg, argumentsList) {
+            scrollTo(0, 0);
+            Reflect.apply(target, thisArg, argumentsList);
+        },
+    });
 </script>
 
 <Route path="login" component={Login} />

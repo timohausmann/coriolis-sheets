@@ -1,13 +1,12 @@
 <script>
     import { _ } from "svelte-i18n";
     import { onDestroy } from "svelte";
-    import { activePartyId } from "./stores.js";
+    import { activePartyId } from "../stores.js";
     import { firestore } from "firebase/app";
     import "firebase/firestore";
+    import MenuDropdown from './MenuDropdown.svelte';
 
     const db = firestore();
-
-    export let handleNav;
 
     let chars = [];
     const dbChars = db.collection("characters");
@@ -41,31 +40,11 @@
 </script>
 
 {#if $activePartyId && chars.length}
-    <div class="navbar-item has-dropdown is-hoverable">
-        <div href="#" class="navbar-link" on:click={handleNav}
-                    data-href={`/parties/${$activePartyId}`}>{$_("nav_party_chars")}</div>
-
-        <div class="navbar-dropdown">
-            {#each chars as char}
-                <div
-                    class="navbar-item"
-                    on:click={handleNav}
-                    data-href="/characters/{char.id}"
-                >
-                    {char.name}
-                </div>
-            {/each}
-        </div>
-    </div>
+    <MenuDropdown 
+        to={`/parties/${$activePartyId}`}
+        label={$_('nav_party_chars')}
+        items={chars.map(item => ({
+            to: `/characters/${item.id}`,
+            label: item.name,
+        }))} />
 {/if}
-
-<style>
-    /* @todo make these <a> */
-    div.navbar-item {
-        cursor: pointer;
-    }
-    div.navbar-item:hover {
-        background-color: #fafafa;
-        color: #3273dc;
-    }
-</style>

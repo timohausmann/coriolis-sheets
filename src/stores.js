@@ -14,3 +14,5 @@ export const currCharStore = writable({
 export const activePartyId = writable('');
 
 export const unsavedChangesStore = writable(false);
+
+export const mainMenuOpen = writable(false);

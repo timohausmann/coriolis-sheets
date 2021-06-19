@@ -43,9 +43,8 @@
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Fria Ligan
-                </a>
-                . This website is a fan project and not affiliated with Fria Ligan
+                    Fria Ligan</a>. 
+                This website is a fan project and not affiliated with Fria Ligan
                 or Coriolis in any capacity.
             </p>
         </div>
@@ -85,7 +84,7 @@
             border-right: 1px solid rgba(0, 0, 0, 0.1);
 
             &:last-child {
-                border-bottom: none;
+                border-right: none;
             }
         }
     }

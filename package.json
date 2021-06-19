@@ -19,12 +19,12 @@
     "sass": "^1.29.0",
     "svelte": "^3.30.0",
     "svelte-i18n": "^3.3.0",
-    "svelte-preprocess": "^3.9.12"
+    "svelte-preprocess": "^3.9.12",
+    "svelte-routing": "^1.6.0"
   },
   "dependencies": {
     "firebase": "^7.24.0",
     "firebaseui": "^4.7.1",
-    "sirv-cli": "^0.4.4",
-    "svelte-routing": "^1.4.2"
+    "sirv-cli": "^0.4.4"
   }
 }

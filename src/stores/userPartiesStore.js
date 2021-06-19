@@ -24,8 +24,11 @@ const userPartiesStore = readable([], function start(set) {
 
         return usersRef.doc(uid).onSnapshot(userSnapshot => {
 
-            //possibly user has no doc / parties yet
             const data = userSnapshot.data();
+
+            //console.log('userSnapshot', data);
+
+            //possibly user has no doc / parties yet
             if (!data || !data.parties || data.parties.length === 0) {
                 set([]);
                 return;
@@ -44,6 +47,8 @@ const userPartiesStore = readable([], function start(set) {
                     } else {
                         console.log(`userPartiesStore: Received query snapshot of size ${partiesSnapshot.size}`);
                     }*/
+
+                    userParties = [];
 
                     let i = 0;
                     partiesSnapshot.forEach((doc) => {

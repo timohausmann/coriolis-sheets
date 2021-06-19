@@ -50,7 +50,7 @@
                     <li>Additional fields for lore and inventory</li>
                     <li>Works on mobile and desktop</li>
                 </ul>
-                <Link getProps={() => ({ class: 'cta' })} to={`/${createHref}`}
+                <Link getProps={() => ({ class: 'cta' })} to={`/sheet`}
                     >View Sheet</Link
                 >
             </div>
@@ -131,7 +131,7 @@
         padding-top: 25vh;
 
         position: relative;
-        background: center no-repeat;
+        background: center no-repeat #111;
         background-size: cover;
     }
 
