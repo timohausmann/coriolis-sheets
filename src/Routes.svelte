@@ -13,7 +13,9 @@
 </script>
 
 <Route path="login" component={Login} />
-<Route path="sheet" component={Sheet} />
+<Route path="sheet">
+    <Sheet isDemo={true} />
+</Route>
 <Route path="characters" component={Characters} />
 <Route path="characters/:id" let:params>
     {#key params.id}

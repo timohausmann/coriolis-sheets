@@ -1,11 +1,11 @@
 <script>
-    import { _ } from "svelte-i18n";
-    import { Link, navigate } from "svelte-routing";
-    import { userStore, unsavedChangesStore } from "./stores.js";
-    import userCharsStore from "./stores/userCharsStore.js";
-    import userPartiesStore from "./stores/userPartiesStore.js";
-    import MenuPartyChars from "./MenuPartyChars.svelte";
-    import MenuActiveParty from "./MenuActiveParty.svelte";
+    import { _ } from 'svelte-i18n';
+    import { Link, navigate } from 'svelte-routing';
+    import { userStore, unsavedChangesStore } from './stores.js';
+    import userCharsStore from './stores/userCharsStore.js';
+    import userPartiesStore from './stores/userPartiesStore.js';
+    import MenuPartyChars from './MenuPartyChars.svelte';
+    import MenuActiveParty from './MenuActiveParty.svelte';
 
     let active = false;
 
@@ -20,7 +20,7 @@
         active = false;
 
         if ($unsavedChangesStore) {
-            const choice = window.confirm($_("confirm_unsaved_changes"));
+            const choice = window.confirm($_('confirm_unsaved_changes'));
             if (!choice) return false;
         }
 
@@ -30,14 +30,14 @@
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-        <Link getProps={() => ({class: "navbar-item"})} to="/">
+        <Link getProps={() => ({ class: 'navbar-item' })} to="/">
             <strong>Coriolis Sheets</strong>
         </Link>
 
         <a
             href="#"
             role="button"
-            class={"navbar-burger" + (active ? " is-active" : "")}
+            class={'navbar-burger' + (active ? ' is-active' : '')}
             aria-label="menu"
             aria-expanded="false"
             on:click={toggleActive}
@@ -48,10 +48,9 @@
         </a>
     </div>
 
-    <div class={"navbar-menu" + (active ? " is-active" : "")}>
+    <div class={'navbar-menu' + (active ? ' is-active' : '')}>
         <div class="navbar-start">
             {#if $userStore.isSignedIn}
-
                 {#if $userCharsStore.length}
                     <div class="navbar-item has-dropdown is-hoverable">
                         <div
@@ -59,7 +58,7 @@
                             on:click={handleNav}
                             data-href="/characters/"
                         >
-                            {$_("nav_my_characters")}
+                            {$_('nav_my_characters')}
                         </div>
                         <div class="navbar-dropdown">
                             {#each $userCharsStore as char}
@@ -74,8 +73,12 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="navbar-item" on:click={handleNav} data-href="/characters/">
-                        {$_("nav_my_characters")}
+                    <div
+                        class="navbar-item"
+                        on:click={handleNav}
+                        data-href="/characters/"
+                    >
+                        {$_('nav_my_characters')}
                     </div>
                 {/if}
                 {#if $userPartiesStore.length}
@@ -85,7 +88,7 @@
                             on:click={handleNav}
                             data-href="/parties/"
                         >
-                            {$_("nav_my_parties")}
+                            {$_('nav_my_parties')}
                         </div>
                         <div class="navbar-dropdown">
                             {#each $userPartiesStore as party}
@@ -100,13 +103,21 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="navbar-item" on:click={handleNav} data-href="/parties/">
-                        {$_("nav_my_parties")}
+                    <div
+                        class="navbar-item"
+                        on:click={handleNav}
+                        data-href="/parties/"
+                    >
+                        {$_('nav_my_parties')}
                     </div>
                 {/if}
 
                 <MenuPartyChars {handleNav} />
-            {:else}{/if}
+            {:else}
+                <Link getProps={() => ({ class: 'navbar-item' })} to="/sheet">
+                    Character Sheet
+                </Link>
+            {/if}
 
             <!--div class="navbar-item" on:click={handleNav} data-href="/items/">
                 {$_("nav_items")}
@@ -117,10 +128,16 @@
             {#if !$userStore.isSignedIn}
                 <div class="navbar-item">
                     <div class="buttons">
-                        <Link getProps={() => ({class: "button is-primary"})} to="/login">
+                        <Link
+                            getProps={() => ({ class: 'button is-primary' })}
+                            to="/login"
+                        >
                             <strong>Sign up</strong>
                         </Link>
-                        <Link getProps={() => ({class: "button is-light"})} to="/login">
+                        <Link
+                            getProps={() => ({ class: 'button is-light' })}
+                            to="/login"
+                        >
                             Log in
                         </Link>
                     </div>
@@ -131,16 +148,20 @@
                 {/if}
 
                 <div class="navbar-item">
-                        <!-- click on icon isn't registred without p-e: none -->
-                        <div title="Your Account"
-                            class="button is-rounded is-light"
-                            on:click={handleNav}
-                            data-href="/login/"
-                        ><span class="icon is-small" style="pointer-events: none;"
-                            ><i class="fa fa-user" /></span
+                    <!-- click on icon isn't registred without p-e: none -->
+                    <div
+                        title="Your Account"
+                        class="button is-rounded is-light"
+                        on:click={handleNav}
+                        data-href="/login/"
+                    >
+                        <span
+                            class="icon is-small"
+                            style="pointer-events: none;"
                         >
-                        </div>
-                    
+                            <i class="fa fa-user" />
+                        </span>
+                    </div>
                 </div>
             {/if}
         </div>

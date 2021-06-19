@@ -1,5 +1,16 @@
 <script>
     import { Link } from 'svelte-routing';
+    import { userStore } from './stores.js';
+
+    export let location;
+
+    let createHref = 'sheet';
+    let partyHref = 'login';
+
+    if($userStore.isSignedIn) {
+        createHref = 'characters';
+        partyHref = 'parties';
+    }
 </script>
 
 <section
@@ -13,7 +24,7 @@
             <br />
             in the cloud
         </h2>
-        <Link getProps={() => ({ class: 'cta' })} to="/sheet"
+        <Link getProps={() => ({ class: 'cta' })} to={`/${createHref}`}
             >Create a Character</Link
         >
     </div>
@@ -39,7 +50,7 @@
                     <li>Additional fields for lore and inventory</li>
                     <li>Works on mobile and desktop</li>
                 </ul>
-                <Link getProps={() => ({ class: 'cta' })} to="/sheet"
+                <Link getProps={() => ({ class: 'cta' })} to={`/${createHref}`}
                     >View Sheet</Link
                 >
             </div>
@@ -76,7 +87,7 @@
             <li>See the character sheets of your mates</li>
             <li>Board a ship together</li>
         </ul>
-        <Link getProps={() => ({ class: 'cta' })} to="/login"
+        <Link getProps={() => ({ class: 'cta' })} to={`/${partyHref}`}
             >Start a party</Link
         >
     </div>

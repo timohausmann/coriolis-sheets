@@ -52,7 +52,7 @@
   "party_leave": "Party verlassen",
   "party_delete_warning": "Möchtest du {partyName} wirklich löschen? Es werden keine Charaktere oder Schiffe gelöscht, aber alle Mitglieder verlieren ihre Zugehörigkeit.",
   "sheet_not_found": "Charakter nicht gefunden",
-  "sheet_not_found_text": "Es existiert kein Charakter mit dieser ID.",
+  "id_not_found_text": "Es existiert kein Eintrag mit dieser ID.",
   "sheet_name": "Name",
   "sheet_value": "Wert",
   "sheet_bonus": "Bonus",

@@ -52,7 +52,7 @@
   "party_leave": "Leave party",
   "party_delete_warning": "Are you sure you want to delete this party? No Characters or Ships will be deleted, but all members will loose their affiliation.",
   "sheet_not_found": "Character not found",
-  "sheet_not_found_text": "There is no character with this ID.",
+  "id_not_found_text": "There is no record with this ID.",
   "sheet_name": "Name",
   "sheet_value": "Value",
   "sheet_bonus": "Bonus",
