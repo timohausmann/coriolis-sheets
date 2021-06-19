@@ -108,19 +108,19 @@
                 <MenuPartyChars {handleNav} />
             {:else}{/if}
 
-            <div class="navbar-item" on:click={handleNav} data-href="/items/">
+            <!--div class="navbar-item" on:click={handleNav} data-href="/items/">
                 {$_("nav_items")}
-            </div>
+            </div-->
         </div>
 
         <div class="navbar-end">
             {#if !$userStore.isSignedIn}
                 <div class="navbar-item">
                     <div class="buttons">
-                        <Link getProps={() => ({class: "button is-primary"})} to="/">
+                        <Link getProps={() => ({class: "button is-primary"})} to="/login">
                             <strong>Sign up</strong>
                         </Link>
-                        <Link getProps={() => ({class: "button is-light"})} to="/">
+                        <Link getProps={() => ({class: "button is-light"})} to="/login">
                             Log in
                         </Link>
                     </div>
