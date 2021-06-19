@@ -15,7 +15,7 @@
 
 <section
     class="section has-text-white"
-    style="background-image: url(/images/BrainCloud-and-scientist_mango_concept-art_04-1080h.jpg)"
+    style="background-image: url(/images/BrainCloud-and-scientist_mango_concept-art_04-1080h.webp)"
 >
     <div class="container">
         <a name="start" />
@@ -56,7 +56,7 @@
             </div>
             <div class="column">
                 <img
-                    src="/images/coriolis-character-sheet.png"
+                    src="/images/coriolis-character-sheet.webp"
                     alt="Coriolis Character Sheet"
                 />
             </div>
@@ -73,7 +73,7 @@
 
 <section
     class="section has-text-white"
-    style="background-image: url(/images/Future-Koningsplein_01.jpg)"
+    style="background-image: url(/images/Future-Koningsplein_01.webp)"
 >
     <div class="container">
         <a name="team-up" />
@@ -144,7 +144,7 @@
     }
 
     section.dark {
-        background-image: url(/images/space-2638158_1920.jpg);
+        background-image: url(/images/space-2638158_1920.webp);
     }
 
     section.dark::before {
