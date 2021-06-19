@@ -11,7 +11,6 @@
     
     options = options.map(o => {
         
-        o.href = o.href || '#';
         o.onClick = o.onClick || (() => {});
         if(o.icon && o.icon.indexOf('fa') != 0) {
             o.icon = `fas fa-${o.icon}`;
@@ -42,9 +41,7 @@
     <div class="dropdown-menu" id={randomId} role="menu">
         <div class="dropdown-content">
             {#each options as option}
-                <a
-                    role="button"
-                    href={option.href}
+                <button
                     class="dropdown-item"
                     on:click={option.onClick}
                 >
@@ -55,7 +52,7 @@
                     {/if}
 
                     <span>{option.label}</span>
-                </a>
+                </button>
 
                 {#if option.divider}
                     <hr class="dropdown-divider" />
@@ -64,3 +61,10 @@
         </div>
     </div>
 </div>
+<style>
+    .dropdown-item {
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+</style>

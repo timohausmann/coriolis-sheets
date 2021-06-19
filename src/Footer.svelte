@@ -1,9 +1,5 @@
 <script>
-    import { _ } from 'svelte-i18n';
-    import { getLocaleFromNavigator } from 'svelte-i18n';
-
-    let locale = getLocaleFromNavigator();
-    if (['de', 'en'].indexOf(locale) === -1) locale = 'en';
+    import { _, locale } from 'svelte-i18n';
 
     const currentYear = new Date().getFullYear();
 </script>
@@ -15,7 +11,7 @@
                 <a
                     class="tinynav-item"
                     target="_blank"
-                    href={`/privacy-${locale}.html`}
+                    href={`/privacy-${$locale}.html`}
                 >
                     {$_('nav_privacy')}
                 </a>

@@ -1,6 +1,15 @@
 <script>
-    import { locale, locales } from 'svelte-i18n'
+    import { locale, locales } from 'svelte-i18n';
     import Dropdown from "../ui/Dropdown.svelte";
+
+    function getLabel(code) {
+        const withFlag = {
+            de: '🇩🇪 Deutsch',
+            en: '🇬🇧 English',
+        };
+
+        return withFlag[code] || code;
+    }
 </script>
 
 
@@ -8,7 +17,7 @@
     <Dropdown
         label={$locale.toUpperCase()}
         options={$locales.map(l => ({
-            label: l,
+            label: getLabel(l),
             onClick: () => { $locale = l }
         }))}
     />

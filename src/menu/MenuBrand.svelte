@@ -11,9 +11,7 @@
         <strong>Coriolis Sheets</strong>
     </MenuLink>
 
-    <a
-        href="#"
-        role="button"
+    <button
         class={'navbar-burger' + ($mainMenuOpen ? ' is-active' : '')}
         aria-label="menu"
         aria-expanded="false"
@@ -22,5 +20,12 @@
         <span aria-hidden="true" />
         <span aria-hidden="true" />
         <span aria-hidden="true" />
-    </a>
+    </button>
 </div>
+<style>
+    .navbar-burger {
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+</style>

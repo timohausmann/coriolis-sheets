@@ -1,11 +1,7 @@
 <script>
     import { analytics } from "firebase/app";
-    import { _ } from "svelte-i18n";
-    import { getLocaleFromNavigator } from 'svelte-i18n';
+    import { _, locale } from "svelte-i18n";
     import "firebase/analytics";
-
-    let locale = getLocaleFromNavigator();
-    if(['de', 'en'].indexOf(locale) === -1) locale = 'en';
 
     const gaOptout = localStorage.getItem('gaOptout') !== null;
     const gaAccept = localStorage.getItem('gaAccept') !== null;
@@ -51,7 +47,7 @@
         <div class="block">
         <span
             >{$_("privacy_note")}
-            <a target="_blank" href={`/privacy-${locale}.html`}>{$_('learn_more')}</a></span
+            <a target="_blank" href={`/privacy-${$locale}.html`}>{$_('learn_more')}</a></span
         ></div>
         <div class="level">
             
