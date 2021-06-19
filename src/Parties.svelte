@@ -58,9 +58,11 @@
             const userPartyIds = parties.map(p => p.id);
             userPartyIds.push(ref.id);
 
-            usersRef.doc(uid).update({
-                parties: userPartyIds
-            });
+            //we cannot be sure that every user has a user doc right now, so use set
+            usersRef.doc(uid)
+                .set({
+                    parties: userPartyIds
+                }, { merge: true });
         });
 
     }
