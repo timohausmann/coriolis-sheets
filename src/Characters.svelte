@@ -1,24 +1,15 @@
 <script>
-    import { auth, firestore } from "firebase/app";
-    import "firebase/firestore";
     import { _ } from "svelte-i18n";
 	import { onDestroy } from 'svelte';
     import { userStore } from "./stores.js";
     import userCharsStore from "./stores/userCharsStore.js";
-    
-
     import Tiles from "./ui/Tiles.svelte";
-    import Modal from "./ui/Modal.svelte";
+    import CharacterCreateModal from "./CharacterCreateModal.svelte";
 
     export let location;
 
-    const db = firestore();
-    const dbChars = db.collection("characters");
-
     let chars = [];
-
-    const currUser = auth().currentUser;
-    const uid = currUser ? currUser.uid : null;
+    let textPromptActive = false;
 
     const unsubscribe = {};
 
@@ -37,36 +28,6 @@
         }
     });
 
-    let textPromptActive = false;
-    let newCharName = '';
-
-    function openTextPrompt() {
-        textPromptActive = true;
-    }
-
-    function closeTextPrompt() {
-        textPromptActive = false;
-    }
-    function confirmTextPrompt() {
-        
-        const safeName = newCharName.trim();
-        newCharName = '';
-
-        if (!safeName.length) {
-            alert($_("alert_empty_name"));
-            return;
-        }
-
-        dbChars
-            .add({
-                name: safeName,
-                owner: uid,
-            })
-            .then((ref) => {
-                console.log("Added document with ID: ", ref.id);
-            });
-    }
-
 </script>
 
 <div class="section section--intro has-background-white">
@@ -76,7 +37,7 @@
 
             {#if $userStore.isSignedIn}
                 <div class="buttons">
-                    <button class="button is-primary" on:click={openTextPrompt}>
+                    <button class="button is-primary" on:click={() => textPromptActive = true}>
                         <span class="icon is-small"><i class="fa fa-plus" /></span>
                         <span>{$_("char_create")}</span></button
                     >
@@ -94,8 +55,5 @@
     </div>
 </div>
 
-{#if textPromptActive}
-    <Modal title={$_("char_create")} confirm={$_("create")} on:close={closeTextPrompt} on:confirm={confirmTextPrompt}>
-        <input class="input is-primary" type="text" placeholder={$_("char_name_placeholder")} bind:value={newCharName} autofocus />
-    </Modal>
-{/if}
+
+<CharacterCreateModal bind:active={textPromptActive} />

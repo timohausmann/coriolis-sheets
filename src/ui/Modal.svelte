@@ -1,21 +1,17 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+	import { scale, fade } from 'svelte/transition';
     import { _ } from "svelte-i18n";
 
     const dispatch = createEventDispatcher();
 
     export let title;
-    export let active = true;
 
     export let danger = false;
     export let confirm = $_("confirm");
     export let cancel = $_("cancel");
 
-    export function onClose() {};
-
-    if(active) {
-        document.documentElement.classList.add('is-clipped');
-    }
+    document.documentElement.classList.add('is-clipped');
 
     const buttonClass = danger ? 'is-danger' : 'is-primary';
     const headClass = danger ? 'has-background-danger has-text-white' : '';
@@ -32,7 +28,6 @@
     }*/
 
     function close(eventData = {}) {
-        //active = false;
         dispatch('close', eventData);
         document.documentElement.classList.remove('is-clipped');
     }
@@ -55,9 +50,9 @@
         width: 100%;
     }
 </style>
-<div class={'modal' + (active ? ' is-active' : '') }>
-    <div class="modal-background" on:click={close} />
-    <div class="modal-content">
+<div class="modal is-active">
+    <div class="modal-background" on:click={close} transition:fade={{duration: 200}} />
+    <div class="modal-content" transition:scale={{start: 0.8}}>
         <div class="modal-card">
             <header class={`modal-card-head ${headClass}`}>
                 <p class="modal-card-title">{title}</p>
@@ -74,5 +69,4 @@
             </footer>
         </div>
     </div>
-    <!--button class="modal-close is-large" aria-label="close" /-->
 </div>

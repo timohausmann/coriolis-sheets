@@ -1,17 +1,16 @@
 <script>
-    import { Link } from "svelte-routing";
     import { auth, firestore } from "firebase/app";
     import "firebase/firestore";
     import { navigate } from "svelte-routing";
     import { onDestroy } from "svelte";
     import userCharsStore from "./stores/userCharsStore.js";
     import userPartiesStore from "./stores/userPartiesStore.js";
-    import { userStore } from "./stores.js";
     import Tiles from "./ui/Tiles.svelte";
     import Modal from "./ui/Modal.svelte";
     import Dropdown from "./ui/Dropdown.svelte";
     import { _ } from "svelte-i18n";
 
+    import CharacterCreateModal from "./CharacterCreateModal.svelte";
     import PartyJoin from "./PartyJoin.svelte";
     import PartyInvite from "./PartyInvite.svelte";
     import PartyLeave from "./PartyLeave.svelte";
@@ -30,7 +29,8 @@
     let newPartyName = ""; //text prompt input
     let textPromptActive = false;
     let dangerPromptActive = false;
-    let charPromptActive = false;
+    let selectCharPromptActive = false;
+    let createCharPromptActive = false;
 
     let userChars = [];
     let userParties = [];
@@ -141,11 +141,11 @@
     });
 
     function openCharPrompt() {
-        charPromptActive = true;
+        selectCharPromptActive = true;
     }
 
     function closeCharPrompt() {
-        charPromptActive = false;
+        selectCharPromptActive = false;
     }
     function confirmCharPrompt() {
         for (let char of userChars) {
@@ -197,6 +197,12 @@
             console.log("Document successfully written!");
         });
     }
+
+    function handleCreateCharacter() {
+        closeCharPrompt();
+
+        createCharPromptActive = true;
+    }
 </script>
 
 <div class="section section--intro has-background-white">
@@ -230,8 +236,7 @@
 <div class="section">
     <div class="container">
 
-        <!-- @todo if user is not logged in: short PartyJoin with a sign up note  -->
-        {#if $userStore.isSignedIn && !isMember && isInvite}
+        {#if !isMember && isInvite}
             <PartyJoin {id} {partyName} />
         {/if}
 
@@ -287,7 +292,7 @@
     </div>
 </div>
 
-{#if charPromptActive}
+{#if selectCharPromptActive}
     <Modal
         title={$_("party_add_char")}
         on:close={closeCharPrompt}
@@ -303,7 +308,7 @@
                 <div class="columns is-multiline is-mobile">
                     {#each $userCharsStore as char}
                         <div class="column is-one-third">
-                            <label class="checkbox">
+                            <label class="checkbox" title={char.name}>
                                 <input
                                     type="checkbox"
                                     bind:group={userCharsInParty}
@@ -319,7 +324,7 @@
             {/if}
         </div>
         <div class="block">
-            <Link to="/characters">{$_("char_create")}</Link>
+            <button class="button is-link is-inverted" on:click={handleCreateCharacter}>{$_("char_create")}</button>
         </div>
     </Modal>
 {/if}
@@ -353,5 +358,13 @@
     </Modal>
 {/if}
 
+<CharacterCreateModal bind:active={createCharPromptActive} data={{ char_parties: [id] }} />
+
 <style>
+    label.checkbox {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+    }
 </style>

@@ -2,7 +2,6 @@
     import { auth, firestore } from "firebase/app";
     import "firebase/firestore";
 	import { onDestroy } from 'svelte';
-    import { Link } from "svelte-routing";
     import { _ } from "svelte-i18n";
     import Tiles from "./ui/Tiles.svelte";
     import Modal from "./ui/Modal.svelte";

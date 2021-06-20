@@ -197,7 +197,7 @@
             {#if isDemo}
                 {#if $userStore.isSignedIn}
                     <div class="notification is-info is-light">
-                        <strong>Note:</strong>
+                        <strong>{$_('note')}:</strong>
                         this ist just an empty demo sheet. <Link
                             to="/characters"
                             >Go to characters to create a new sheet</Link
@@ -205,8 +205,8 @@
                     </div>
                 {:else}
                     <div class="notification is-info is-light">
-                        <strong>Note:</strong>
-                         you need to be logged in to save the sheet.
+                        <strong>{$_('note')}:</strong>
+                            {$_('note_login_sheet')}
                     </div>
                 {/if}
             {/if}
