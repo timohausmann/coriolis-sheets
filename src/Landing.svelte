@@ -100,7 +100,7 @@
     </div>
 </section>
 
-<!--section class="section dark has-text-white">
+<section class="section dark has-text-white">
     <div class="container">
         <a name="contribute"></a>
         <h2>Free<br />as free can be</h2>
@@ -110,9 +110,9 @@
             You are invited to contribute to this project:<br />
             Code | Artwork | Data | Translation | Donation
         </p>
-        <a class="cta" href="#" target="_blank" rel="noopener noreferrer">Visit us as github</a>
+        <a class="cta" href="https://github.com/timohausmann/coriolis-sheets" target="_blank" rel="noopener noreferrer">Visit us as github</a>
     </div>
-</section-->
+</section>
 <svelte:head>
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
