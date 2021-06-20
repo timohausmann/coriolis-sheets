@@ -85,6 +85,7 @@
         transition: 0.4s;
         margin-bottom: 0 !important;
         font-size: 0.75rem !important;
+        z-index: 100;
     }
     .box.note {
         width: 95%;

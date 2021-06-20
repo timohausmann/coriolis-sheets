@@ -1,18 +1,20 @@
 import { init, register, getLocaleFromNavigator } from 'svelte-i18n';
 
-register('de', () => {
-    return window.fetch('/i18n/de.json')
-        .then(data => data.json())
-        .catch(error => console.log('i18n fetch error', error))
-});
+const availableLanguages = ['de', 'en'];
+const fallbackLocale = 'en';
 
-register('en', () => {
-    return window.fetch('/i18n/en.json')
-        .then(data => data.json())
-        .catch(error => console.log('i18n fetch error', error))
-});
+for (let lang of availableLanguages) {
+    register(lang, () => {
+        return window.fetch(`/i18n/${lang}.json`)
+            .then(data => data.json())
+            .catch(error => console.log('i18n fetch error', lang, error))
+    });
+}
+
+let initialLocale = getLocaleFromNavigator();
+if (availableLanguages.indexOf(initialLocale) === -1) initialLocale = fallbackLocale;
 
 init({
-    fallbackLocale: 'en',
-    initialLocale: getLocaleFromNavigator(),
+    fallbackLocale,
+    initialLocale, 
 });

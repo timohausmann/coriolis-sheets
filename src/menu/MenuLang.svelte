@@ -12,7 +12,6 @@
     }
 </script>
 
-
 <div class="navbar-item">
     <Dropdown
         label={$locale.toUpperCase()}
@@ -22,3 +21,11 @@
         }))}
     />
 </div>
+
+<style>
+    @media screen and (max-width: 1023px) {
+        .navbar-item {
+            text-align: right;
+        }
+    }
+</style>

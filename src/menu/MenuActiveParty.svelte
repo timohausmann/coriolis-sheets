@@ -27,4 +27,9 @@
 {/if}
 
 <style>
+    @media screen and (max-width: 1023px) {
+        .navbar-item {
+            text-align: right;
+        }
+    }
 </style>
