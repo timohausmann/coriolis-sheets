@@ -44,7 +44,7 @@
             <div class="column is-two-thirds">
                 <h2>Sheets for characters and ships</h2>
                 <ul>
-                    <li>Never loose your character sheet again</li>
+                    <li>Never lose your character sheet again</li>
                     <li>No more coffee stains or eraser marks</li>
                     <li>Upload an image of your character or ship</li>
                     <li>Additional fields for lore and inventory</li>
