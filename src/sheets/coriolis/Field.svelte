@@ -23,7 +23,7 @@
             const baseField_value = parseInt(value[base]);
 
             //show sum for common skill or skilled special skill
-            if(skillType === 'common' || (baseField_value > 0 && currField_value > 0)) {
+            if(skillType === 'common' && baseField_value > 0 || (baseField_value > 0 && currField_value > 0)) {
                 meta = '∑ ' + (currField_value + value[base]) || '0';
 
                 //uggh yeah it's bad but it works
