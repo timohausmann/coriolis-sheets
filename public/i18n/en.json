@@ -41,7 +41,7 @@
   "alert_empty_name": "Name must not be empty.",
   "party_chars": "Party characters",
   "party_manage_chars": "Choose your characters that are part of {partyName}.",
-  "party_add_char": "Add charakter",
+  "party_add_char": "Add character",
   "party_none": "You are not part of any party yet.",
   "party_no_chars": "No characters available.",
   "party_ships": "Party ships",
