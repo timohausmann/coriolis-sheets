@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public -s",
+    "start": "sirv public -s --port 5555",
     "start:dev": "sirv public --dev -s",
     "indexes": "firebase firestore:indexes > ./firestore.indexes.json"
   },
@@ -25,6 +25,6 @@
   "dependencies": {
     "firebase": "^7.24.0",
     "firebaseui": "^4.7.1",
-    "sirv-cli": "^0.4.4"
+    "sirv-cli": "^1.0.14"
   }
 }
