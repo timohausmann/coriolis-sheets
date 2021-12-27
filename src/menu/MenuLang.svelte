@@ -1,14 +1,10 @@
 <script>
+	import { availableLanguages } from './../i18n.js';
     import { locale, locales } from 'svelte-i18n';
     import Dropdown from "../ui/Dropdown.svelte";
 
     function getLabel(code) {
-        const withFlag = {
-            de: '🇩🇪 Deutsch',
-            en: '🇬🇧 English',
-        };
-
-        return withFlag[code] || code;
+        return availableLanguages[code] || code;
     }
 </script>
 
