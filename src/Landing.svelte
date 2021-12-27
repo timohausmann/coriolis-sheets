@@ -14,8 +14,8 @@
 </script>
 
 <section
-    class="section has-text-white"
-    style="background-image: url(/images/BrainCloud-and-scientist_mango_concept-art_04-1080h.webp)"
+    class="section has-text-white intro"
+    style="background-image: url(/images/coriolis-space-station-langwichsplendur.webp)"
 >
     <div class="container">
         <a name="start" />
@@ -30,9 +30,11 @@
     </div>
     <div class="footnote has-text-white">
         <a
-            href="https://commons.wikimedia.org/wiki/File:BrainCloud-and-scientist_mango_concept-art_04.png"
+            href="http://www.langwichsplendur.se/2019/06/17/coriolis-station/"
+            target="_blank"
+            rel="noopener noreferrer"
         >
-            Artwork by David Revoy
+            Artwork by John Salquist
         </a>
     </div>
 </section>
@@ -65,6 +67,8 @@
     <div class="footnote has-text-white">
         <a
             href="https://pixabay.com/photos/space-panorama-galaxy-cosmos-2638158/"
+            target="_blank"
+            rel="noopener noreferrer"
         >
             Artwork by Alex Myers
         </a>
@@ -73,7 +77,7 @@
 
 <section
     class="section has-text-white"
-    style="background-image: url(/images/Future-Koningsplein_01.webp)"
+    style="background-image: url(/images/BrainCloud-and-scientist_mango_concept-art_04-1080h.webp)"
 >
     <div class="container">
         <a name="team-up" />
@@ -93,7 +97,9 @@
     </div>
     <div class="footnote has-text-white">
         <a
-            href="https://commons.wikimedia.org/wiki/File:Future-Koningsplein_01.jpg"
+            href="https://commons.wikimedia.org/wiki/File:BrainCloud-and-scientist_mango_concept-art_04.png"
+            target="_blank"
+            rel="noopener noreferrer"
         >
             Artwork by David Revoy
         </a>
@@ -141,6 +147,16 @@
         inset: 0;
         background: rgba(0, 0, 0, 0.4);
         z-index: 0;
+    }
+
+    section.intro {   
+        &::after {
+            background: rgba(0, 0, 0, 0);
+        }
+
+        @media #{$media-tablet-landscape-lt} {
+            background-position: 85% 50%;
+        }
     }
 
     section.dark {
