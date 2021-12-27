@@ -8,7 +8,9 @@ A web app to create and share character sheets for the role-playing game Corioli
 
 For feedback, ideas, feature requests, if you found a bug or would like to contribute code, artwork, translations etc., just open an issue, create a pull request or shoot me an email.
 
-More infos soon.
+Thanks to our contributors!
+
+* [grcarmenaty](https://github.com/grcarmenaty) – Spanish translation
 
 ---
 
