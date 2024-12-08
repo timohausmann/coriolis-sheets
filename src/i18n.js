@@ -6,6 +6,7 @@ export const availableLanguages = {
     de: '🇩🇪 Deutsch',
     en: '🇬🇧 English',
     es: '🇪🇸 Español',
+    cz: '🇨🇿 Čeština',
 };
 
 for (let lang of Object.keys(availableLanguages)) {

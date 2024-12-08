@@ -2,6 +2,9 @@
     import { _, locale } from 'svelte-i18n';
 
     const currentYear = new Date().getFullYear();
+
+    const privacyAvailable = ['de', 'en', 'es'];
+    $: privacyLang = privacyAvailable.includes($locale) ? $locale : 'en';
 </script>
 
 <footer class="footer">
@@ -11,7 +14,7 @@
                 <a
                     class="tinynav-item"
                     target="_blank"
-                    href={`/privacy-${$locale}.html`}
+                    href={`/privacy-${privacyLang}.html`}
                 >
                     {$_('nav_privacy')}
                 </a>
