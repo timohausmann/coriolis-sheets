@@ -11,6 +11,7 @@ For feedback, ideas, feature requests, if you found a bug or would like to contr
 Thanks to our contributors!
 
 * [grcarmenaty](https://github.com/grcarmenaty) – Spanish translation
+* [betkov](https://github.com/betkov) – Czech translation
 
 ---
 
