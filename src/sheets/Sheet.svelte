@@ -14,6 +14,7 @@
         currCharStore,
         unsavedChangesStore,
     } from '../stores.js';
+    import userPartiesStore from '../stores/userPartiesStore';
 
     export let id = '';
     export let template = 'character'; //character, ship
@@ -33,8 +34,9 @@
     const currentSheet = sheetConfig[template];
 
     let form;
-    let charData = {};
     let userId = '';
+    let charData = {};
+    let charParties = [];
     let hasData = false;
     let isOwner = false;
 
@@ -51,6 +53,11 @@
     } else if (isDemo) {
         //allow typing for demo sheet
         currCharStore.set({ readonly: false });
+    }
+    
+    $: if(charData.char_parties?.length) {
+        charParties = $userPartiesStore.filter(p => charData.char_parties.includes(p.id));
+        console.log(charParties);
     }
 
     function getData() {
@@ -190,7 +197,7 @@
     });
 </script>
 
-<form action="/sheet/" method="post" bind:this={form}>
+<form action="" method="post" bind:this={form}>
     <div class="section section--intro has-background-white">
         <div class="container">
             <!-- Demo Notes -->
@@ -224,9 +231,22 @@
             <!-- Character headline + actions -->
             {#if hasData}
                 <div class="level">
-                    {#if charData.name}
-                        <h1 class="title">{charData.name}</h1>
-                    {/if}
+                    <div class="level-left">
+                        <div>
+                            <h1 class="title">{charData.name || 'Unknown'}</h1>
+                            <div style="display: flex; gap: 0.5rem;">
+                                {#each charParties as party, i}
+                                    <Link 
+                                    class="subtitle is-5" 
+                                    to="{`/parties/${party.id}`}"
+                                    >{party.name}</Link>
+                                    {#if i < charParties.length-1}
+                                    /
+                                    {/if}
+                                {/each}
+                            </div>
+                        </div>
+                </div>
                     {#if isOwner}
                         <div class="buttons">
                             <button

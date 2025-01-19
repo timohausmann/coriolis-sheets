@@ -143,24 +143,24 @@
             <h2>{$_('sheet_skills')}</h2>
             <div class="row">
                 <div class="flex-1">
-                    <Field label="{$_('skill_observation')} ({$_('attr_int')})" name="ab_observation" base="attr_int" skillType="common" />
-                    <Field label="{$_('skill_agility')} ({$_('attr_dex')})" name="ab_agility" base="attr_dex" skillType="common" />
-                    <Field label="{$_('skill_ranged')} ({$_('attr_dex')})" name="ab_ranged" base="attr_dex" skillType="common" />
-                    <Field label="{$_('skill_infiltration')} ({$_('attr_dex')})" name="ab_infiltration" base="attr_dex" skillType="common" />
-                    <Field label="{$_('skill_strength')} ({$_('attr_str')})" name="ab_strength" base="attr_str" skillType="common" />
-                    <Field label="{$_('skill_manipulation')} ({$_('attr_emp')})" name="ab_manipulation" base="attr_emp" skillType="common" />
-                    <Field label="{$_('skill_melee')} ({$_('attr_str')})" name="ab_melee" base="attr_str" skillType="common" />
-                    <Field label="{$_('skill_survival')} ({$_('attr_int')})" name="ab_survival" base="attr_int" skillType="common" />
+                    <Field label="{$_('skill_observation')}" name="ab_observation" base="attr_int" skillType="common" />
+                    <Field label="{$_('skill_agility')}" name="ab_agility" base="attr_dex" skillType="common" />
+                    <Field label="{$_('skill_ranged')}" name="ab_ranged" base="attr_dex" skillType="common" />
+                    <Field label="{$_('skill_infiltration')}" name="ab_infiltration" base="attr_dex" skillType="common" />
+                    <Field label="{$_('skill_strength')}" name="ab_strength" base="attr_str" skillType="common" />
+                    <Field label="{$_('skill_manipulation')}" name="ab_manipulation" base="attr_emp" skillType="common" />
+                    <Field label="{$_('skill_melee')}" name="ab_melee" base="attr_str" skillType="common" />
+                    <Field label="{$_('skill_survival')}" name="ab_survival" base="attr_int" skillType="common" />
                 </div>
                 <div class="flex-1">
-                    <Field label="{$_('skill_data')} ({$_('attr_int')})" name="ab_datadschinn" base="attr_int" />
-                    <Field label="{$_('skill_command')} ({$_('attr_emp')})" name="ab_command" base="attr_emp" />
-                    <Field label="{$_('skill_culture')} ({$_('attr_emp')})" name="ab_culture" base="attr_emp" />
-                    <Field label="{$_('skill_medical')} ({$_('attr_int')})" name="ab_medi" base="attr_int" />
-                    <Field label="{$_('skill_mystic')} ({$_('attr_emp')})" name="ab_mystic" base="attr_emp" />
-                    <Field label="{$_('skill_pilot')} ({$_('attr_dex')})" name="ab_pilot" base="attr_dex" />
-                    <Field label="{$_('skill_tech')} ({$_('attr_int')})" name="ab_tech" base="attr_int" />
-                    <Field label="{$_('skill_science')} ({$_('attr_int')})" name="ab_science" base="attr_int" />
+                    <Field label="{$_('skill_data')}" name="ab_datadschinn" base="attr_int" />
+                    <Field label="{$_('skill_command')}" name="ab_command" base="attr_emp" />
+                    <Field label="{$_('skill_culture')}" name="ab_culture" base="attr_emp" />
+                    <Field label="{$_('skill_medical')}" name="ab_medi" base="attr_int" />
+                    <Field label="{$_('skill_mystic')}" name="ab_mystic" base="attr_emp" />
+                    <Field label="{$_('skill_pilot')}" name="ab_pilot" base="attr_dex" />
+                    <Field label="{$_('skill_tech')}" name="ab_tech" base="attr_int" />
+                    <Field label="{$_('skill_science')}" name="ab_science" base="attr_int" />
                 </div>
             </div>
         </section>

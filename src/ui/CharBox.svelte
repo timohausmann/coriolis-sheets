@@ -25,7 +25,7 @@
             </figure>
         </div>
         <div class="media-content">
-            <div class="content">
+            <div class="">
                 <p class="title">{char.name}</p>
                 {#if char.meta}
                     <p class="subtitle">{char.meta}</p>

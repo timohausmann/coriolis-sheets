@@ -32,34 +32,34 @@
 <div class="row">
     <div class="flex-2 flex-gutter">
         <section>
-            <h2>Schiff</h2>
-            <TextField label="Name" name="name" />
+            <h2>{$_('sheet_ship.ship')}</h2>
+            <TextField label="{$_('sheet_ship.name')}" name="name" />
             <div class="row">
                 <div class="flex-1">
-                    <TextField label="Klasse & Typ" name="class_type" />
-                    <TextField label="Problem" name="problem" />
+                    <TextField label="{$_('sheet_ship.class_type')}" name="class_type" />
+                    <TextField label="{$_('sheet_ship.problem')}" name="problem" />
                 </div>
                 <div class="flex-1">
-                    <TextField label="Werft" name="shipyard" />
-                    <TextField label="Schulden" name="debt" />
+                    <TextField label="{$_('sheet_ship.shipyard')}" name="shipyard" />
+                    <TextField label="{$_('sheet_ship.debt')}" name="debt" />
                 </div>
             </div>
         </section>
         <section>
-            <h2>Daten</h2>
+            <h2>{$_('sheet_ship.data')}</h2>
             <div class="row">
                 <div class="flex-1">
-                    <Field label="Manövrierbarkeit" name="maneuverability" />
-                    <Field label="Geschwindigkeit" name="speed" />
+                    <Field label="{$_('sheet_ship.maneuverability')}" name="maneuverability" />
+                    <Field label="{$_('sheet_ship.speed')}" name="speed" />
                 </div>
                 <div class="flex-1">
-                    <Field label="Signatur" name="signature" />
-                    <Field label="Panzerung" name="armor" />
+                    <Field label="{$_('sheet_ship.signature')}" name="signature" />
+                    <Field label="{$_('sheet_ship.armor')}" name="armor" />
                 </div>
             </div>
         </section>
         <section>
-            <h2>Module</h2>
+            <h2>{$_('sheet_ship.modules')}</h2>
             <TextField label="1" name="module_1" />
             <TextField label="2" name="module_2" />
             <TextField label="3" name="module_3" />
@@ -72,25 +72,24 @@
             <TextField label="10" name="module_10" />
             <TextField label="11" name="module_11" />
             <TextField label="12" name="module_12" />
-            <Field label="Maximale Anzahl an Modulen" name="modules_max" />
+            <Field label="{$_('sheet_ship.modules_max')}" name="modules_max" />
         </section>
     </div>
     <div class="flex-1 flex-gutter">
         <section>
-            <h2>Leistungspunkte</h2>
-            <FieldPoints label="Leistungspunkte" name="performance" max="10" />
+            <h2>{$_('sheet_ship.performance')}</h2>
+            <FieldPoints label="{$_('sheet_ship.performance')}" name="performance" max="10" />
         </section>
         <section>
-            <h2>Rumpfpunkte</h2>
-            <FieldPoints label="Rumpfpunkte" name="hull" max="10" />
-            <Points max="10" name="hull_points_2" />
+            <h2>{$_('sheet_ship.hull')}</h2>
+            <FieldPoints label="{$_('sheet_ship.hull')}" name="hull" max="20" rows={2} />
 
-            <TextField label="Kritischer Schaden" name="crit_1" />
-            <TextField label="Kr.S." name="crit_2" />
-            <TextField label="Kr.S." name="crit_3" />
+            <TextField label="{$_('sheet_ship.crit')}" name="crit_1" />
+            <TextField label="{$_('sheet_ship.crit_2')}" name="crit_2" />
+            <TextField label="{$_('sheet_ship.crit_2')}" name="crit_3" />
         </section>
         <section>
-            <h2>Merkmale</h2>
+            <h2>{$_('sheet_ship.attributes')}</h2>
             <Equipment suffix="1" />
             <Equipment suffix="2" />
             <Equipment suffix="3" />
@@ -106,22 +105,22 @@
 </div>
 <div class="row">
     <section>
-        <h2>Crew</h2>
+        <h2>{$_('sheet_ship.crew')}</h2>
         <div class="row">
             <div class="flex-1">
-                <TextField label="Kapitän" name="crew_captain" />
+                <TextField label="{$_('sheet_ship.crew_captain')}" name="crew_captain" />
             </div>
             <div class="flex-1">
-                <TextField label="Pilot" name="crew_pilot" />
+                <TextField label="{$_('sheet_ship.crew_pilot')}" name="crew_pilot" />
             </div>
             <div class="flex-1">
-                <TextField label="Sensorbediener" name="crew_sensors" />
+                <TextField label="{$_('sheet_ship.crew_sensors')}" name="crew_sensors" />
             </div>
             <div class="flex-1">
-                <TextField label="Bordschütze" name="crew_gunner" />
+                <TextField label="{$_('sheet_ship.crew_gunner')}" name="crew_gunner" />
             </div>
             <div class="flex-1">
-                <TextField label="Maschinist" name="crew_machinist" />
+                <TextField label="{$_('sheet_ship.crew_machinist')}" name="crew_machinist" />
             </div>
         </div>
     </section>
@@ -129,7 +128,7 @@
 <div class="row">
     <div class="flex-1">
         <section>
-            <h2>Inventar</h2>
+            <h2>{$_('sheet_ship.inventory')}</h2>
             <div class="row">
                 <div class="flex-1">
                     <TextField label="1" name="inventory_1" />

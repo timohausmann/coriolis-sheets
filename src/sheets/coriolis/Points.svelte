@@ -6,6 +6,7 @@
 
     export let max;
     export let name;
+    export let rows = 1;
 
     let currField_value = 0;
     let readonly = null;
@@ -56,6 +57,16 @@
     button {
         width: 2rem;
     }
+    .points {
+        --rows: 1;
+        --columns: 5;
+        display: grid;
+        grid-template-rows: repeat(var(--rows), 1fr);
+        grid-template-columns: repeat(var(--columns), 1fr);
+        flex: 1;
+        padding: 0.25rem 0.5rem;
+        gap: 0.55rem;
+    }
     .point {
         position: relative;
         width: 0.75rem;
@@ -86,9 +97,11 @@
 
 <div class="field row">
     <button on:click={decrease} disabled={readonly} title={$_('sheet_decrease')}>-</button>
-	{#each points as point}
-        <div class={point ? 'point point--filled' : 'point'}></div>
-	{/each}
+    <div class="points" style={`--rows: ${rows}; --columns: ${Math.ceil(max/rows)}`}>
+        {#each points as point}
+            <div class={point ? 'point point--filled' : 'point'}></div>
+        {/each}
+    </div>
     <div class="output">{currField_value}</div>
     <button on:click={increase} disabled={readonly} title={$_('sheet_increase')}>+</button>
     <input type="hidden" name={fieldname} value={currField_value} />

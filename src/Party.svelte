@@ -14,6 +14,7 @@
     import PartyJoin from "./PartyJoin.svelte";
     import PartyInvite from "./PartyInvite.svelte";
     import PartyLeave from "./PartyLeave.svelte";
+    import ShipCreateModal from "./ShipCreateModal.svelte";
 
     export let id;
     export let isInvite = false;
@@ -31,6 +32,7 @@
     let dangerPromptActive = false;
     let selectCharPromptActive = false;
     let createCharPromptActive = false;
+    let createShipPromptActive = false;
 
     let userChars = [];
     let userParties = [];
@@ -61,7 +63,7 @@
             .where("char_parties", "array-contains", id)
             .orderBy("name");
         const shipsQuery = dbShips
-            .where("char_parties", "array-contains", id)
+            .where("ship_party", "==", id)
             .orderBy("name");
 
         unsubscribe.charsQuery = charsQuery.onSnapshot(
@@ -134,6 +136,12 @@
         isMember = userPartiesIds.indexOf(id) !== -1;
     });
 
+    /*unsubscribe.activePartyId = activePartyId.subscribe((value) => {
+        if($activePartyId !== id) {
+            navigate(`/parties/${$activePartyId}`);
+        }
+    })*/
+
     onDestroy(() => {
         for (let key in unsubscribe) {
             unsubscribe[key]();
@@ -143,7 +151,6 @@
     function openCharPrompt() {
         selectCharPromptActive = true;
     }
-
     function closeCharPrompt() {
         selectCharPromptActive = false;
     }
@@ -163,6 +170,10 @@
 
             dbChars.doc(char.id).update({ char_parties });
         }
+    }
+
+    function openShipPrompt() {
+        createShipPromptActive = true;
     }
 
     function openDangerPrompt() {
@@ -241,15 +252,18 @@
         {/if}
 
         <div class="level">
-            <h2 class="subtitle">{$_("party_chars")}</h2>
+            <h2 class="title is-4">{$_("party_chars")}</h2>
             {#if isMember}
                 <div class="buttons">
-                    <button class="button is-primary" on:click={openCharPrompt}
-                        ><span class="icon is-small"
-                            ><i class="fa fa-plus" /></span
+                    <button 
+                        class="button is-primary" 
+                        on:click={openCharPrompt}
                         >
-                        <span> {$_("party_add_char")}</span></button
-                    >
+                        <span class="icon is-small">
+                            <i class="fa fa-plus" />
+                        </span>
+                        <span> {$_("party_add_char")}</span>
+                    </button>
                 </div>
             {/if}
         </div>
@@ -259,19 +273,35 @@
         <hr class="has-background-grey-lighter" />
 
         <div class="level">
-            <h2 class="subtitle">{$_("party_ships")}</h2>
-            <!--div class="buttons">
-                <button class="button is-light"
-                    ><span class="icon is-small"><i class="fa fa-plus" /></span>
-                    <span>{$_("party_add_ship")}</span></button
-                >
-            </div-->
+            <div class="level-left">
+                <div class="level-item">
+                    <h2 class="title is-4">{$_("party_ships")}</h2>
+                </div>
+                <div class="level-item">
+                    <span class="tag is-info is-uppercase new">{$_("new")}</span>
+                </div>
+            </div>
+            {#if isMember}
+                <div class="level-right">
+                    <div class="buttons">
+                        <button 
+                            class="button is-primary"
+                            on:click={openShipPrompt}
+                            >
+                            <span class="icon is-small">
+                                <i class="fa fa-plus" />
+                            </span>
+                            <span>{$_("ship_create")}</span>
+                        </button>
+                    </div>
+                </div>
+            {/if}
         </div>
 
         <Tiles
             chars={ships}
             route="ships"
-            empty={$_("party_no_ships") + " (work in progress)"}
+            empty={$_("party_no_ships")}
         />
 
         <hr class="has-background-grey-lighter" />
@@ -359,6 +389,7 @@
 {/if}
 
 <CharacterCreateModal bind:active={createCharPromptActive} data={{ char_parties: [id] }} />
+<ShipCreateModal bind:active={createShipPromptActive} data={{ ship_party: id }} />
 
 <style>
     label.checkbox {
@@ -366,5 +397,17 @@
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 100%;
+    }
+    .new {
+        rotate: -2.5deg;
+        animation: new 0.5s infinite alternate;
+    }
+    @keyframes new {
+        0% {
+            scale: 1;
+        }
+        100% {
+            scale: 1.1;
+        }
     }
 </style>

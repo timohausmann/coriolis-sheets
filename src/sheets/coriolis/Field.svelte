@@ -1,4 +1,5 @@
 <script>
+    import { _ } from 'svelte-i18n';
     import { onDestroy } from 'svelte';
     import { currCharStore, unsavedChangesStore } from '../../stores.js'
 
@@ -11,7 +12,7 @@
     let currField_value = ''
     let readonly = null;
     let meta = '';
-    let metaTitle = '';
+    let baseField_value = 0;
 
     const unsubscribe = currCharStore.subscribe(value => {
 
@@ -20,18 +21,17 @@
         currField_value = value[name] ? parseInt(value[name]) : ''
 
         if(base) {
-            const baseField_value = parseInt(value[base]);
-
-            //show sum for common skill or skilled special skill
-            if(skillType === 'common' && baseField_value > 0 || (baseField_value > 0 && currField_value > 0)) {
-                meta = '∑ ' + (currField_value + value[base]) || '0';
-
-                //uggh yeah it's bad but it works
-                const parts = label.split(' (');
-                metaTitle = `${currField_value || 0} ${parts[0]} + ${value[base] || 0} ${parts[1].replace(')', '')}`;
-            }
+            baseField_value = parseInt(value[base]);
+            updateMeta();
         }
     })
+
+    function updateMeta() {
+        //show sum for common skill or skilled special skill
+        if(skillType === 'common' && baseField_value > 0 || (baseField_value > 0 && currField_value > 0)) {
+            meta = `(+ ${baseField_value} ${$_(base)} = ${currField_value + baseField_value})`;
+        }
+    }
 
     function onChange(e) {
         if(readonly) return;
@@ -53,6 +53,7 @@
         color: #111;
         padding: 0.25rem;
         margin: 0 0.25rem;
+        gap: 0.5rem;
     }
     .sheetField:last-child {
         border-bottom: none;
@@ -73,7 +74,7 @@
 </style>
 
 <div class="sheetField">
-    <label for={name} title={metaTitle}>{label} 
+    <label for={name}>{label} 
         {#if meta}
             <small>{meta}</small>
         {/if}
