@@ -3,6 +3,7 @@
     import { _ } from 'svelte-i18n';
     import { userStore, mainMenuOpen } from '../stores.js';
     import MenuPartyChars from './MenuPartyChars.svelte';
+    import MenuPartyShips from './MenuPartyShips.svelte';
     import MenuActiveParty from './MenuActiveParty.svelte';
     import MenuLang from './MenuLang.svelte';
     import MenuLink from './MenuLink.svelte';
@@ -23,6 +24,8 @@
                 <MenuParties />
 
                 <MenuPartyChars />
+                
+                <MenuPartyShips />
             {:else}
                 <MenuLink to="/sheet">{$_('nav_sheet')}</MenuLink>
             {/if}
