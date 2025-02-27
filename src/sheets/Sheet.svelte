@@ -294,7 +294,7 @@
 {/if}
 
 <style lang="scss">
-    @import '../_vars.scss';
+    @use '../_vars.scss' as vars;
 
     .container {
         max-width: 960px !important;
@@ -323,16 +323,16 @@
             opacity: 0;
         }
 
-        @media #{$media-tablet-landscape-lt} {
+        @media #{vars.$media-tablet-landscape-lt} {
             bottom: 0.5rem;
         }
 
-        @media #{$media-mobile-landscape-lt} {
+        @media #{vars.$media-mobile-landscape-lt} {
             width: 80%;
             text-align: center;
         }
 
-        @media #{$media-tablet-landscape} {
+        @media #{vars.$media-tablet-landscape} {
             margin-left: 95px; //sidebar offset
         }
     }

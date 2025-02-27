@@ -51,13 +51,13 @@
 </footer>
 
 <style lang="scss">
-    @import './_vars.scss';
+    @use './_vars.scss' as vars;
 
     .tinynav {
         display: flex;
     }
 
-    @media #{$media-tablet-landscape-lt} {
+    @media #{vars.$media-tablet-landscape-lt} {
         .tinynav {
             flex-direction: column;
         }
@@ -73,7 +73,7 @@
         }
     }
 
-    @media #{$media-tablet-landscape} {
+    @media #{vars.$media-tablet-landscape} {
         .tinynav-item {
             padding-right: 1rem;
             margin-right: 1rem;

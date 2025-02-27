@@ -2,8 +2,10 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import json from '@rollup/plugin-json';
+import * as sass from 'sass';
+import child_process from 'child_process';
 
 import autoPreprocess from 'svelte-preprocess';
 
@@ -17,6 +19,7 @@ export default {
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
+	strictDeprecations: true,
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production
@@ -24,7 +27,7 @@ export default {
 			//sass?
 			preprocess: autoPreprocess({ 
 				scss: {
-					implementation: require('sass'),
+					implementation: sass,
 				  },
 			 }),
 			// we'll extract any component CSS out into
@@ -72,7 +75,7 @@ function serve() {
 			if (!started) {
 				started = true;
 
-				require('child_process').spawn('npm', ['run', 'start', '--', '--dev'], {
+				child_process.spawn('npm', ['run', 'start', '--', '--dev'], {
 					stdio: ['ignore', 'inherit', 'inherit'],
 					shell: true
 				});

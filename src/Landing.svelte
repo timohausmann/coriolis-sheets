@@ -128,7 +128,7 @@
 </svelte:head>
 
 <style lang="scss">
-    @import './_vars.scss';
+    @use './_vars.scss' as vars;
 
     section {
         font-family: 'DM Mono', monospace;
@@ -154,7 +154,7 @@
             background: rgba(0, 0, 0, 0);
         }
 
-        @media #{$media-tablet-landscape-lt} {
+        @media #{vars.$media-tablet-landscape-lt} {
             background-position: 85% 50%;
         }
     }
@@ -179,13 +179,13 @@
     section:first-of-type {
         margin-top: -3.25rem;
 
-        @media #{$media-tablet-landscape-lt} {
+        @media #{vars.$media-tablet-landscape-lt} {
             display: flex;
             align-items: flex-end;
             padding-bottom: 10vh;
         }
 
-        @media #{$media-tablet-landscape} {
+        @media #{vars.$media-tablet-landscape} {
             padding-top: 60vh;
         }
     }
@@ -200,11 +200,11 @@
         line-height: 1.2;
         margin-bottom: 2rem;
 
-        @media #{$media-tablet-landscape-lt} {
+        @media #{vars.$media-tablet-landscape-lt} {
             font-size: 2.5rem;
         }
 
-        @media #{$media-tablet-landscape} {
+        @media #{vars.$media-tablet-landscape} {
             max-width: 60%;
         }
     }
@@ -226,7 +226,7 @@
         font-size: 1.125rem;
         margin-bottom: 1rem;
 
-        @media #{$media-mobile} {
+        @media #{vars.$media-mobile} {
             font-size: 1rem;
         }
     }
